@@ -1,5 +1,5 @@
 class SearchesController < InheritedResources::Base
-before_filter :check_for_cancel, :only => [:create, :update]
+before_action :check_for_cancel, :only => [:create, :update]
 
 def check_for_cancel
   if params[:commit] == "Cancel"
