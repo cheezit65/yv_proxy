@@ -1,0 +1,157 @@
+<style>
+.hideMessage{
+		display: none;		
+}
+.flex-container-siteLogo{
+		display: none !important;
+}
+	
+img:hover{
+	opacity: 1;	
+}	
+
+a:link{
+	text-decoration: none;
+}	
+.accountCSS {
+		font-size: 10px !important;
+		color: white !important;
+}
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+</style>
+<% @concludedSales = Array.new [] %>
+<!-- ><div width="100%" style="background-color: #154786;position: absolute; top: 0px;width: 2000px;height: 45pt"></div> -->
+<div width="100%" style="background-color: green;position: absolute; top: 0px;width: 2000px;height: 45pt"></div>
+<div width="100%" style="background: linear-gradient(#D1D1D1, #B8B8B8 ) !important;position: absolute;top: 30px; width: 2000px; height: 70px">
+	<h4 class="texty">
+	<span class="dashboardButtonLink"><a href="#" id="edit_horse" style="color: white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></span>	
+	<span class="dashboardButtonLink"><a href="#" id="edit_farm" style="color: white">Edit Your Farm</a></span>
+	<span class="dashboardButtonLink"><a href="#" id="edit_horse" style="color: white">&nbsp;&nbsp;Reports&nbsp;&nbsp;</a></span>
+	<span class="dashboardButtonLink"><a href="#" id="edit_horse" style="color: white">&nbsp;&nbsp;View Stats&nbsp;&nbsp;</a></span>
+	<span class="dashboardButtonLink"><a href="#" id="edit_horse" style="color: white">&nbsp;Upload Horse&nbsp;</a></span>
+	<span class="dashboardButtonLink"><a href="#" id="edit_horse" style="color: white">Your Farm Page</a></span>
+
+</div>
+	</h4>
+</div>
+<div style="width: 100%; height: 2000px; margin-top: 150px; display: flex">
+	<div style="width: 15%">
+		<p style="font-size: 15pt; text-align: center">Manage Your Account</p>
+	</div>
+	<div style="width: 25%">
+		<p style="font-size: 15pt; text-align: center">Views</p>
+	</div>
+	<div style="width: 25%">
+		<p style="font-size: 15pt; text-align: center">Edit</p>
+	</div>
+	<div style="width: 25%">
+		<p style="font-size: 15pt; text-align: center">Add Horses</p>
+	</div>
+</div>
+
+<script>
+$(function() {
+  $('a#edit_horse').click(function(event){
+    event.preventDefault();
+    $('div#mainContainer').show();
+    $('div#mainContainer2').hide();
+    $('div#mainContainer3').hide();
+    $('div#mainContainer4').hide();
+    $('div#mainContainer5').hide();
+    $('div#mainContainer6').hide();
+    $('div#mainContainer7').hide();
+    
+  });
+});  
+</script>
+<script>
+$(function() {
+  $('a#edit_farm').click(function(event){
+    event.preventDefault();
+    $('div#mainContainer').hide();
+    $('div#mainContainer2').show();
+    $('div#mainContainer3').hide();
+    $('div#mainContainer4').hide();
+    $('div#mainContainer5').hide();
+    $('div#mainContainer6').hide();
+    $('div#mainContainer7').hide();
+    
+  });
+});  
+</script>
+<script>
+$(function() {
+  $('a#report').click(function(event){
+    event.preventDefault();
+    $('div#mainContainer').hide();
+    $('div#mainContainer2').hide();
+    $('div#mainContainer3').show();
+    $('div#mainContainer4').hide();
+    $('div#mainContainer5').hide();
+    $('div#mainContainer6').hide();
+    $('div#mainContainer7').hide();
+    
+  });
+});  
+</script>
+<script>
+$(function() {
+  $('a#add').click(function(event){
+    event.preventDefault();
+    $('div#mainContainer').hide();
+    $('div#mainContainer2').hide();
+    $('div#mainContainer3').hide();
+    $('div#mainContainer4').show();
+    $('div#mainContainer5').hide();
+    $('div#mainContainer6').hide();
+    $('div#mainContainer7').hide();
+    
+  });
+});  
+</script>
+<script>
+$(function() {
+  $('a#addSire').click(function(event){
+    event.preventDefault();
+    $('div#mainContainer').hide();
+    $('div#mainContainer2').hide();
+    $('div#mainContainer3').hide();
+    $('div#mainContainer4').hide();
+    $('div#mainContainer5').show();
+    $('div#mainContainer6').hide();
+    $('div#mainContainer7').hide();
+  });
+});  
+</script>
+<script>
+$(function() {
+  $('a#addFarm').click(function(event){
+    event.preventDefault();
+    $('div#mainContainer').hide();
+    $('div#mainContainer2').hide();
+    $('div#mainContainer3').hide();
+    $('div#mainContainer4').hide();
+    $('div#mainContainer5').hide();
+    $('div#mainContainer6').show();
+    $('div#mainContainer7').hide();
+  });
+});  
+</script>
+<script>
+$(function() {
+  $('a#addSale').click(function(event){
+    event.preventDefault();
+    $('div#mainContainer').hide();
+    $('div#mainContainer2').hide();
+    $('div#mainContainer3').hide();
+    $('div#mainContainer4').hide();
+    $('div#mainContainer5').hide();
+    $('div#mainContainer6').hide();
+    $('div#mainContainer7').show();
+  });
+});  
+</script>

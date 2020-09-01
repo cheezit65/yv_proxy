@@ -1,0 +1,51 @@
+<% params.inspect %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @bulk_upload.Name %>
+</p>
+
+<p>
+  <strong>Hipnumber:</strong>
+  <%= @bulk_upload.HipNumber %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @bulk_upload.Gender %>
+</p>
+
+<p>
+  <strong>Gait:</strong>
+  <%= @bulk_upload.Gait %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @bulk_upload.Description %>
+</p>
+
+<p>
+  <strong>Sale:</strong>
+  <%= @bulk_upload.Sale %>
+</p>
+
+<p>
+  <strong>Bulkuploadvideoname:</strong>
+  <%= @bulk_upload.BulkUploadVideoName %>
+</p>
+
+<p>
+  <strong>Farm:</strong>
+  <%= @bulk_upload.farm %>
+</p>
+
+<p>
+  <strong>Sire:</strong>
+  <%= @bulk_upload.sire %>
+</p>
+
+<%= link_to 'Edit', edit_bulk_upload_path(@bulk_upload) %> |
+<%= link_to 'Back', bulk_uploads_path %>

@@ -1,0 +1,12 @@
+<% @sale = Sale.find(@sale) %>
+<% @farm = Farm.find(@farm) %>
+
+
+<div align="left">
+	<p>Dear <%= @farm.name %>,</p><br />
+	<p>Attached is a PDF of <%= @sale.Name %>. If you have any questions, please let me know.</p><br />
+	<p>Thank you for your patronage.</p><br />
+	<p>Sincerely,</p><br />
+	<p>Evan Newman</p>
+
+</div>

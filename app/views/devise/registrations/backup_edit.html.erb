@@ -1,0 +1,369 @@
+<style>
+.hideMessage{
+		display: none;		
+}
+.flex-container-siteLogo{
+		display: none !important;
+}
+	
+img:hover{
+	opacity: 1;	
+}	
+
+a:link{
+	text-decoration: none;
+}	
+.accountCSS {
+		font-size: 10px !important;
+		color: white !important;
+}
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+</style>
+<% @concludedSales = Array.new [] %>
+<!-- ><div width="100%" style="background-color: #154786;position: absolute; top: 0px;width: 2000px;height: 45pt"></div> -->
+<div width="100%" style="background-color: green;position: absolute; top: 0px;width: 2000px;height: 45pt"></div>
+<div width="100%" style="background: linear-gradient(#D1D1D1, #B8B8B8 ) !important;position: absolute;top: 30px; width: 2000px; height: 70px">
+	<h4 class="texty">
+	<span class="dashboardButtonLink"><a href="#" id="edit_horse" style="color: white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></span>	
+	<span class="dashboardButtonLink"><a href="#" id="edit_farm" style="color: white">Edit Your Farm</a></span>
+	<span class="dashboardButtonLink"><a href="#" id="edit_horse" style="color: white">&nbsp;&nbsp;Reports&nbsp;&nbsp;</a></span>
+	<span class="dashboardButtonLink"><a href="#" id="edit_horse" style="color: white">&nbsp;&nbsp;View Stats&nbsp;&nbsp;</a></span>
+	<span class="dashboardButtonLink"><a href="#" id="edit_horse" style="color: white">&nbsp;Upload Horse&nbsp;</a></span>
+	<span class="dashboardButtonLink"><a href="#" id="edit_horse" style="color: white">Your Farm Page</a></span>
+
+<div width="100%" style=";position: absolute; top: 68px;width: 600px;height: 200pt">
+	<img src="/DashboardPhoto.jpg"img-responsive">
+</div>
+	</h4>
+</div>
+<div align="center" class="account" style="margin: 0 auto;">				
+	<div class="accountLeft">
+	<% @farm = Farm.find_by(id: @current_user.farm) %>
+	<h1>Manage Your Account</h1>
+<!-- 	<%= button_to 'Go to Farm Page', farm_path(@farm.id),  {:style=>'color:white !important;font-size: 18px;line-height: .7em;text-decoration:none', :method => :get}  %><br> --></br>
+	<h3>Welcome, <%= @current_user.email %></h3>
+	<h4><%= current_user.id %></h4>
+	<% if current_user.role == "cp" %>
+	<h4>Content Provider Role</h4>
+	<% end %>
+	<% if !@farm.nil? %>
+	<div style="font-size: 20px">
+	<%= @farm.name %><br>
+	<%= @farm.address %><br>
+	<%= @farm.city %>,	<%= @farm.state %>, <%= @farm.zipcode %><br>
+	<%= @farm.phonenumber %><br>
+	<%= @farm.website %>
+	<br><br>
+	<a href="#" id="edit_horse">Edit Horse Info</a> | <a href="#" id="edit_farm">Edit Farm Info</a> | <a href="#" id="report">Reports</a> | <a href="#" id="add">Add a Horse</a>
+	 	<% if current_user.role == "cp" %><br>
+<a href="#" id="addSire">Add a Sire</a>|  <a href="#" id="addFarm">Add a Farm</a> | <a href="#" id="addSale">Add a Sale</a>
+	<% end %>
+	<% end %>
+
+	</div>
+</div>
+<!-- -->	
+
+<div class="accountMiddle" style="margin-bottom: 25px;height: 100%;">
+	</div>
+<div class="accountRight" style="margin-bottom: 25px;height: 100%;">
+<div id="mainContainer" style-"background-color: blue">	
+<div style="width: 80%;border-bottom: 30px solid white;margin-bottom: -25px; height: 100%; background-color: red;">
+	<ul>
+		<li><h1 style="float: left; width: 30%;margin-bottom: -2px; border-top-left-radius: 10px;border-top-right-radius: 10px;background-color: brown" id="farmStyle">UPCOMING SALES</h1></li>
+		<li><h1 style="float: right; width: 30%;margin-bottom: -2px; border-top-left-radius: 10px;border-top-right-radius: 10px;;background-color: brown" id="farmStyle">PAST SALES</h1></li>
+	</ul>
+	
+	<% @salesArray = Array.new [] %>				
+	<% @horses = Horse.where(:farm => @farm.id).all %>
+	<% @horses2 = Horse.where(:farm2 => @farm.id).all %>
+	<% @sales = Sale.order(StartDate: :asc) %>
+		<% @sales.each do |s| %>
+			<% @horses.each do |h| %>
+				<% if s.id.to_s == h.Sale %>
+				<% @salesArray.push s.id %>
+				<% end %>
+			<% end %>
+			<% @horses2.each do |h2| %>
+				<% if s.id.to_s == h2.Sale %>
+				<% @salesArray.push s.id %>
+				<% end %>
+			<% end %>
+		<% end %>				
+</div>
+
+<div align="center">	
+<div id="farmWidth2" style="margin-top: 0px !important; height: 100%">
+			<% @uniqueSale = @salesArray.uniq %>
+			<% @uniqueSale.each do |sale| %>
+				<% @saleDetails = Sale.find(sale) %>
+				<% if @saleDetails.StartDate >= Date.today %>
+				<h1 align="center" id="hoverLink" style="font-size: 16px !important; margin-top: 25px">
+				<%= link_to @saleDetails.Name,sale_path(sale) %>&nbsp;
+				<span id="hideThis">
+					<%= link_to image_tag("/YV.jpg"), farm_path(@farm, format: "pdf", :e => @saleDetails.id) %></span>
+				<h4 style="text-align: center; color: black; font-size: 18px !important;background-color: white !important"><%= @saleDetails.StartDate.strftime("%B %-d, %Y") %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</h4><br>
+				<div align="left" style="text-align: left;font-size:19px;background-color: white">
+				</div>
+		<table style="background-color: #E1DDD4"  class="tableStyle" id="salePageTable" class="tablesorter">
+			<thead style="border-bottom: solid 1px black">
+				<th>&nbsp;</th>
+				<th>Hip #</th>
+				<th>Name</th>
+				<th>Page Views</th>
+				
+			</thead>
+			<tbody>
+			<% @horses = Horse.all %>
+			<% @horses = @horses.sort_by{|a| a.HipNumber.to_i } %>					
+			<% @horses.each do |horse| %>
+				<% if horse.Sale.to_i == @saleDetails.id.to_i && (horse.farm.to_i == @farm.id.to_i || horse.farm2.to_i == @farm.id.to_i) %>
+			<tr>
+				<td id="tableStyle10"><%= link_to "Edit Horse", edit_horse_path(:id => horse.id) %></a></td>
+				<td id="tableStyle10"><%= horse.HipNumber %></td>
+				<td id="tableStyle10"><%= horse.Name %></td>
+				<% if horse.PageViews.to_i < 1 %>
+				<% horse.PageViews = 0 %>
+				<% end %>
+				<td id="tableStyle10"><%= horse.PageViews %></td>
+				<td id="tableStyle10"><%= link_to "View Online", horse_path(:id => horse.id)%></td>
+			</tr>
+			<% end %>
+			<% end %>
+			</tbody>
+		</table>
+
+	<% else %>
+	<% @concludedSales.push @saleDetails.id %>
+	<% end %>
+	<% end %>
+</div>
+</div>
+</div>
+<div id="mainContainer2"  style="display:none">	
+	<h2>EDIT YOUR FARM INFORMATION</h2>
+	<div id="innerCont">
+	<% if !@farm.nil? %>
+	<%= form_for (@farm)  do |f| %>
+	      <%= f.submit "Save changes" %><br><br>
+	<div style="display: block; text-align: left; width: 50%;line-height:1.5em; float: left;font-size: 24px;">
+      <%= f.label :name %>: <br>
+      <%= f.label :address %>: <br>
+      <%= f.label :city %><br>
+      <%= f.label :state %><br>
+      <%= f.label :zipcode %><br>
+      <%= f.label :phonenumber, "Phone Number:" %><br>
+      <%= f.label :website %><br>
+      <%= f.label :email %><br>
+      <%= f.hidden_field :FarmCode %><br>
+</div>
+	<div style="display: block; text-align: left; width: 50%;float: left;font-size: 27px;">
+      <%= f.text_field :name, :size => 45  %><br>
+      <%= f.text_field :address, :size => 45  %><br>
+      <%= f.text_field :city, :size => 45  %><br>
+      <%= f.text_field :state, :size => 45  %><br>
+      <%= f.text_field :zipcode, :size => 45  %><br>
+      <%= f.text_field :phonenumber, :size => 45  %><br>
+      <%= f.text_field :website, :size => 45 %><br>
+      <%= f.text_field :email, :size => 45  %><br>
+      <%= f.hidden_field :FarmCode, :size => 45  %><br>
+    <% end %>
+	<% end %>
+	</div>
+	</div>	
+	</div>
+<div id="mainContainer3" style="display:none">
+	<h1>Reporting</h1>
+	</div>	
+	<br>
+	
+<div id="mainContainer4" style="display:none">
+	<h2>ADD YOUR HORSE</h2>
+<div class="account" style="text-align: left">
+<div>	
+<%= form_for Horse.new, :html => {:multipart => true} do |f| %>
+		<br>
+<div style="display: block; text-align: left; width: 50%;float: left;font-size: 18px;">
+		<%= f.label :Name %>
+		<br>
+		<%= f.text_field :Name %><br>
+		<%= f.label :HipNumber, "Hip Number" %>
+		<br>
+		<%= f.text_field :HipNumber %><br>
+		<%= f.label :Gender %>
+		<br>
+	    <%= f.select :Gender, [['Colt','colt'],['Filly','filly'],['Gelding','gelding']] %><br>
+<!-- 		<%= f.text_field :Gender %> -->
+		<%= f.label :Sale %>
+		<br>
+ 		 <%= f.collection_select :Sale, Sale.order(:Name),:id,:Name, include_blank: true %> <br>
+<!-- 		<%= f.text_field :Sale %> -->
+		<%= f.label :sire %>
+		<br>
+ 		 <%= f.collection_select :sire, Sire.order(:Name),:id,:Name, include_blank: true %> <br>
+<!-- 		<%= f.text_field :sire %> -->
+		<%= f.hidden_field :farm %>
+		<br>
+		<%= f.hidden_field :farm, :value => @current_user.farm %>
+		<%= f.hidden_field :farm2 %>
+		<br>
+		<%= f.hidden_field :farm2 %>
+		<%= f.submit "Add Horse"  %>
+</div>
+<div style="display: block; text-align: left; width: 50%;float: left;font-size: 18px;">
+		<%= f.label :Description %>
+		<br>
+		<%= f.text_area :Description, :cols => "50", :rows => "10" %>
+
+		<%= f.label :video %>
+		<br>
+		<%= f.file_field :video %>
+		<br>
+		<%= f.hidden_field :BulkUploadVideoName %>
+</div>
+</div>
+<% end %>
+</div>
+</div>
+
+
+<div id="mainContainer5" style="display:none">
+	<h2>ADD A HORSE</h2>
+<div class="account" style="text-align: left">
+<div>	
+<%= form_for Sire.new, :html => {:multipart => true} do |f| %>
+		<br>	
+<div style="display: block; text-align: left; width: 50%;float: left;font-size: 18px;">
+		<%= f.label :Name %>
+		<br>
+		<%= f.text_field :Name %><br>
+		<%= f.label :gait, "Gait" %>
+		<br>
+	    <%= f.select :gait, [['Pace','pace'],['Trot','trot']] %><br>
+		<%= f.label :eligibility %>
+		<br>
+	    <%= f.select :eligibility, [['Ohio','Ohio'],['Pennsylvania','Pennsylvania']] %><br>
+		<%= f.submit "Add Sire"  %>
+</div>
+</div>
+<% end %>
+</div>
+</div>
+
+
+
+<div id="mainContainer6" style="display:none">
+	Add a Farm
+</div>
+
+<div id="mainContainer7" style="display:none">
+	Add a Sale
+</div>
+
+<script>
+$(function() {
+  $('a#edit_horse').click(function(event){
+    event.preventDefault();
+    $('div#mainContainer').show();
+    $('div#mainContainer2').hide();
+    $('div#mainContainer3').hide();
+    $('div#mainContainer4').hide();
+    $('div#mainContainer5').hide();
+    $('div#mainContainer6').hide();
+    $('div#mainContainer7').hide();
+    
+  });
+});  
+</script>
+<script>
+$(function() {
+  $('a#edit_farm').click(function(event){
+    event.preventDefault();
+    $('div#mainContainer').hide();
+    $('div#mainContainer2').show();
+    $('div#mainContainer3').hide();
+    $('div#mainContainer4').hide();
+    $('div#mainContainer5').hide();
+    $('div#mainContainer6').hide();
+    $('div#mainContainer7').hide();
+    
+  });
+});  
+</script>
+<script>
+$(function() {
+  $('a#report').click(function(event){
+    event.preventDefault();
+    $('div#mainContainer').hide();
+    $('div#mainContainer2').hide();
+    $('div#mainContainer3').show();
+    $('div#mainContainer4').hide();
+    $('div#mainContainer5').hide();
+    $('div#mainContainer6').hide();
+    $('div#mainContainer7').hide();
+    
+  });
+});  
+</script>
+<script>
+$(function() {
+  $('a#add').click(function(event){
+    event.preventDefault();
+    $('div#mainContainer').hide();
+    $('div#mainContainer2').hide();
+    $('div#mainContainer3').hide();
+    $('div#mainContainer4').show();
+    $('div#mainContainer5').hide();
+    $('div#mainContainer6').hide();
+    $('div#mainContainer7').hide();
+    
+  });
+});  
+</script>
+<script>
+$(function() {
+  $('a#addSire').click(function(event){
+    event.preventDefault();
+    $('div#mainContainer').hide();
+    $('div#mainContainer2').hide();
+    $('div#mainContainer3').hide();
+    $('div#mainContainer4').hide();
+    $('div#mainContainer5').show();
+    $('div#mainContainer6').hide();
+    $('div#mainContainer7').hide();
+  });
+});  
+</script>
+<script>
+$(function() {
+  $('a#addFarm').click(function(event){
+    event.preventDefault();
+    $('div#mainContainer').hide();
+    $('div#mainContainer2').hide();
+    $('div#mainContainer3').hide();
+    $('div#mainContainer4').hide();
+    $('div#mainContainer5').hide();
+    $('div#mainContainer6').show();
+    $('div#mainContainer7').hide();
+  });
+});  
+</script>
+<script>
+$(function() {
+  $('a#addSale').click(function(event){
+    event.preventDefault();
+    $('div#mainContainer').hide();
+    $('div#mainContainer2').hide();
+    $('div#mainContainer3').hide();
+    $('div#mainContainer4').hide();
+    $('div#mainContainer5').hide();
+    $('div#mainContainer6').hide();
+    $('div#mainContainer7').show();
+  });
+});  
+</script>

@@ -1,0 +1,403 @@
+<% require "net/https" %>
+<% require "uri" %>
+
+<style>
+
+ #my_popup{
+	text-align: center !important;
+	padding-top:1%;
+	height: 400px; 
+	width: 400px; 
+	visibility: visible; 
+	display: none; 
+	outline: none; 
+	background-color: #4F5458 !important;
+	text-align: center !important; 
+	position: relative; 
+	vertical-align: middle; 
+}
+
+ #my_popup2{
+	text-align: center !important;
+	padding-top:1%;
+	height: 400px; 
+	width: 300px; 
+	visibility: visible; 
+	display: none; 
+	outline: none; 
+	background-color: #4F5458 !important;
+	text-align: center !important; 
+	position: relative; 
+	vertical-align: middle; 
+}
+
+
+button{
+	color: white !important;
+	font-family: 'Roboto', sans-serif;
+	background-color: #838a90 !important;
+	background: linear-gradient(#00bfff, #4267b2);
+	border: solid 1px #484e53;
+	border-bottom-color: #363b3f;
+	border-color: #484e53;
+	border-left-color: #484e53;
+	border-radius: 0px;
+	border-right-color: #484e53;
+	border-top-color: #616a71;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.1),0 1px 0 0px rgba(255,255,255,0.2) inset;
+	color: #efefef;
+	cursor: pointer;
+	display: inline-block;
+	/* fix buttonStyle2 in css to change font, too */
+	font-family: 'Roboto', sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	line-height: 12px;
+	margin-right: 3px;
+	text-decoration: none;
+	/* text-shadow: #000 0 1px 0; REMOVED 7/2/2017 */
+	
+}
+form input[type=submit],form input[type=button],form button
+{
+	background-color: #838a90;
+	background: linear-gradient(#00bfff, #4267b2);
+	border: solid 1px #484e53;
+	border-bottom-color: #363b3f;
+	border-color: #484e53;
+	border-left-color: #484e53;
+	border-radius: 0px;
+	border-right-color: #484e53;
+	border-top-color: #616a71;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.1),0 1px 0 0px rgba(255,255,255,0.2) inset;
+	color: #efefef;
+	cursor: pointer;
+	display: inline-block;
+	/* fix buttonStyle2 in css to change font, too */
+	font-family: 'Roboto', sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	line-height: 12px;
+	margin-right: 3px;
+	padding: 10px 10px 10px 10px;
+	text-decoration: none;
+	/* text-shadow: #000 0 1px 0; REMOVED 7/2/2017 */
+}
+</style>
+
+
+<!-- *** This is the Social Sticky section. Put on HOLD until other cosmetic fixed are complete. -->
+<!--        <li><a href="https://twitter.com/share?url=http://www.yearlingvideos.com/<%= @horse.id %>&amp;text=Check out this new video from YearlingVideos.com" class="entypo-social twitter" target="_blank"><span>Twitter</span></a></li> -->
+<!----- increment social count ----->
+<% Horse.increment_counter(:PageViews, @horse.id) %>
+<% @sale = Sale.all %>
+<% if !@horse.farm2.nil? && @horse.farm2 != "" %>
+	<% @farm = Farm.find(@horse.farm) %>
+	<% @farm2 = Farm.find(@horse.farm2) %>
+<!-- 	<%= @farm.name %>, <%= @farm.phonenumber %><br>
+	Agent For:<br><%= @farm2.name %>, <%= @farm2.phonenumber %>
+-->	
+<% elsif @horse.farm.length < 4 %>
+	<% @farm = Farm.find(@horse.farm) %>
+<!-- 	<%= @farm.name %><br><%= @farm.phonenumber %> -->
+<% end %>		
+<% @farm = Farm.find(@horse.farm) %>
+<!----- top buttons ----->
+
+<div class= "flex-container3b" id="hp1" align="center">
+	
+<!-- Button 1 -->	
+<!-- 	<div align="center" style="margin-right: 5%">	
+			<%= button_to 'Return to Results', :back, {:style=>'color:#FFFFFF;text-decoration:none', :method => :get}  %>
+	</div>
+-->	
+<!-- Button 2 -->	
+<!--
+	 	<div style="z-index: 999999; margin-right: 5%;">			
+ 	</div>
+-->
+<!-- Button 3 -->	
+<!-- 	<div align="center">	
+		<% if @horse.Sale.to_i.is_a? Numeric %>				
+		<% @saleName = Sale.find(@horse.Sale.to_i) %>
+		<%= button_to 'Other Horses in Sale', sale_path(@saleName.id),  {:style=>'color:#FFFFFF;text-decoration:none', :method => :get}  %>
+		<% end %>
+	</div>
+-->	
+</div>
+<!-- -->
+<div class= "flex-container3b" align="center" style="padding-top:10px;">
+
+</div>
+
+<div class="flex-container-horse" id="flex-container-horse-style">
+	<div id="l">
+		<div id="LR1">
+			<div id="R1">
+				#<%= @horse.HipNumber %>					
+			</div>
+			<div id="R2">
+				<%= @horse.Name %>
+			</div>
+<div id="showMe">
+			<div id="R3">
+				<%= @horse.Gender.capitalize %>
+			</div>
+			<div id="R4">
+					<% if @horse.sire == "00000" %>
+						<span>&nbsp;</span>
+					<% else %>		
+						<% @sire = Sire.find(@horse.sire)%>
+						<% if !@sire.gait.nil? %>
+ 							<%= @sire.gait.capitalize %>
+						<% else %>
+							<span>n/a</span>
+						<% end %>
+					<% end %>				
+			</div>
+			<div id="R5">
+					<% if !@horse.sire.nil? and @horse.sire != "" and @horse.sire != "00000"%>
+						<% @sire = Sire.find(@horse.sire)%>
+						<%= @sire.Name %>
+					<% elsif  @horse.sire == "00000" %>
+						<span>Sire Unavailable</span>
+					<% end %>				
+			</div>
+			
+</div>
+<div id="hideMe">
+			<div style="width: 100%;font-size: 15px; text-align: center;">
+				<span style="font-size: 1.3em"><%= @horse.Gender.capitalize %></span>
+						<span>&nbsp;&bull;&nbsp;</span>
+					<% if @horse.sire == "00000" %>
+						<span style="font-size: 1.3em">&nbsp;&bull;&nbsp;</span>
+					<% else %>		
+						<% @sire = Sire.find(@horse.sire)%>
+						<% if !@sire.gait.nil? %>
+ 							<span style="font-size: 1.3em"><%= @sire.gait.capitalize %></span>
+						<% else %>
+							<span style="font-size: 1.3em">n/a</span>
+						<% end %>
+					<% end %>				
+						<span style="font-size: 1.3em">&nbsp;&bull;&nbsp;</span>
+
+					<% if !@horse.sire.nil? and @horse.sire != "" and @horse.sire != "00000"%>
+						<% @sire = Sire.find(@horse.sire)%>
+						<span style="font-size: 1.3em"><%= @sire.Name %></span>
+					<% elsif  @horse.sire == "00000" %>
+						<span style="font-size: 1.3em">Sire Unavailable</span>
+					<% end %>				
+			</div>
+			
+</div>
+<div id="hideMeSmall">
+			<div style="width: 100%;font-size: 15px; text-align: center;">
+				<span style="font-size: 15px"><%= @horse.Gender.capitalize %></span>
+						<span>&nbsp;&bull;&nbsp;</span>
+					<% if @horse.sire == "00000" %>
+						<span style="font-size: 20px">&nbsp;&bull;&nbsp;</span>
+					<% else %>		
+						<% @sire = Sire.find(@horse.sire)%>
+						<% if !@sire.gait.nil? %>
+ 							<span style="font-size: 15px"><%= @sire.gait.capitalize %></span>
+						<% else %>
+							<span style="font-size: 15px">n/a</span>
+						<% end %>
+					<% end %>				
+						<span style="font-size: 15px">&nbsp;&bull;&nbsp;</span>
+
+					<% if !@horse.sire.nil? and @horse.sire != "" and @horse.sire != "00000"%>
+						<% @sire = Sire.find(@horse.sire)%>
+						<span style="font-size: 15px"><%= @sire.Name %></span>
+					<% elsif  @horse.sire == "00000" %>
+						<span style="font-size: 15px">Sire Unavailable</span>
+					<% end %>				
+			</div>
+			
+</div>
+		</div>
+	<div class="lexis">
+					<% if !@horse.BulkUploadVideoName.nil? %>
+<!-- take the happy path to find video with lower case letters for Sale Code -->
+    	<% @path = "http://s3.amazonaws.com/yv-output/" + @horse.BulkUploadVideoName[0...-4] + "/hls_" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
+ 		<% uri = URI.parse(@path) %>
+		<% http = Net::HTTP.new(uri.host, uri.port) %>
+		<% request = Net::HTTP::Get.new(uri.request_uri) %>
+		<% res = http.request(request) %>
+<!-- take the OTHER path to find video with uppercase letters for Sale Code -->
+    	<% @path2 = "http://s3.amazonaws.com/yv-output/" + @horse.BulkUploadVideoName[0...-4] + "/hls_" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
+		<% uri = URI.parse(@path2) %>
+		<% http = Net::HTTP.new(uri.host, uri.port) %>
+		<% request = Net::HTTP::Get.new(uri.request_uri) %>
+		<% res2 = http.request(request) %>	
+		<% if res.code.to_s == "200" %>
+
+<video style="background-color: #e9ebee;" id=example-video width="820" height="461" class="video-js vjs-16-9 vjs-default-skin vjs-playing vjs-fullscreen vjs-big-play-centered" controls > 
+  <source
+     src=<%= @path %>
+     type="application/x-mpegURL">
+</video>     
+     	<% elsif res2.code.to_s == "200" %>
+	
+<video style="background-color: #e9ebee;" id=example-video width="820" height="461" class="video-js vjs-16-9 vjs-default-skin vjs-playing vjs-fullscreen vjs-big-play-centered" controls >
+  <source
+     src=<%= @path %>
+     type="application/x-mpegURL">
+</video>     
+			<% end %>
+		<% else %>				
+		<h1 style="font-size:1.5em;font-family:Merriweather Sans !important ;color:red">
+		The video is not available yet. Please try again later.</h1>
+		<% end %>		
+
+		</div>
+		<div style="width: 100%; height: 10%; float: left; vertical-align: middle; ">
+			<div class="saleNameStyle">
+				<% if @horse.Sale.to_i.is_a? Numeric %>		
+					<% @saleName = Sale.find(@horse.Sale) %>
+						<%= @saleName.Name %>		
+				<% end %>			
+			</div>
+			<div style="text-align: center; font-size: 1.0em; width: 50%;  padding: 1%;  float: right;">
+				<% @farm = Farm.find(@horse.farm) %>
+				<%= @farm.name %> | <%= @farm.phonenumber %>
+			</div>
+			<% if !@horse.farm2.nil? && @horse.farm2 != "" && !@horse.Description.nil? && @horse.Description != "" %>
+			<div class="saleNameStyle2">
+				<strong>NOTES:</strong>
+					<%= @horse.Description %>		
+			</div>
+			<div class="saleNameStyle3" style="margin-bottom: 5%">
+				<% @farm = Farm.find(@horse.farm) %>
+				<% @farm2 = Farm.find(@horse.farm2) %>
+				<strong>Agent for:</strong>
+				<%= @farm2.name %> | <%= @farm2.phonenumber %>
+			</div>
+		</div>
+	</div>
+	<div id="r" style="padding-top: 7%">
+			<% elsif (@horse.farm2.nil? || @horse.farm2 == "") && !@horse.Description.nil? %>
+			<div class="saleNameStyle2a">
+				<strong>NOTES:</strong>
+					<%= @horse.Description %>		
+			</div>
+		</div>
+	</div>
+	<div id="r" style="padding-top: 7%">
+			<% elsif (!@horse.farm2.nil? && @horse.farm2 != "") && (@horse.Description.nil? || @horse.Description == "") %>
+			<div class="saleNameStyle3" style="margin-bottom: 5%">
+				<% @farm = Farm.find(@horse.farm) %>
+				<% @farm2 = Farm.find(@horse.farm2) %>
+				<strong>Agent for:</strong>
+				<%= @farm2.name %> | <%= @farm2.phonenumber %>
+			</div>
+		</div>
+	</div>
+	<div id="r" style="padding-top: 7%">
+		
+			<% else %>
+				</div>
+				</div>
+				<div id="r">
+			<% end %>
+
+		<div class= "flex-container-saleButtons">
+	<div class="flex-items-default-saleButtons2">
+			<%= button_to 'Return to Results', :back,  :method => :get, :class => "buttonStyle3" %>
+ 		</div>
+	<div class="flex-items-default-saleButtons2">
+<!-- 			<%= button_to 'Email A Friend', :back,  :method => :get,  :class => "buttonStyle3"%> -->
+ 		<button  class="my_popup_open" id="button1" style="background: linear-gradient(#00bfff, #4267b2);"> Email horse to a friend</button><br> </br> 
+		 		<% @email = "" %> 
+	<div id="my_popup">
+ 			<button onclick="window.close()"; style="margin-bottom:30px; border: thick 2px black;" class="my_popup_close">Close</button>
+ 			<%= form_for @email, url: {controller: "messages", action: "create"} do |f| %>
+			<br><span style="font-size:16px;color: white;">
+			EMAIL THIS HORSE TO A FRIEND!<br></span>
+			<span style="font-size:18px;text-align:center !important;color:black">
+			<br>Enter YOUR email address:
+			<span style="font-size: 25pt;"><%= email_field(:user1, :email1) %><br></span>
+			<br>Enter YOUR FRIEND's email address:
+			<span style="font-size: 25pt;"><%= email_field(:user2, :email2) %><br>
+			<%= f.hidden_field :id, :value => @horse.id %>
+			<%= f.hidden_field :yearling, :value => @horse.Name %>
+			<%= f.hidden_field :hip, :value => @horse.HipNumber %>
+			<%= submit_tag "Send", :email1 => :email1,:email2 => :email2, :user1 => :user1,:user2 => :user2, :id => :id, :yearling => :yearling	, :hip => :hip %> </span>
+		<span>				
+		<% if flash[:notice] %>
+		<div>
+			<%= flash[:notice] %>
+		</div>
+		<% end %>
+		<% end %>
+</div>
+
+ 		</div>
+
+	<% @saleName = Sale.find(@horse.Sale.to_i) %>
+
+	<div class="flex-items-default-saleButtons2">
+			<%= button_to 'More Horses in this Sale', sale_path(@saleName.id),  {:method => :get,  :class => "buttonStyle3"} %>
+ 		</div>
+	<div class="flex-items-default-saleButtons2">
+ 		<button  class="my_popup2_open" id="button1" value="Refresh Page" onClick="window.location.reload(); style="background: linear-gradient(#00bfff, #4267b2);">Trouble Viewing This Video?</button><br> </br> 
+ 			<div id="my_popup2">
+	 			<button onclick="window.close()"; style="margin-bottom:30px; border: thick 2px black;" class="my_popup2_close">Close</button><br/>
+				<span style="font-size:12px;text-align:left !important;color:white; padding: 1%;">
+					If you are having problems viewing the video and are using Internet Explorer, either update 
+					your <a href="https://get.adobe.com/flashplayer/">Adobe Flash</a> or use another browser such as Chrome or Firefox.
+				</span>
+				<span style="font-size:12px;text-align:left !important;color:white; padding: 1%;">
+					If you are having problems viewing the video and are on a mobile Android device, please refresh your screen.
+				</span>
+ 			</div>
+ 		</div>
+		</div>
+	</div>
+
+
+</div>
+
+	</div>
+	</div>	
+<br><br><br>
+
+</br>	
+<div class="flex-container3" align="center" style="padding-bottom:15px;padding-top:15px">
+</div>
+<br>
+<script>
+  $(document).ready(function() {
+      // Initialize the plugin
+      $('#my_popup').popup();
+      $('#my_popup2').popup();
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.13/jquery.popupoverlay.js"></script>
+<script>
+      (function(window, videojs) {
+        var player = window.player = videojs('example-video');
+
+        // hook up the video switcher
+        var loadUrl = document.getElementById('load-url');
+        var url = document.getElementById('url');
+        loadUrl.addEventListener('submit', function(event) {
+          event.preventDefault();
+          player.src({
+            src: url.value,
+            type: 'application/x-mpegURL'
+          });
+          return false;
+        });
+      }(window, window.videojs));
+    </script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-104901712-1', 'auto');
+  ga('send', 'pageview');
+</script>

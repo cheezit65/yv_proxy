@@ -1,0 +1,45 @@
+<% @horse = Horse.find(params[:id])%>
+<% if current_user.farm.to_i == @horse.farm.to_i %>
+<div style="height:100%; width: 70%; margin: auto;"><h1 style="text-align: center">Editing <%= @horse.Name %></h1><hr>
+	<div id="horse_edit_left" style="display: block; float: left; background-color:float:left; width: 20%;">
+		<span style="font-size: 24px"><bold><%= @horse.Name %></bold><br></span>
+		<span style=" font-size: 16px"><%= @horse.Name %><br></span>
+		<span style="font-size: 16px"><%= @horse.HipNumber %><br></span>
+		<span style="font-size: 16px"><%= @horse.Gender %><br></span>
+		<% @sale = Sale.find_by(id: @horse.Sale) %>
+		<span style="font-size: 16px"><%= @sale.Name %><br></span>
+		<% @sire = Sire.find_by(id: @horse.sire) %>
+		<span style=" font-size: 16px"><%= @sire.Name %><br></span>
+		<% if !@horse.Description.nil? %>
+			<span style="font-size: 16px"><%= @horse.Description %><br></span>	
+		<% else %>	
+			<span style="font-size: 16px">No Description<br></span>
+		<% end %>
+	</div>
+	<div id="horse_edit_right" style="display: block; float: left; width: 70%;">
+			<%= form_for @horse, :url => { :action => "update" }  do |f| %>
+			<div style="display: block; text-align: left; padding-left: 10%; width: 100%;font-size: 216x;">
+				<span style="font-size: 16px"><%= f.label :Name %>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<span style="padding-left: 25px; font-size: 24px"><%= f.text_field :Name, :size => 25  %></span><br>
+				<span style=" font-size: 16px"><%= f.label :HipNumber, "Hip Number" %>:&nbsp;&nbsp;&nbsp;</span>
+					<span style="padding-left: 25px; font-size: 24px"><%= f.text_field :HipNumber, :size => 25  %></span><br>
+				<span style="font-size: 16px"><%= f.label :Gender %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<span style="padding-left: 25px; font-size: 16px"><%= f.select :Gender, [['Colt','colt'],['Filly','filly'],['Gelding','gelding']] %></span><br>
+				<span style="font-size: 16px"><%= f.label :Sale %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<span style="padding-left: 25px; font-size: 16px"><%= f.collection_select :Sale, Sale.order(:Name),:id,:Name, include_blank: true %> </span><br>
+				<span style="font-size: 16px"><%= f.label :sire %>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<span style="padding-left: 25px; font-size: 16px"><%= f.collection_select :sire, Sire.order(:Name),:id,:Name, include_blank: true %></span><br>
+				<span style="font-size: 16px"><%= f.label :Description %>:<br></span>
+					<span style="padding-left: 25px; font-size: 25px"><%= f.text_area :Description, :cols => "60", :rows => "7" %></span><br>
+			</div>
+			<div><span style="padding-left: 25%; font-size: 16px; float: left"><%= f.submit "  Save Changes "  %></span><% end %>
+			<span style="float: left;"><%= button_to 'Back to Account', edit_user_registration_path,  {:style=>'color:white !important;font-size: 16px;line-height: .7em;text-decoration:none', :method => :get}  %></span>
+		</div>
+	</div>
+</div>	
+<% else %>
+<div align="center">
+	<h1>You are not permitted to edit this horse.</h1>
+	<h2><%= link_to "Back", :back %></h2>
+</div>	
+<% end %>

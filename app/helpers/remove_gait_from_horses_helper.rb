@@ -1,0 +1,2 @@
+module RemoveGaitFromHorsesHelper
+end

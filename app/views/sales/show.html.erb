@@ -1,0 +1,124 @@
+<style>
+	tr:nth-child(even) {
+		background-color: #d3dcef;
+	}
+#header2{
+	padding-bottom: 0px !important;
+}	
+</style>
+	<% @sale = Sale.find_by_id(params[:id]) %>
+
+<div align="center" style="display: flex; min-height:800px; width:100%;display:block;overflow:visible;">
+	<div style="display: block !important; margin: auto !important;">
+<!--- id salesPage makes a funky looking box for the sale info. disbanded 2019. 
+<div id="salesPage"></div>
+-->
+<div class= "flex-container3" style="padding-top:0px">
+<div class="flex-item-1c">
+	<div id="saleTitleBlockA">
+		<div id="saleTitleBlock1">
+		<h1 class="saleName1">
+			<%= @sale.Name %>
+			<h4>
+				<span class="linkColor" style="color:black">
+				<%= link_to @sale.website, "#{@sale.website}", target: '_blank' %>
+				</span>
+			</h4>
+		</h1>
+		</div>
+	<div id="saleTitleBlock2">
+		<h4>
+			<%= @sale.StartDate.strftime("%B %-d, %Y") %>
+			<% if !@sale.EndDate.nil? && @saleEndDate != @saleStartDate %>
+			- <%= @sale.EndDate.strftime("%B %-d, %Y") %>
+			<% end %>
+		</h4>		
+		<h4 class="linkColor" >
+			<%= @sale.Location %><br />			
+		</h4>
+	</div>
+	</div>
+</div>
+</div>
+<div class= "flex-container3" style="padding-top:0px">
+<div class="flex-item-1c">
+		<% @horses = Horse.where(:Sale => @sale.id).all %>
+		<% @farm = Farm.all %>
+		<% @flag = 0 %>
+		<table style="background-color: #e5ebf6"  class="tableStyle" id="salePageTable" class="tablesorter">
+			<thead class="tableHeadHover">
+			<th width="6%">Hip #</th>
+			<th width="15%">Name</th>
+			<th class="hideColumn3" width="7%">Gender</th>
+			<th class="hideColumn3" width="10%">Gait</th>
+			<th class="hideColumn" width="12%">Eligible State</th>
+			<th class="hideColumn" width="12%">Sire</th>
+			<th class="hideColumn" width="20%">Farm</th>
+			</thead>
+			<tbody>
+			<% @horses = Horse.where(:Sale => @sale.id)  %>
+			<% @horses = @horses.sort_by{|a| a.HipNumber.to_i } %>			
+			<% @horses.each do |horse| %>
+			<tr id="clickableHand" class='clickable-row' data-href='<%= horse_path(horse) %>'>
+				<td><%= horse.HipNumber %></td>
+				<td><%= horse.Name %></td>
+				<td class="hideColumn3"><%= horse.Gender %></td>
+				<% if horse.sire == "00000" %>
+				<td class="hideColumn">&nbsp</td>				
+				<td  class="hideColumn">No Sire Listed</td>
+				<td class="hideColumn">&nbsp</td>				
+				<% else %>
+				<% @sireResults = Sire.find_by(id: horse.sire)  %>
+				<% if !@sireResults.gait.nil? %>
+				<td class="hideColumn3"><%= @sireResults.gait.capitalize %></td>				
+				<td class="hideColumn"><%= @sireResults.eligibility %></td>
+				<td  class="hideColumn"><%= @sireResults.Name %></td>
+				<% end %>
+					<% @farms = Farm.all %>
+					<% @farms.each do |farm| %>
+					<% if farm.id.to_i == horse.farm.to_i || farm.FarmCode == horse.farm %>
+					<td class="hideColumn"><%= farm.name %></td>
+					<% end %>
+					<% end %>
+				<% end %>
+			</tr>
+
+			<% end %>
+			</tbody>
+		</table>
+		</table>	
+		<br />
+		<br>
+		<br>
+	</div>
+</div></div>
+
+
+</div>
+
+<script>
+$(document).ready(function() 
+    { 
+        $("#salePageTable").tablesorter(); 
+        $('th').css('cursor', 'pointer');
+    } 
+); 
+</script>
+
+<script>
+	jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.document.location = $(this).data("href");
+    });
+});
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104901712-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

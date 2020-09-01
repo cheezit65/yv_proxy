@@ -1,0 +1,86 @@
+<div align="center">
+	<% @sales = Sale.all %>
+	<% @saleArray = Array.new %>
+	<% @sales.each do |s| %>
+	<% @saleArray.push h s.Name %>
+	<% end %>
+
+	<% @farms = Farm.all %>
+	<% @farmArray = Array.new %>
+	<% @farms.each do |f| %>
+	<% @farmArray.push h f.name %>
+	<% end %>
+
+	<h1 style="font-size:20pt">	Choose the farm and sale to run a report. Report will open in PDF format.</h1>
+	<!-- the form actually reloads the page with a GET to pass parameters to use when generating the report. This code does NOT generate the report, only pulls in farm & sale params -->
+	<%= form_tag(bulk_uploads_path, :method => "get") do %>
+	<span style="font-size: 30pt;"><%= text_field_tag :search1, params[:search1], :size => 50, :id => "sale", placeholder: "Choose Sale" %><br>
+	<%= text_field_tag :search2, params[:search2], :size => 50, :id => "farm", placeholder: "Choose Farm" %><br></span>
+	<% @sale = Sale.where(:name => params[:search1])%>		<br><br>
+
+	  <%= submit_tag("Create") %>
+<% end %>
+
+<% if !params[:search1].nil? %>
+<% if !params[:search2].nil? %>
+<br>
+		<% @farm = Farm.all %>
+		<% @farm.each do |f| %>
+		 <% if f.name == params[:search2] %>
+		 <% @farmID = f.id %>
+		 <% end %>
+		 <% end %>		 
+
+		<% @sale = Sale.all %>
+		<% @sale.each do |s| %>
+		 <% if s.Name == params[:search1] %>
+		 <% @saleID = s.id %>
+		 <% end %>		 
+		<% end %>
+		<br><br>
+		<%= params[:search1] %><br>
+		<%= params[:search2] %><br>
+		<% @sale = Sale.find(@saleID) %>
+		<% @farm = Farm.find(@farmID) %>
+	<!-- The code below is what generates the report, with the bulk_upload_path method -->
+		<span style="color:blue; font-size:18pt"><%= link_to "View Report", bulk_upload_path(@farm, format: "pdf", :e => @sale) %></span></h4>
+	<% end %><br/>
+	 		<% @email = "" %> 
+		 	<%= form_tag(new_message_path, :method => "get") do  %>
+				<span style="font-size:18px;text-align:center !important;color:black">
+				<br>The email address on file for <%= @farm.name %> is:<br/> <%= @farm.email %></span><br><br>
+				<%= hidden_field_tag :email1 , @farm.email %>
+				<%= hidden_field_tag :farm , @farm.id %>
+				<%= hidden_field_tag :sale , @sale.id %>
+				<%= submit_tag "Email Report to Farm" %> </span>
+<!-- 				<%= submit_tag "Email Report to Farm", :email1 => :email1,:email2 => :email2, :user1 => :user1,:user2 => :user2, :id => :id, :yearling => :yearling	, :hip => :hip %> </span>-->
+			<% end %>
+
+		<% params[:search1] = ""%>
+		<% params[:search2] = ""%>
+<% end %>
+
+</div>
+
+<script>
+	$(function() {
+var availableTags = [<% @saleArray.each do |sale| %>"<%= sanitize sale %>",<% end %>
+	];
+	$("#sale").autocomplete({
+		source : availableTags
+	});
+	});
+</script>
+	
+
+	
+<script>
+	$(function() {
+var availableTags = [<% @farmArray.each do |farm| %>"<%= sanitize farm %>",<% end %>
+	];
+	$("#farm").autocomplete({
+		source : availableTags
+	});
+	});
+</script>
+	

@@ -1,0 +1,98 @@
+<div align="center">
+<%= form_for(@bulk_upload) do |f| %>
+  <% if @bulk_upload.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bulk_upload.errors.count, "error") %> prohibited this bulk_upload from being saved:</h2>
+      <ul>
+      <% @bulk_upload.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+<div class= "flex-container">
+<h3 style="font-size:1.0em; font-family: Helvetica;color:black;font-weight: 250">To add a single horse to your farm, fill out the form below.<br> If you have multiple horses, you may upload a CSV file. Download template.
+	<span style="color:red"> All fields are required are denoted with a red asterisk.</span></h3><br />
+</div>	 
+
+<h3 style="font-size:1.0em; font-family: Helvetica;color:black;font-weight: 250;margin-top: 35px">SINGLE HORSE UPLOAD</h3>  
+<div class= "flex-container">
+<div class="flex-items-default">
+  <div class="field">
+    <%= f.label :Name %><br>
+    <%= f.text_field :Name %>
+  </div>
+</div>
+<div class="flex-items-default">
+	<div class="field">
+    <%= f.label :HipNumber %><br>
+    <%= f.text_field :HipNumber %>
+  </div>
+</div>
+<div class="flex-items-default">
+  <div class="field">
+    <%= f.label :Gender %><br>
+    <%= f.text_field :Gender %>
+  </div>
+</div>
+<div class="flex-items-default">  
+  <div class="field">
+    <%= f.label :Gait %><br>
+    <%= f.text_field :Gait %>
+  </div>
+</div>
+</div>
+<div class= "flex-container">
+<div class="flex-items-default">  
+  <div class="field">
+    <%= f.label :Description %><br>
+    <%= f.text_field :Description %>
+  </div>
+</div>
+<div class="flex-items-default">  
+  <div class="field">
+    <%= f.label :Sale %><br>
+    <%= f.text_field :Sale %>
+  </div>
+</div>
+
+<!-- hide bulk upload name - will be generated when submitted 
+<div class="flex-items-default">  
+  <div class="field">
+    <%= f.label :BulkUploadVideoName %><br>
+    <%= f.text_field :BulkUploadVideoName %>
+  </div>
+</div>
+-->
+<div class="flex-items-default">  
+  <div class="field">
+    <%= f.label :farm %><br>
+    <%= f.text_field :farm %>
+  </div>
+</div>
+<div class="flex-items-default">  
+  <div class="field">
+    <%= f.label :sire %><br>
+    <%= f.text_field :sire %>
+  </div>
+</div>  
+</div>  
+<div class= "flex-container">
+<div class="flex-items-default">  
+  <div class="field" style="padding-top:15px">
+    <%= f.label :video, :class=>'inlineForm' %>
+    <%= f.file_field :BulkUploadVideoName %>
+</div>
+</div>    
+
+</div>
+  <div class="actions">
+    <%= f.submit "Upload Horse" %>
+  </div>
+<% end %>
+<div align="center" style="width:50%">
+<hr style="height:3px;border:none;color:white;background-color:white;" />
+</div>
+</div>
+

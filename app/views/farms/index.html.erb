@@ -1,0 +1,79 @@
+<style>
+form input[type=submit],form input[type=button],form button
+{
+	background-color: #838a90;
+	background: linear-gradient(#00bfff, #4267b2);
+	border: solid 1px #484e53;
+	border-bottom-color: #363b3f;
+	border-color: #484e53;
+	border-left-color: #484e53;
+	border-radius: 0px;
+	border-right-color: #484e53;
+	border-top-color: #616a71;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.1),0 1px 0 0px rgba(255,255,255,0.2) inset;
+	color: #efefef;
+	cursor: pointer;
+	display: inline-block;
+	/* fix buttonStyle2 in css to change font, too */
+	font-family: 'Roboto', sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	line-height: 12px;
+	margin-right: 3px;
+	padding: 10px 10px 10px 10px;
+	text-decoration: none;
+	/* text-shadow: #000 0 1px 0; REMOVED 7/2/2017 */
+}</style>
+<div align="center" style=" height:800px; width:100%;display:block;overflow:auto;">
+<h1 align="center" style="margin-bottom:20px;font-size:30px; color:#643A13;padding-top:20px">Farms</h1>
+<% @return = "" %>
+<% horseList = Array.new(0) %>
+<div class= "flex-container-saleButtons">
+	<% @farms = Farm.order(name: :asc) %>
+	<% @farms.each do |farm| %>
+	<% @horses = Horse.where(farm: farm.id).count + Horse.where(farm2: farm.id).count %>
+	<% if @horses.to_i > 0 %>
+	<div class="flex-items-default-saleButtons">
+		<%= button_to farm.name, farm_path(farm), :method => :get,  :class => "buttonStyle2" %>
+	</div>
+	<% else %>
+	<% horseList.push farm.id %>
+	<% end %>
+	<% end %>
+</div>
+
+<!-- <area1><h1 align="center" id="clickableHand2" style="margin-top:10px;font-size:30px;color:#643A13;">Inactive Farms</h1><br></area1>
+	<div class= "flex-container-saleButtons">
+	<% horseList.each do |list| %>
+		<div class="flex-items-default-saleButtons">
+			<% @farm =  Farm.find_by(id: list) %>
+			<%= button_to @farm.name, farm_path(list), :method => :get,  :class => "buttonStyle2" %>
+		</div>	
+	<% end %>
+</div>
+</div>
+--> 
+</div>
+
+<!-- if you want to use the script below, put <span1> tags around a chunk of code. It will hide/show it.-->
+
+<script>
+$(document).ready(function(){
+$('span1').hide();
+$("area1").click(function(){
+$('span1').fadeToggle();
+});
+});
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104901712-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

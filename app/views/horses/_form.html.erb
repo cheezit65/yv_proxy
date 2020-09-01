@@ -1,0 +1,17 @@
+<% @email = "" %>
+		<%= form_for @email, url: {controller: "messages", action: "create"} do |f| %>
+		<span  id="flip"style="color:white;font-size:1em; font-family:Merriweather Sans !important"> Email this page to a friend:</span><br> 
+			<span id="panel" style="color:white"><span>
+			Enter your friend's email address<br>
+			<%= email_field(:user, :email) %><br><br>
+			<%= f.hidden_field :id, :value => @horse.id %>
+			<%= f.hidden_field :name, :value => @horse.Name %>
+			<%= f.hidden_field :hip, :value => @horse.HipNumber %>						
+			<%= submit_tag "Send", :email => :email, :id => :id, :name => :name, :hip => :hip %> </span>
+						
+		<% if flash[:notice] %>
+		<div>
+			<%= flash[:notice] %>
+		</div>
+		<% end %>
+		<% end %>

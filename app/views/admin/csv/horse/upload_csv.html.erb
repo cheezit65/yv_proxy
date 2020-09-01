@@ -1,0 +1,71 @@
+<% if !notice.nil? %>
+<div align="center">
+	<% flash.each do |errors| %>
+  <div style="padding-left:30%; color: red;text-align:left;font-size:2.2em; font-color: black">
+    <p><strong>Error importing horses:</strong><br> 
+		<span style="font-size:14pt; color:black">
+    	<% notice.each do |n| %>
+    	<% n = n+1 %>
+    	Horse on row number <%= n %> has an error.<br>	
+    	<% end %>     	
+    	<br>Please check your CSV file for errors and resubmit these rows using the CSV template.</p>
+<% end %>
+		</span>
+  </div>
+</div>
+<% end %>
+
+<%= form_for :dump, :url=>{:action=>"import_csv"}, :html => { :multipart => true } do |f| %>
+  <div align="center" style="padding-left: 32%;width:40%;">
+  <h1>Instructions for Uploading Horses <br>with a CSV File</h1>
+  	<div align="left">
+  <h3 style="font-size: 16pt">1. Add horses to each line, ensuring that the following fields are filled out:</h3>
+  <div style="font-size: 12pt">
+  	 <ul>
+  	 	<li><strong>Farm.</strong> Enter a valid farm code.
+  	 	</li>
+  	 	<li>
+  	 		<strong>HipNumber.</strong> Enter a numeric hip number.
+  	 	</li>
+  	 	<li>
+  	 		<strong>Gender.</strong> Enter an f (filly), c (colt), or g (gelding)
+  	 	</li>
+  	 	<li>
+  	 		<strong>Sire.</strong> Enter a valid sire. <br>**If you need to use a sire not on the list, add the sire from the ActiveAdmin site before proceeding.  	 		
+  	 	</li>
+  	 	<li>
+  	 		<strong>Sale.</strong> Enter a valid sale code.
+  	 	</li>
+  	 	<li>
+  	 		<strong>BulkUploadVideoName.</strong> This field may be left blank or populated with a video filename that is located in the Amazon S3 bucket.
+  	 	</li>
+  	 	<li>
+  	 		<strong>Description.</strong> Optional field for adding notes about the horse.
+  	 	</li>
+  	 </ul>
+  	</div>
+<br><br><br>
+
+<div style="font-size: 16pt">
+  <table>
+    <tr>
+      <td>
+        <label for="dump_file">
+         
+        </label>
+      </td>
+      <td>
+         2. Select a CSV File : <%= f.file_field :file %>
+      </td>
+    </tr>
+    <tr>
+    	<td></td>
+      <td>
+        <%= submit_tag 'Submit' %>
+      </td>
+    </tr>
+  </table>
+  </div>
+</div>
+<% end %>
+

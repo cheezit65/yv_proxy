@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<!-- Page Wrapper w/footer-->
+<html>
+	<head>
+		<title>Yearling Videos</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+		<%= stylesheet_link_tag    'mediaQueries', media: 'all', 'data-turbolinks-track' => true %>
+		<%= stylesheet_link_tag    'entypo', media: 'all', 'data-turbolinks-track' => true %>
+		<%= favicon_link_tag 'favicon.ico' %>
+		<link href='https://fonts.googleapis.com/css?family=Merriweather+Sans' rel='stylesheet' type='text/css'>
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>		
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<link href="//vjs.zencdn.net/5.8/video-js.min.css" rel="stylesheet">
+		<link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	    <script src="https://unpkg.com/video.js/dist/video.js"></script>
+        <script src="https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
+		<script type="text/javascript" src="../jquery.tablesorter.js"></script>
+		
+	</head>
+	
+	
+	
+	
+	
+	<body>
+		<div id="page-wrapper-mobile">
+			<div id="page-wrapper">
+				<% if flash[:notice] %>
+				<div align="center" style="color:red; font-size:1.5em">
+					<%= flash[:notice] %>
+				</div>
+				<% end %>
+				<!-- Header -->
+				<div id="header-wrapper">
+					<header id="header2">
+						<div class="flex-container-siteLogo">
+							<div>
+							<a href="<%= root_url%>"><img src="/YVlogoC88.png" class="img-responsive"></a>
+							</div>
+							<div class="img-responsive">
+							<%= form_tag(horses_path, :method => "get", id: "Search Form") do %>
+							<%= search_field_tag :search, params[:search],  placeholder: "Enter a Hip Number", :class => "searchTagStyle" %>
+							<div id="useUntil787">
+							<%= image_submit_tag("/mg.png") %>
+							</div>
+							<div id="useAtl787">
+							<%= image_submit_tag("/mg2.png") %>
+							</div>
+							<% end %>
+							</div>
+<!-- 							<% if params[:id] != "ADD" %>
+							<span class="hideMessage"> <span style="float: right;"><%= link_to "CLICK HERE TO LEARN ABOUT ADDING YOUR HORSES!", messages_path(:id => "ADD"), {:style => 'color: black; text-decoration: none; font-size: 15px;'} %></span></span>
+							<% end %>
+-->
+							<!-- 	<%= link_to (image_tag("/YVlogoC88.png")), root_url %> -->
+						</div>
+
+					</header>
+					<div>
+						<% if current_page?(root_path) %>
+							<div id="banner" style="max-width:100% !important">
+						<% elsif controller.controller_name == "horses" %>
+							<div id="bannerBlank" class="bannerStyle">
+						<% elsif controller.controller_name == "horses" && controller.action_name == "edit" %>
+							<div id="bannerBlank"  class="bannerStyle">
+						<% elsif controller.controller_name == "farms" %>
+							<div id="bannerBlank"  class="bannerStyle">
+						<% elsif controller.controller_name == "sales" %>
+							<div id="bannerBlank"  class="bannerStyle">
+						<% elsif controller.controller_name == "bulk_uploads" && controller.action_name == "index" %>
+		 					<div id="bannerBlank" style="max-width:100% !important">
+						<% elsif controller.controller_name == "registrations"  && controller.action_name == "new" %>
+							<div id="bannerBlank" style="max-width:100% !important">
+						<% elsif controller.controller_name == "registrations"  && controller.action_name == "edit" %>
+							<div id="bannerBlank" style="max-width:100% !important">
+						<% elsif controller.controller_name == "registrations"  && controller.action_name == "create" %>
+							<div id="bannerBlank" style="max-width:100% !important">
+						<% elsif controller.controller_name == "sessions"  && controller.action_name == "new" %>
+							<div id="bannerBlank" style="max-width:100% !important">
+						<% elsif controller.controller_name == "messages" %>
+							<div id="bannerBlank"  class="bannerStyle">
+						<% elsif controller.controller_name == "searches" %>
+							<div id="bannerBlank"  class="bannerStyle">
+						<% else %>
+							<div id="banner3" style="max-width:100% !important">
+						<% end %>
+						<%= yield %>
+					</div>
+
+										<!-- footer -->
+				<footer id="sticky" style=" background:  linear-gradient(#d3d3d3, #696969) !important;">
+										<% @dmca = "DMCA" %>
+										<div  align-"center"  id="copyright">
+										        <% current_time = DateTime.now %>
+										        <% new_time = current_time.strftime "%Y" %>
+											    <span id="cpRight">&copy;<%= new_time %> Yearling Videos. All rights reserved.</span><span> &nbsp;&nbsp;|&nbsp;&nbsp;</span> 
+												<span><%= link_to "DMCA", messages_path(:id => "DMCA") %> &nbsp;&nbsp;|&nbsp;&nbsp;</span>
+												<span><%= link_to "Disclaimer", messages_path(:id => "DMCA") %> &nbsp;&nbsp;|&nbsp;&nbsp;</span>
+												<!-- <span style="color:#337ab7"> --> 
+												<span>614-600-3383&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+												<span><%= link_to "Add Your Horse", messages_path(:id => "ADD") %> &nbsp;&nbsp;|&nbsp;&nbsp;</span>
+
+												<% if current_user %>
+	 												<span><%= link_to "Account", edit_user_registration_path %> &nbsp;&nbsp;|&nbsp;&nbsp;</span>
+	 												<span><%= link_to "Log Out",  destroy_user_session_path %> </span>
+ 												<% else %> 
+	 												<span><%= link_to "Download Videos", downloads_path %> </span>
+												<% end %>
+										</div>
+										</footer>
+									</div>
+	</body>
+</html>

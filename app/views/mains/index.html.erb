@@ -1,0 +1,145 @@
+<style>
+	#header2
+{
+	border-bottom: 10px solid transparent;
+	display: table;
+	height: 20px;
+	overflow: visible;
+	padding: 5px 0;
+	position: inherit;
+	width: 100%;
+	z-index: 900;
+	background-color: white !important;
+	padding-top: -40px !important;
+}
+
+</style>
+<style>
+	tr:nth-child(even) {
+		background-color: #98AFC7;
+	}
+</style>
+<div style=" min-height:10px">
+	<div class="flex-container-horseButtons">
+		<div>
+			<a href="<%= sales_url%>"><img src="/SaleQ.png" class="img-responsive"></a>
+			<!-- Banner Copy -->
+		</div>
+		<div>
+			<a href="<%= farms_url%>"><img src="/FarmQ.png" class="img-responsive"></a>
+		</div>
+
+	</div>
+	<div class="flex-container" align="center" style="padding-top:1.5em;">
+		<div class="flex-items-6a">
+			<%= form_tag(horses_path, :method => "get", id: "Search Form") do %>
+<!-- 			<span id="break1" style="color:black; font-size: 1.2em;font-family: Merriweather Sans !important; padding-right:10px;line-height:2em !important;padding-top:30px !important">Search by Hip #</span>
+			<span id="break2"><%= search_field_tag :search, params[:search],  placeholder: "Enter a Hip Number", :class => "searchTagStyle" %></span>
+			<span id="break33"><%= submit_tag("Search") %></span>
+			<br>
+--></br>			<div class="flex-items-6b">
+				<span id="linkAdvancedSearch">
+				<strong><%= link_to "Advanced Search", searches_path %></span> </strong>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div align="center" class="hideTable">
+<% if @horses.count > 0 %>
+		<h1 style="font-family:Merriweather Sans !important ;color:black !important;text-align:center; font-size:24pt">Recently Added</h1>
+		<br>
+		<% @sale = Sale.all %>
+		<% @farm = Farm.all %>
+		<% @flag = 0 %>
+		<table class="tableStyle" id="mainPageTable" class="tablesorter">
+			<thead class="tableHeadHover">
+				<th width="8%">Hip Number</th>
+				<th width="12%" >Name</th>
+				<th width="10%" class="hideColumn" >Gender</th>
+				<th width="10%" class="hideColumn" >Gait</th>
+				<th width="15%" class="hideColumn" >Sire</th>
+				<th width="20%" class="hideColumn" >Sale</th>
+				<th width="20%" class="hideColumn" >Farm</th>
+			</thead>
+			<tbody>
+				<% @horses.sort_by { |obj| obj.created_at } %>
+				<% @horses.each do |horse| %>
+				<tr id="clickableHand" class='clickable-row' data-href='<%= horse_path(horse) %>'>
+					<td class="mobileStyle"><%= horse.HipNumber %></td>
+					<td class="mobileStyle"><%= horse.Name %></td>
+					<td id="mobileStyle" class="hideColumn"><%= horse.Gender %></td>
+
+					<% @sires = Sire.all %>
+					<% if horse.sire == "00000" %>
+					<td class="hideColumn" id="mobileStyle" >no sire listed</td>
+					<% else %>
+					<% @sires.each do |sire| %>
+					<% if sire.id.to_i == horse.sire.to_i %>
+					<td id="mobileStyle" class="hideColumn"><%= sire.gait %></td>
+					<td id="mobileStyle" class="hideColumn"><%= sire.Name %></td>
+					<% end %>
+					<% end %>
+					<% end %>
+					
+					<% @sales = Sale.all %>
+					<% @sales.each do |sale| %>
+					<% if sale.id.to_i == horse.Sale.to_i || sale.SaleCode == horse.Sale %>
+					<% @flag = 1 %>
+					<td  id="mobileStyle" class="hideColumn"><%= sale.Name %></td>
+					<% end %>
+					<% end %>
+
+					<% @farms = Farm.all %>
+					<% @farms.each do |farm| %>
+					<% if farm.id.to_i == horse.farm.to_i || farm.FarmCode == horse.farm %>
+					<% @flag = 1 %>
+					<td id="mobileStyle" class="hideColumn"><%= farm.name %></td>
+					<% end %>
+					<% end %>
+
+
+					<% if @flag == 0 %>
+					<td style="text-align:center">&nbsp;</td>
+					<% end %>
+				</tr>
+				<% @flag = 0 %>
+				<% end %>
+			</tbody>
+		</table>
+<% end %>
+		<br />
+		<br>
+		<br>
+</div>
+<% else %>
+	<div class="hideDiv" style="margin-bottom: 0px; border-bottom: none">
+				<br />
+		<br>
+		<br>
+	</div>
+<!-- Footer -->
+<script>
+	jQuery(document).ready(function($) {
+		$(".clickable-row").click(function() {
+			window.document.location = $(this).data("href");
+		});
+	}); 
+</script>
+<script>
+	$(document).ready(function() {
+		$("#mainPageTable").tablesorter();
+		$('th').css('cursor', 'pointer');
+	}); 
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104901712-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

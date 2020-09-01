@@ -1,0 +1,17 @@
+<%= form_for(@sire) do |f| %>
+  <% if @sire.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sire.errors.count, "error") %> prohibited this sire from being saved:</h2>
+
+      <ul>
+      <% @sire.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

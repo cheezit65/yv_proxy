@@ -1,0 +1,125 @@
+<style>
+form input[type=submit],form input[type=button], button
+{
+	background-color: #838a90;
+	background: linear-gradient(#00bfff, #4267b2);
+	border: solid 1px #484e53;
+	border-bottom-color: #363b3f;
+	border-color: #484e53;
+	border-left-color: #484e53;
+	border-radius: 0px;
+	border-right-color: #484e53;
+	border-top-color: #616a71;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.1),0 1px 0 0px rgba(255,255,255,0.2) inset;
+	color: #efefef;
+	cursor: pointer;
+	display: inline-block;
+	/* fix buttonStyle2 in css to change font, too */
+	font-family: 'Roboto', sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	line-height: 12px;
+	margin-right: 3px;
+	padding: 10px 10px 10px 10px;
+	text-decoration: none;
+	/* text-shadow: #000 0 1px 0; REMOVED 7/2/2017 */
+}
+	tr:nth-child(even) {
+		background-color: #d3dcef;
+	}
+
+</style>
+
+<div align="center" style="height: 800px">
+	<h1 id="searchColor">Search Results for Hip Number <%= params[:search] %></h1>
+<div align="center" style="max-width:100% !important; ">
+	<% if params[:search].to_i > 0 %>
+	<!-- test to see if valid hip number has been entered -->
+	<% @match = "false" %>
+	<% @allHorses = Horse.all %>
+		<% @allHorses.each do |horse|  %>
+			<% if horse.HipNumber == params[:search] %>
+			<% @match = "true" %>
+			<% end %>
+		<% end %>
+	<% end %>
+	<!-- if match is found, @match will be set to true and following code executed -->
+	<%if @match == "true" %>
+	<% @searchResults = Horse.where(HipNumber: params[:search]) %>
+		<table style="background-color: #E1DDD4"  class="tableStyle" id="salePageTable" class="tablesorter">
+			<thead class="tableHeadHover">
+			<th width="5%"><strong>Hip #</strong></th>
+			<th width="5%"><strong>Name</strong></th>
+			<th class="hideColumn" width="5%"><strong>Gender</strong></th>
+			<th class="hideColumn" width="5%"><strong>Gait</strong></th>
+			<th class="hideColumn" width="5%"><strong>Sire</strong></th>
+			<th class="hideColumn" width="5%"><strong>Sale</strong></th>
+			<th class="hideColumn" width="5%"><strong>Farm</strong></th>
+			<th class="hideColumn" width="5%"><strong>Eligible State</strong></th>
+			</thead>
+		<tbody>
+		<% @searchResults.each do |horse| %>
+		<tr id="clickableHand" style="background-color: #e5ebf6; opacity:0.6;" class='clickable-row' data-href='<%= horse_path(horse) %>'>
+			<td  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;"><%= horse.HipNumber %></td>
+			<td  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;"><%= horse.Name %></td>
+			<td class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;"><%= horse.Gender %></td>
+			<% @sireResults = Sire.find_by(id: horse.sire)  %>
+			<% if @sireResults.nil? %>						
+			<td class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;">Not Listed</td>
+			<% else %>
+			<td class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;"><%= @sireResults.gait %></td>
+			<td class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;"><%= @sireResults.Name %></td>
+			<% end %>
+			<% @saleResults = Sale.find_by(id: horse.Sale)  %>
+			<% if !@saleResults.nil? %>
+			<td  class="hideColumn" style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;"><%= @saleResults.Name %></td>
+			<% else %>
+			<td></td>
+			<% end %>
+			<% @flag = 1 %>
+			<% @farmResults = Farm.find_by(id: horse.farm)  %>
+			<td class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;"><%= @farmResults.name %></td>
+			<td class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;"><%= @sireResults.eligibility %></td>
+			<% if @flag == 0 %>
+			<td class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.0em;">&nbsp;</td>
+			<% end %>
+		</tr>
+		<% @flag = 0 %>
+		<% end %>
+		</tbody>
+	</table>
+	<% else %>
+	<h1 style="font-size:23px;color:red; ">You have entered an invalid hip number. Please try again.</h1>
+	<% end %>
+	<br>
+			<%= form_tag(horses_path, :method => "get", id: "Search Form") do %>
+			<span  style="color:black; font-size: 1.2em;font-family: Merriweather Sans !important; padding-right:10px;min-height:1em !important;padding-top:30px !important">Search by Hip #</span>
+			<%= search_field_tag :search, params[:search], maxlength: 15, size: 20,  placeholder: "Enter a Hip Number" %>
+			<%= submit_tag("Search") %>
+			<br>
+			<div class="flex-items-6b">
+				<span id="linkAdvancedSearch">
+				<strong><%= link_to "Advanced Search", searches_path %></span> </strong>
+	<% end %>
+	<br>
+	<br>
+
+</div>
+</div>
+<script>
+	jQuery(document).ready(function($) {
+		$(".clickable-row").click(function() {
+			window.document.location = $(this).data("href");
+		});
+	}); 
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104901712-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

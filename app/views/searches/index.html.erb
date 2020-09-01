@@ -1,0 +1,548 @@
+<style>
+button{
+	color: white !important;
+	font-family: 'Roboto', sans-serif;
+	background-color: #838a90 !important;
+	background: linear-gradient(#00bfff, #4267b2);
+	border: solid 1px #484e53;
+	border-bottom-color: #363b3f;
+	border-color: #484e53;
+	border-left-color: #484e53;
+	border-radius: 0px;
+	border-right-color: #484e53;
+	border-top-color: #616a71;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.1),0 1px 0 0px rgba(255,255,255,0.2) inset;
+	color: #efefef;
+	cursor: pointer;
+	display: inline-block;
+	/* fix buttonStyle2 in css to change font, too */
+	font-family: 'Roboto', sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	line-height: 12px;
+	margin-right: 3px;
+	text-decoration: none;
+	/* text-shadow: #000 0 1px 0; REMOVED 7/2/2017 */
+	
+}
+a.button,a:link.button,a:visited.button,input[type=submit],input[type=button],button
+{
+	background-color: red;
+	background-image: linear-gradient(180deg, #838a90, #414549);
+	border: solid 1px #484e53;
+	border-bottom-color: #363b3f;
+	border-color: #484e53;
+	border-left-color: #484e53;
+	border-radius: 200px;
+	border-right-color: #484e53;
+	border-top-color: #616a71;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.1),0 1px 0 0px rgba(255,255,255,0.2) inset;
+	color: #efefef;
+	display: inline-block;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 1.0em;
+	font-weight: bold;
+	line-height: 12px;
+	margin-right: 3px;
+	padding: 7px 16px 6px;
+	text-decoration: none;
+/*	text-shadow: #000 0 1px 0; */
+}
+#sire {
+	width: 60% !important;
+	font-size: 15px;
+	line-height: 2px;
+}
+select{
+	width: 60% !important;
+}
+
+#sale_saleName{
+	width: 30%;
+}
+#sire_sireName{
+	width: 30%;
+}
+#state_eligibility{
+	width: 30%;
+}
+	tr:nth-child(even) {
+		background-color: #d3dcef;
+		 opacity: 0.6;
+	}
+
+</style>
+<!-- Advanced Search Page #search -->
+
+<div align="center" style=" min-height:800px; width:100%; text-align:left">
+	<h1 align="center" class="advancedSearch">Advanced Search </h1>
+	<div align="center" class= "flex-container-advancedSearch" style="text-align: center; font-size: 1.5em;">
+		<div class="flex-items-default-advancedSearch">
+			<div id="searchBox" align="center">
+							<!-- radio buttons for gender -->
+							
+				<h2 style="font-size: 1.5em !important; color:white"></h2>
+				<%= form_tag(searches_path, :method => "get",:action => 'search') do %>		
+				<div align="left">		
+				<span style="font-size: 1.2em !important;width:100%; text-align: left">Gender:</span>
+				<%= radio_button_tag(:gender, "any", :checked => "true") %>
+				<%= label_tag(:gender_any, "any") %>
+				<%= radio_button_tag(:gender, "filly") %>
+				<%= label_tag(:gender_filly, "filly") %>
+				<%= radio_button_tag(:gender, "colt") %>
+				<%= label_tag(:gender_colt, "colt") %>
+				<%= radio_button_tag(:gender, "gelding") %>
+				<%= label_tag(:gender_gelding, "gelding") %>
+				</div>				
+				<!-- radio buttons for gait -->
+			    <div  align="left"><span style="left: 0; font-size: 1.2em !important">Gait:</span>
+				<%= radio_button_tag(:gait, "any", :checked => "true") %>
+				<%= label_tag(:gait_any, "any") %>
+				<%= radio_button_tag(:gait, "pace") %>
+				<%= label_tag(:gait_pace, "pace") %>
+				<%= radio_button_tag(:gait, "trot") %>
+				<%= label_tag(:gait_trot, "trot") %>
+				</div>
+				<div style="text-align: left;">
+				<span style="font-size: 1.2em !important;">Sale:</span> 
+
+				<% @saleNames = Sale.all %>
+				<% @saleArray = Array.new %>
+				<% @saleNames.each do |s| %>
+					<% @saleArray.push s.Name %>
+				<% end %>
+				<%= select("sale", "saleName", @saleArray, :include_blank => "any", :size => 55) %>
+				<br>
+				</div>
+				
+				<div style="text-align: left;">
+				<span style="font-size: 1.2em !important; left: 0; width: 100%; text-align: left">Sire:&nbsp;</span> 
+				<span>
+				<%= text_field_tag :sire, params[:sire], :id => "sire", :onclick => "return clearForm()", placeholder: "Enter Sire Name Here" %>
+				</span>
+				</div>
+				</div>
+
+				<div align="center">	
+										    <%= text_field_tag :clear, params[:clear], :type => 'hidden', :size => 25 %>
+
+		       <span><%= submit_tag "Search", :class => "buttonStyle3SearchPage",  :style => "background: linear-gradient(#00bfff, #4267b2); margin-top: 3%;", :name => nil %></span>
+
+			     </span>
+				</div>
+				<% end %>
+			</div>
+			</div>
+	<div align="center" class= "flex-container-advancedSearch2" style="text-align: center; font-size: 1.5em;">
+
+	<% if params[:search] && params[:search] != "" %>
+	<% @paramSearch = params[:search] %>
+	<% @match = "false" %>
+	<% @allHorses = Horse.all %>
+	<% @allHorses.each do |horse| %>
+	<% if horse.Name.downcase == params[:search].downcase %>
+	<% @match = "true" %>
+
+	<% end %>
+	<% end %>
+	<% end %>
+
+	<% @horses = Horse.all %>
+	<% @horseArray = Array.new %>
+	<% @horses.each do |h| %>
+	<% @horseArray.push h h.Name %>
+	<% end %>
+
+	<% @sires = Sire.all %>
+	<% @sireArray = Array.new %>
+	<% @newHorseArray = Horse.all %>
+	<% @sires.each do |s| %>
+		<% @newHorseArray.each do |h| %>
+			<% if h.sire.to_s == s.id.to_s %>
+				<% if !@sireArray.include?(s.Name) %>
+					<% @sireArray.push s.Name %>
+				<% end %>
+			<% end %>
+		<% end %>
+	<% end %>
+
+
+	<!-- search results code below -->
+	<div style="padding-top: 3%;" align="center">
+		<div style="font-size:15px">
+			<!-- check for horse search -->
+			<% if !params[:search].nil? %>
+			<!-- test to see if valid hip number has been entered -->
+			<% @match = "false" %>
+			<% @allHorses = Horse.all %>
+				<% @allHorses.each do |horse|  %>
+				<% if horse.Name == params[:search] %>
+				<% @match = "true" %>
+				<% @matchHorse = horse %>
+				<% end %>
+			<% end %>
+			<% end %>
+			<!-- check for sire search -->
+			<% if !params[:search2].nil? %>
+			<!-- test to see if valid Sire Name has been entered -->
+			<% @match = "false" %>
+			<% @allSires = Sire.all %>
+			<% @allSires.each do |s|  %>
+			<% if s.Name == params[:search2] %>
+					<% @match = "trueSire" %>
+					<% @matchSire = s %>
+					<% end %>
+				<% end %>
+			<% end %>
+			<% if !params[:gait].nil? %>
+				<% @match = "trueSire" %>			
+			<% end %>
+			<% if !params[:gender].nil? %>
+				<% @match = "trueSire" %>
+			<% end %>
+	
+				<% if @match == "trueSire" %>
+				<span style="font-size:1.2em">
+			    <%= form_tag(searches_path, :method => "get",:action => 'search2') do %>
+			    <%= text_field_tag :clear, params[:clear], :type => 'hidden', :size => 25 %>
+		       <span><%= submit_tag "Reset", :class => "buttonStyleSearchPage",  :style => "background: linear-gradient(#00bfff, #4267b2);", :name => nil %></span>
+			     </span>
+			    <% end %>
+
+<!-- 1. Gait, no gender, no sale, maybe sire  -->
+				<% if (params[:gait] == "pace" || params[:gait] == "trot") && (params[:gender] == "any" && params[:sale][:saleName] == "") %>
+					<% if (params[:sire] != "")%>
+						<% @sires = Sire.all %>
+						<% @horses = Horse.all %>
+						<% @horseList = Array.new %>
+						<% @horses.each do |h| %>
+							<% @sires.each do |s| %>
+					    		<% if h.sire.to_s == s.id.to_s && s.gait == params[:gait] && s.Name.downcase == params[:sire].downcase %>
+				        			<% @horseList.push(h) %>
+					    		<% end %>
+					    	<% end %>
+						<% end %>    				
+					<% else %>
+						<% @sireList = Sire.where(:gait => params[:gait].downcase) %>
+						<% @horses = Horse.all %>
+						<% @horseList = Array.new %>
+						<% @horses.each do |h| %>
+						<% @sireList.each do |s| %>
+				    	<% if s.id.to_s == h.sire.to_s %>
+				        <% @horseList.push(h) %>	
+					    <% end %>
+						<% end %>
+						<% end %>    				
+					<% end %>
+<!-- 2 Gender, no gait, no sale, maybe sire #1  -->
+				<% elsif (params[:gender] == "colt" || params[:gender] == "filly" || params[:gender] == "gelding") && (params[:gait] == "any") && (params[:sale][:saleName] == "") %>
+					<% if (params[:sire] != "")%>
+						<% @horses = Horse.all %>	
+						<% @sires = Sire.all %>
+						<% @horseList = Array.new %>
+						<% @horses.each do |h| %>
+							<% @sires.each do |s| %>
+							    <% if s.id.to_s == h.sire.to_s && h.Gender == params[:gender] && s.Name.downcase == params[:sire].downcase %>
+							        <% @horseList.push(h) %>	
+							    <% end %>								
+						    <% end %>								
+						<% end %>				
+					<% else %>
+						<% @horseList = Array.new %>
+						<% @horses = Horse.all %>	
+						<% @horses.each do |h| %>
+							<% if h.Gender == params[:gender] %>
+						        <% @horseList.push(h) %>	
+						    <% end %>								
+						<% end %>				
+					<% end %>
+<!-- 3 Sale, no gender, no gait, maybe sire  -->
+				<% elsif ((params[:gender] == "any") && (params[:gait] == "any") && (params[:sale][:saleName].length > 1)) %>
+					<% if (params[:sire] != "")%>
+						<% @horseList = Array.new %>
+						<% @sires = Sire.all %>
+						<% @horses = Horse.all %>
+						<% @saleList = Sale.where(:Name => params[:sale][:saleName])  %>
+						<% @horses.each do |h| %>									
+							<% @sires.each do |sire| %>
+								<% @saleList.each do |sale| %>
+								    <% if sale.id.to_s == h.Sale.to_s  && sire.id.to_s == h.sire.to_s && sire.Name.downcase == params[:sire].downcase %>
+								        <% @horseList.push(h) %>	
+								    <% end %>
+							    <% end %>
+						    <% end %>
+						<% end %>    				
+					<% else %>
+						<% @horseList = Array.new %>
+						<% @saleList = Sale.where(:Name => params[:sale][:saleName])  %>
+						<% @horses.each do |h| %>
+							<% @saleList.each do |s| %>
+							    <% if s.id.to_s == h.Sale.to_s %>
+							        <% @horseList.push(h) %>	
+							    <% end %>
+						    <% end %>
+						<% end %>    				
+					<% end %>    				
+<!-- 4 Sale, Gait, no gender, maybe sire  -->
+				<% elsif ((params[:gender] == "any") && (params[:gait] == "trot" || params[:gait] == "pace") && (params[:sale][:saleName].length > 1)) %>
+					<% if (params[:sire] != "")%>
+						<% @horseList = Array.new %>
+						<% @horses = Horse.all %>
+						<% @saleList = Sale.where(:Name == params[:sale][:saleName]) %>
+						<% @sires = Sire.where(:gait => params[:gait].downcase) %>
+						<% @horses.each do |h| %>
+							<% @sires.each do |s| %>
+								<% if h.sire.to_s == s.id.to_s && s.Name.downcase == params[:sire].downcase %>
+									<% @saleList.each do |sale| %>
+								    	<% if h.Sale.to_s == sale.id.to_s && sale.Name == params[:sale][:saleName] %>
+							        		<% @horseList.push(h) %>										        	
+							   			<% end %>
+							   		<% end %>
+								<% end %>									    		
+							  <% end %>
+						<% end %>    				
+					<% else %>
+						<% @horseList = Array.new %>
+						<% @horses = Horse.all %>
+						<% @saleList = Sale.where(:Name == params[:sale][:saleName]) %>
+						<% @sireList = Sire.where(:gait => params[:gait].downcase) %>
+						<% @horses.each do |h| %>
+							<% @sireList.each do |s	| %>
+								<% if h.sire.to_s == s.id.to_s %>
+									<% @saleList.each do |sale| %>
+								    	<% if h.Sale.to_s == sale.id.to_s && sale.Name == params[:sale][:saleName] %>
+							        		<% @horseList.push(h) %>										        	
+							   			<% end %>
+							   		<% end %>
+						  		<% end %>									    		
+						    <% end %>
+						<% end %>    											
+					<% end %>
+<!-- 5 Sale, Gender, no gait, maybe sire #5   -->
+				<% elsif ((params[:gender] == "filly" || params[:gender] == "colt" || params[:gender] == "gelding") && (params[:gait] == "any") && (params[:sale][:saleName].length > 1)) %>
+					<% if (params[:sire] != "")%>
+						<% @sireList = Sire.where(:Name => params[:sire]) %>
+						<% @horseList = Array.new %>
+						<% @horses = Horse.all %>
+						<% @sales = Sale.all  %>
+						<% @horses.each do |h| %>
+							<% @sires.each do |sire| %>
+								<% if sire.Name.downcase == params[:sire].downcase  %>
+									<% @sales.each do |sale| %>
+										<% if sale.id.to_s == h.Sale.to_s && sale.Name == params[:sale][:saleName]  %>
+										   	<% if params[:gender] == h.Gender %>
+										        <% @horseList.push(h) %>	
+										    <% end %>
+										<% end %>
+									<% end %>
+								<% end %>
+							<% end %>
+						<% end %>    				
+					<% else %>
+						<% @horseList = Array.new %>
+						<% @horses = Horse.all %>
+						<% @saleList = Sale.all  %>
+						<% @horses.each do |h| %>
+							<% @saleList.each do |s| %>
+							    <% if s.id.to_s == h.Sale.to_s && s.Name == params[:sale][:saleName] && h.Gender == params[:gender] %>
+							        <% @horseList.push(h) %>	
+							    <% end %>
+						    <% end %>
+						<% end %>    				
+					<% end %>
+<!-- 6 Gait, Gender, no sale, maybe sire -->
+				<% elsif ((params[:gender] == "filly" || params[:gender] == "colt" || params[:gender] == "gelding") && (params[:gait] == "trot" || params[:gait] == "pace") && (params[:sale][:saleName] == "")) %>
+					<% if (params[:sire] != "")%>
+					<% @sires = Sire.all %>
+						<% @horseList = Array.new %>
+						<% @horses = Horse.where(:Gender => params[:gender]) %>
+						<% @horses.each do |h| %>
+							<% @sires.each do |sire| %>
+							    <% if sire.id.to_s == h.sire.to_s && sire.gait == params[:gait] && h.Gender == params[:gender]  && sire.Name.downcase == params[:sire].downcase%>
+							        <% @horseList.push(h) %>	
+							    <% end %>
+						    <% end %>
+					    <% end %>
+					<% else %>
+						<% @horseList = Array.new %>
+						<% @horses = Horse.where(:Gender => params[:gender]) %>
+						<% @sireList = Sire.where(:gait => params[:gait])  %>
+						<% @horses.each do |h| %>
+							<% @sireList.each do |sire| %>
+							    <% if sire.id.to_s == h.sire.to_s && sire.gait == params[:gait] && h.Gender == params[:gender] %>
+							        <% @horseList.push(h) %>	
+							    <% end %>
+						    <% end %>
+						<% end %>    					
+					<% end %>
+<!-- 7 Gait, Gender, Sale, maybe sire  -->
+				<% elsif (params[:gait] == "pace" || params[:gait] == "trot") && (params[:gender] == "filly" || params[:gender] == "colt" || params[:gender] == "gelding") && (params[:sale][:saleName].length > 0) %>
+					<% if (params[:sire] != "")%>
+						<% @sires = Sire.where(:gait => params[:gait].downcase) %>
+						<% @horses = Horse.all %>
+						<% @horseList = Array.new %>
+						<% @horses.each do |h| %>
+							<% @sires.each do |s| %>
+							    <% if s.id.to_s == h.sire.to_s && h.Gender == params[:gender] && s.Name.downcase == params[:sire].downcase %>
+									<% @sales = Sale.all %>
+									<% @sales.each do |sale| %>
+										<% if sale.id.to_s == h.Sale.to_s && sale.Name == params[:sale][:saleName]  %>
+						        			<% @horseList.push(h) %>	
+						    			<% end %>
+					    			<% end %>
+								<% end %>    				
+							<% end %>    				
+						<% end %>    				
+					<% else %>							
+						<% @sireList = Sire.where(:gait => params[:gait].downcase) %>
+						<% @horses = Horse.all %>
+						<% @horseList = Array.new %>
+						<% @horses.each do |h| %>
+							<% if h.Gender == params[:gender] %>
+							<% @sireList.each do |s| %>
+							    <% if s.id.to_s == h.sire.to_s %>
+		    						<% @saleList = Sale.all  %>
+										<% @saleList.each do |sale| %>
+											<% if sale.id.to_s == h.Sale.to_s && sale.Name == params[:sale][:saleName] %>
+										        <% @horseList.push(h) %>	
+										    <% end %>
+									    <% end %>
+								    <% end %>
+							    <% end %>
+							<% end %>    				
+						<% end %>    				
+					<% end %>    								
+<!-- 8 Sire, no gender, no gait, no sale  -->
+				<% elsif (params[:sire] != "") %>
+					<% @sires = Sire.all %>							
+					<% @horses = Horse.all %>
+					<% @horseList = Array.new %>
+					<% @horses.each do |h| %>
+						<% @sires.each do |s| %>
+						    <% if s.id.to_s == h.sire.to_s && s.Name.downcase == params[:sire].downcase %>
+						        <% @horseList.push(h) %>	
+						    <% end %>
+					    <% end %>
+					<% end %>    				
+<!-- 9 no sire, no gender, no gait, no sale  -->
+				<% else %>
+					<% @horseList = Horse.all %>
+				<% end %>
+			<!-- check attributes for selection -->
+			<% if (params[:sire] || params[:gait] || params[:gender] || params[:sale][:saleName]) && (@horseList.length > 0) %>
+    		<table style="background-color: #e5ebf6"  class="tableStyle" id="searchPageTable" class="tablesorter">
+			<thead class="tableHeadHover">
+			<th width="5%"><strong>Hip #</strong></th>
+			<th width="20%"><strong>Name</strong></th>
+			<th class="hideColumn" width="5%"><strong>Gender</strong></th>
+			<th class="hideColumn" width="5%"><strong>Gait</strong></th>
+			<th class="hideColumn" width="20%"><strong>Sire</strong></th>
+			<th class="hideColumn" width="15%"><strong>Sale</strong></th>
+			<th class="hideColumn" width="15%"><strong>Farm</strong></th>
+			<th class="hideColumn" width="15%"><strong>Eligible State</strong></th>
+			</thead>
+
+				<% @horseList.each do |hs| %>
+				<% @sireList = Sire.where(:gait => params[:gait].downcase) %>
+
+				<tr id="clickableHand" class='clickable-row' data-href='<%= horse_path(hs) %>'>
+					<td  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;"><%= hs.HipNumber %></td>
+					<td  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;"><%= hs.Name %></td>
+					<td   class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;"><%= hs.Gender %></td>
+					<% if hs.sire == "00000" %>
+					<td  class="hideColumn"   style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;">&nbsp;</td>					
+					<% else %>
+					<% @sireResults = Sire.find_by(id: hs.sire)  %>
+					<td  class="hideColumn"   style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;"><%= @sireResults.gait %></td>
+					<% end %>
+					<% if hs.sire == "00000" %>
+					<td  class="hideColumn"   style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;">No Sire Found</td>					
+					<% else %>
+					<% @sireResults = Sire.find_by(id: hs.sire)  %>
+					<td   class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;"><%= @sireResults.Name %></td>
+					<% end %>
+					<% @saleResults = Sale.find_by(id: hs.Sale)  %>
+					<% @sales = Sale.all %>
+					<% @sales.each do |sale| %>
+					<% if sale.id.to_i == hs.Sale.to_i %>
+					<% @flag = 1 %>
+					<td   class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;"><%= sale.Name %></td>
+					<% end %>
+					<% end %>
+					<% @farms = Farm.all %>
+					<% @farms.each do |farm| %>
+					<% if farm.id.to_i == hs.farm.to_i %>
+					<% @flag = 1 %>
+					<td   class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;"><%= farm.name %></td>
+					<% end %>
+					<% end %>
+					<% if hs.sire == "00000" %>
+					<td  class="hideColumn"   style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;">&nbsp;</td>					
+					<% else %>
+					<% @sireResults = Sire.find_by(id: hs.sire)  %>
+					<td  class="hideColumn"   style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;"><%= @sireResults.eligibility %></td>
+					<% end %>
+				</tr>
+				<% end %>				
+			</table>
+			
+			<% else %>
+			<% if (params[:sire] || params[:gait] || params[:gender] || params[:sale][:saleName]) && @horseList != "" %>
+				<h2 class="searchIndexH2">No results returned. Please widen your search criteria.</p>			
+			<%end %>
+			<%end %>
+			<%end %>
+		</div>
+	</div>
+</div>
+</div>
+<script>
+	jQuery(document).ready(function($) {
+		$(".clickable-row").click(function() {
+			window.document.location = $(this).data("href");
+		});
+	}); 
+</script>
+<!-- Jquery UI script for autocomplete -->
+<!-- autocomplete horses -->
+<script>
+	$(function() {
+var availableTags = [<% @horseArray.each do |h| %>"<%= sanitize h %>",<% end %>
+	];
+	$("#name").autocomplete({
+		source : availableTags
+	});
+	});
+</script>
+<!-- autocomplete sires -->
+<script>
+	$(function() {
+var availableTags = [<% @sireArray.each do |s| %>"<%= sanitize  s %>",<% end %>
+	];
+	$("#sire").autocomplete({
+		source : availableTags
+	});	
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		$("#searchPageTable").tablesorter();
+		$('th').css('cursor', 'pointer');
+	}); 
+</script>
+<script>
+function myFunction() {
+    document.getElementById("clearFormc").reset();
+}
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104901712-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

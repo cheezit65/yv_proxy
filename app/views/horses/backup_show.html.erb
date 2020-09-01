@@ -1,0 +1,274 @@
+<!-- June 24, 2019 -->
+
+<% require "net/https" %>
+<% require "uri" %>
+<style> 
+
+  #my_popup{
+	text-align: center !important;
+	padding-top:1%;
+	height: 400px; 
+	width: 400px; 
+	visibility: visible; 
+	display: inline-block; 
+	outline: none; 
+	background-color: #4F5458 !important;
+	text-align: center !important; 
+	position: relative; 
+	vertical-align: middle; 
+}
+
+input {
+  font-size:30px;
+  width:200px;
+}
+</style>
+<!-- *** This is the Social Sticky section. Put on HOLD until other cosmetic fixed are complete. -->
+<div id="sticky-social">
+    <ul>
+<!--         <li><a href="http://www.facebook.com/sharer.php?u=http://www.yearlingvideos.com/horses/<%= @horse.id %>"  onclick="return theFunction();" class="entypo-social facebook" target="_blank"><span>Facebook</span></a></li> -->
+		<% @f_url = "http://www.facebook.com/sharer.php?u=http://www.yearlingvideos.com/horses/" + params[:horse_id].to_s %>
+ 		<% @t_url = "https://twitter.com/share?text=Check out this new video from YearlingVideos.com!&nbsp;&nbsp;&nbsp;&amp;url=http://www.yearlingvideos.com/horses/#{params[:horse_id].to_s}" %>
+ 		<% @g_url = "https://plus.google.com/share?url=http://www.yearlingvideos.com/horses/#{}" + params[:horse_id].to_s %>
+        <li><a href="<%= bounces_path(:horse_id => @horse.id, :tag=>"fb_count", :url => @f_url) %>" class="entypo-social facebook" target="_blank"></a></li>
+        <li><a href="<%= bounces_path(:horse_id => @horse.id, :tag=>"tw_count", :url => @t_url) %>" class="entypo-social twitter" target="_blank"><span>Twitter</span></a></li>
+        <li><a href="<%= bounces_path(:horse_id => @horse.id, :tag=>"g_count", :url => @g_url) %>" class="entypo-social google" target="_blank"><span>Google+</span></a></li>
+    </ul>
+</div>	
+<!--        <li><a href="https://twitter.com/share?url=http://www.yearlingvideos.com/<%= @horse.id %>&amp;text=Check out this new video from YearlingVideos.com" class="entypo-social twitter" target="_blank"><span>Twitter</span></a></li> -->
+<!----- increment social count ----->
+<% Horse.increment_counter(:PageViews, @horse.id) %>
+			
+<!----- top buttons ----->
+
+<div class= "flex-container3b" id="hp1" align="center">
+<!-- Button 1 -->	
+	<div align="center" style="margin-right: 5%">	
+			<%= button_to 'Return to Results', :back, {:style=>'color:#FFFFFF;text-decoration:none', :method => :get}  %>
+	</div>
+<!-- Button 2 -->	
+ 	<div style="z-index: 999999; margin-right: 5%;">			
+ 		<button  class="my_popup_open"> Email horse to a friend</button><br> </br> 
+ 		<% @email = "" %> 
+ 	</div>
+<div id="my_popup">
+ 			<button onclick="window.close()"; style="margin-bottom:30px; border: thick 2px black;" class="my_popup_close">Close</button>
+ 			<%= form_for @email, url: {controller: "messages", action: "create"} do |f| %>
+			<br><span style="font-size:16px;color: white;">
+			EMAIL THIS HORSE TO A FRIEND!<br></span>
+			<span style="font-size:18px;text-align:center !important;color:black">
+			<br>Enter YOUR email address:
+			<span style="font-size: 25pt;"><%= email_field(:user1, :email1) %><br></span>
+			<br>Enter YOUR FRIEND's email address:
+			<span style="font-size: 25pt;"><%= email_field(:user2, :email2) %><br>
+			<%= f.hidden_field :id, :value => @horse.id %>
+			<%= f.hidden_field :yearling, :value => @horse.Name %>
+			<%= f.hidden_field :hip, :value => @horse.HipNumber %>
+			<%= submit_tag "Send", :email1 => :email1,:email2 => :email2, :user1 => :user1,:user2 => :user2, :id => :id, :yearling => :yearling	, :hip => :hip %> </span>
+		<span>				
+		<% if flash[:notice] %>
+		<div>
+			<%= flash[:notice] %>
+		</div>
+		<% end %>
+		<% end %>
+</div>
+<!-- Button 3 -->	
+	<div align="center">	
+		<% if @horse.Sale.to_i.is_a? Numeric %>				
+		<% @saleName = Sale.find(@horse.Sale.to_i) %>
+		<%= button_to 'Other Horses in Sale', sale_path(@saleName.id),  {:style=>'color:#FFFFFF;text-decoration:none', :method => :get}  %>
+		<% end %>
+	</div>
+</div>
+<!----- END top buttons ----->
+<!-- END top buttons on mobile -->
+<!-- START horse information above video --> 
+
+<div class= "flex-container3bS1" align="center"  style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+	<span style="line-height: 30px; font-size: 2.0em; min-width: 40px;">
+		#<%= @horse.HipNumber %>
+		<%= @horse.Name %>
+	</span>
+</div>
+<div class= "flex-container3bS" align="center" style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+	<span style="line-height: 30px; font-size: 1.5em;">
+		<%= @horse.Gender.capitalize %>&nbsp;&bull;&nbsp;
+	</span>
+	<span style="line-height: 30px; font-size: 1.5em;">
+	<% if @horse.sire == "00000" %>
+	<span>&nbsp;</span>
+	<% else %>		
+	<% @sire = Sire.find(@horse.sire)%>
+	<% if !@sire.gait.nil? %>
+	<%= @sire.gait.capitalize %>&nbsp;&bull;&nbsp;
+	<% else %>
+	<span>n/a</span>&nbsp;&bull;&nbsp;
+	<% end %>
+	<% end %>
+	</span>	
+	<span id="hideThis"  style="line-height: 30px; font-size: 1.5em">
+		<% if !@horse.sire.nil? and @horse.sire != "" and @horse.sire != "00000"%>
+		<% @sire = Sire.find(@horse.sire)%>
+		<%= @sire.Name %>&nbsp;&bull;&nbsp;
+		<% elsif  @horse.sire == "00000" %>
+		<span>Sire Unavailable</span>&nbsp;&bull;&nbsp;
+		<% end %>
+	</span>
+	<% @sale = Sale.all %>
+		<% if @horse.Sale.to_i.is_a? Numeric %>		
+		<% @saleName = Sale.find(@horse.Sale) %>
+	<span id="hideThis"  style="line-height: 30px; font-size: 1.5em">
+		<%= @saleName.Name %>		
+	</span>
+	<% end %>
+</div>
+<div class= "flex-container3b" align="center" style="padding-top:10px">
+</div>
+
+
+<!--BEGIN VIDEO SECTION -->
+
+<div class="flex-container3" style="width:100%;" align="center">
+	<div class="flex-item-1-videoContainer" align="center">
+		<% if !@horse.BulkUploadVideoName.nil? %>
+<!-- take the happy path to find video with lower case letters for Sale Code -->
+    	<% @path = "http://s3.amazonaws.com/yv-output/" + @horse.BulkUploadVideoName[0...-4] + "/hls_" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
+ 		<% uri = URI.parse(@path) %>
+		<% http = Net::HTTP.new(uri.host, uri.port) %>
+		<% request = Net::HTTP::Get.new(uri.request_uri) %>
+		<% res = http.request(request) %>
+<!-- take the OTHER path to find video with uppercase letters for Sale Code -->
+    	<% @path2 = "http://s3.amazonaws.com/yv-output/" + @horse.BulkUploadVideoName[0...-4] + "/hls_" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
+		<% uri = URI.parse(@path2) %>
+		<% http = Net::HTTP.new(uri.host, uri.port) %>
+		<% request = Net::HTTP::Get.new(uri.request_uri) %>
+		<% res2 = http.request(request) %>	
+		<% if res.code.to_s == "200" %>
+
+<video id=example-video width=820 height=461 class="video-js vjs-16-9 vjs-default-skin vjs-playing vjs-fullscreen vjs-big-play-centered" controls>
+  <source
+     src=<%= @path %>
+     type="application/x-mpegURL">
+</video>     
+     	<% elsif res2.code.to_s == "200" %>
+	
+<video id=example-video width=820 height=461 class="video-js vjs-16-9 vjs-default-skin vjs-playing vjs-fullscreen vjs-big-play-centered" controls>
+  <source
+     src=<%= @path %>
+     type="application/x-mpegURL">
+</video>     
+			<% end %>
+		<% else %>				
+		<h1 style="font-size:1.5em;background-color:white;font-family:Merriweather Sans !important ;color:red">
+		The video is not available yet. Please try again later.</h1>
+		<% end %>		
+	</div>		
+</div>
+
+<br>
+<!-- END VIDEO SECTION -->
+	<div class="messageWarning" align="center">
+		If you are having problems viewing the video and are using Internet Explorer, either update<br />
+		your <a href="https://get.adobe.com/flashplayer/">Adobe Flash</a> or use another browser such as Chrome or Firefox.
+	</div><br>
+<div class="flex-container3" align="center" style="padding-bottom:15px;padding-top:15px">
+		<% if !@horse.Description.nil? and @horse.Description != "" %>
+			<div  align="center" style="width:80%;margin: auto;font-size:1.25em;color:black;font-family:Futura;background-color: white; opacity: 0.8">
+		<% else %>
+			<div class="flex-item-1e" style="font-size:1.25em;color:black;font-family:Futura;background-color: white; opacity: 0.8">
+		<% end %>
+		<% if !@horse.farm2.nil? && @horse.farm2 != "" %>
+			<% @farm = Farm.find(@horse.farm) %>
+			<% @farm2 = Farm.find(@horse.farm2) %>
+			<%= @farm.name %>, <%= @farm.phonenumber %><br>
+			Agent For:<br><%= @farm2.name %>, <%= @farm2.phonenumber %>
+		<% elsif @horse.farm.length < 4 %>
+			<% @farm = Farm.find(@horse.farm) %>
+			<%= @farm.name %><br><%= @farm.phonenumber %>
+		<% end %>		
+
+		<% if !@horse.Description.nil? and @horse.Description != "" %>
+		<span style="background-color:white;font-size: 18px"><br><strong>NOTES: </strong></span><br/>
+			<span style="font-size: 14px"><%= @horse.Description %></span>
+
+	</div>	
+	<% end %>
+	</div>
+	
+
+</div>
+<br>
+
+<script>
+	vjs.FullscreenToggle.prototype.onClick = function() {
+		if (isExecuted == false || isExecuted == null) {
+			isExecuted = true;
+			if (this.player_.isFullScreen == null)
+				this.player_.isFullScreen = false;
+			if ((vjs.TOUCH_ENABLED && vjs.IS_ANDROID && vjs.IS_SAFARI) || !this.player_.isFullScreen) {
+				this.player_.play();
+				this.player_.requestFullScreen();
+			} else if (!this.player_.isFullScreen) {
+				this.player_.requestFullScreen();
+				this.el_.children[0].children[0].innerHTML = 'Non-Fullscreen';
+				// change the button text to "Non-Fullscreen"
+			} else {
+				this.player_.cancelFullScreen();
+				this.el_.children[0].children[0].innerHTML = 'Fullscreen';
+				// change the button to "Fullscreen"
+			}
+			setTimeout(function() {
+				isExecuted = false;
+			}, execTimeout);
+		}
+	}; 
+</script>
+
+<script>
+  $(document).ready(function() {
+      // Initialize the plugin
+      $('#my_popup').popup();
+    });
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.13/jquery.popupoverlay.js"></script>
+<script src="video.js"></script>
+<script src="videojs.hls.min.js"></script>
+<script>
+      (function(window, videojs) {
+        var player = window.player = videojs('example-video');
+
+        // hook up the video switcher
+        var loadUrl = document.getElementById('load-url');
+        var url = document.getElementById('url');
+        loadUrl.addEventListener('submit', function(event) {
+          event.preventDefault();
+          player.src({
+            src: url.value,
+            type: 'application/x-mpegURL'
+          });
+          return false;
+        });
+      }(window, window.videojs));
+    </script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104901712-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<script type="text/javascript">
+	function theFunction(){
+		alert("Hello <%= "KIM" %>");
+	}
+	
+</script>
+
+*******************

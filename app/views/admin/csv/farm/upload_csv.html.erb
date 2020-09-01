@@ -1,0 +1,48 @@
+<% if !notice.nil? %>
+<div align="center">
+	<% flash.each do |errors| %>
+  <div style="padding-left:30%; color: red;text-align:left;font-size:2.2em; font-color: black">
+    <p><strong>Error importing horses:</strong><br> 
+		<span style="font-size:14pt; color:black">
+    	<% notice.each do |n| %>
+    	<% n = n+1 %>
+    	Horse on row number <%= n %> has an error.<br>	
+    	<% end %>     	
+    	<br>Please check your CSV file for errors and resubmit these rows using the CSV template.</p>
+<% end %>
+		</span>
+  </div>
+</div>
+<% end %>
+
+<%= form_for :dump, :url=>{:action=>"import_csv"}, :html => { :multipart => true } do |f| %>
+  <div align="center" style="padding-left: 32%;width:40%;">
+  <h1>Instructions for Uploading Farms <br>with a CSV File</h1>
+  	<div align="left">
+  		<h2>1. Download the template CSV file <a href="/template_farms.csv">here</a> </h2>
+  <h2 style="font-size: 16pt">2. Do not change the headers in row 1.</h2>
+  <h2 style="font-size: 16pt">3. Enter the information for consignors. You do NOT have to enter the created at/updated at fields, and you may delete these columns if you want.</h2>
+  
+<div style="font-size: 16pt">
+  <table>
+    <tr>
+      <td>
+        <label for="dump_file">
+         
+        </label>
+      </td>
+      <td>
+         2. Select a CSV File : <%= f.file_field :file %>
+      </td>
+    </tr>
+    <tr>
+    	<td></td>
+      <td>
+        <%= submit_tag 'Submit' %>
+      </td>
+    </tr>
+  </table>
+  </div>
+</div>
+<% end %>
+

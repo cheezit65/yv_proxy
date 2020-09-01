@@ -1,0 +1,348 @@
+<style>
+
+#sale_saleName{
+	width: 30%;
+}
+#state_eligibility{
+	width: 30%;
+}
+select{
+	width:50%;
+}
+	tr:nth-child(even) {
+		background-color: white;
+		 opacity: 0.6;
+	}
+	tr:nth-child(odd+1) {
+		background-color: white;
+		 opacity: 0.6;
+	}
+</style>
+<!-- Advanced Search Page #search -->
+
+<div align="center" style=" min-height:800px; width:100%; text-align:left">
+	<h1 align="center" style="font-size:40px; color:white;">Advanced Search<br/>		
+		<span style="font-size:1.2em">
+		<%= form_tag(searches_path, :method => "get",:action => 'search') do %>
+		<%= text_field_tag :clear, params[:clear], :type => 'hidden', :size => 25 %>
+		 </span>
+		<%= submit_tag "Clear the Form", :class => "button2",  :style => "background: linear-gradient(#bc9055, #382b19);", :name => nil %>
+		<% end %>
+		 </h1>
+	<div align="center" class= "flex-container-advancedSearch" style="padding-top:1.6em; width: 100%;">
+		<div class="flex-items-default-advancedSearch">
+			<div align="center" style="width: 50%; float:left;">
+				<div style="text-align:left;padding-left: 30%">
+ 			<H2 style="font-size:1.5em;color:white">SEARCH BY YEARLING<br></H2>
+				<span style="font-size:1em;color:white">Enter name in search box</span> -->
+			
+			<%= form_tag(searches_path, :method => "get",:action => 'search') do %>
+			<div class="ui-widget"> 
+				<%= text_field_tag :search, params[:search], :size => 50, :id => "name", placeholder: "Enter Horse Name Here"  %>
+				<%= submit_tag "Search", :class => "button2", :name => nil %>
+				<% end %>
+			</div> 
+			<div>
+							<!-- radio buttons for gender -->
+							
+				<h2 style="font-size: 1.5em !important; color:white">SEARCH BY GENDER/GAIT</h2>
+				<%= form_tag(searches_path, :method => "get",:action => 'search') do %>
+				<span style="text-align: left; font-size: 1.2em !important">Gender:</span>
+				<%= radio_button_tag(:gender, "any", :checked => "true") %>
+				<%= label_tag(:gender_any, "any") %>
+				<%= radio_button_tag(:gender, "filly") %>
+				<%= label_tag(:gender_filly, "filly") %>
+				<%= radio_button_tag(:gender, "colt") %>
+				<%= label_tag(:gender_colt, "colt") %>
+				<%= radio_button_tag(:gender, "gelding") %>
+				<%= label_tag(:gender_gelding, "gelding") %>				
+				<!-- radio buttons for gait -->
+				<br><br><span style="text-align: left; font-size: 1.2em !important">Gait:</span>
+				<%= radio_button_tag(:gait, "any", :checked => "true") %>
+				<%= label_tag(:gait_any, "any") %>
+				<%= radio_button_tag(:gait, "pace") %>
+				<%= label_tag(:gait_pace, "pace") %>
+				<%= radio_button_tag(:gait, "trot") %>
+				<%= label_tag(:gait_trot, "trot") %>
+				<br><%= submit_tag "Search", :class => "button2", :name => nil %>
+				<% end %>	
+			</div>	
+			</div>	
+			</div>
+		<!-- Attribute search section -->
+			<div align="center" style="width: 50%;  float:left;">
+			<div style="text-align:left;">
+			<H2 style="font-size:1.5em;color:white">SEARCH BY SIRE</H2>
+				<span style="font-size:1em;color:white">Enter name in search box</span>
+			<%= form_tag(searches_path, :method => "get",:action => 'search') do %>
+				<!-- autocomplete for sire; default is any -->
+				<span style="font-size:1.2em">
+    			<div class="ui-widget">
+				<%= text_field_tag :search2, params[:search2], :size => 50, :id => "sire", placeholder: "Enter Sire Name Here" %>
+				</span>
+				<!-- radio buttons for gender -->
+				<%= submit_tag "Search", :class => "button2", :name => nil %>
+				<% end %>
+				</div>
+				<h2 style="font-size: 1.2em !important; color:white">SEARCH BY SALE/ELIGIBILITY</h2>
+				<%= form_tag(searches_path, :method => "get",:action => 'search') do %>
+				<span style="font-size: 1.0em !important">Sale:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+				<% @saleNames = Sale.all %>
+				<% @saleArray = Array.new %>
+				<% @saleNames.each do |s| %>
+					<% @saleArray.push s.Name %>
+				<% end %>
+				<%= select("sale", "saleName", @saleArray, :include_blank => "Any") %>
+				<!-- eligibility radio buttons -->
+				<br><br>Eligibility:
+				<% @eligibilityArray = Array["Ohio", "Pennsylvania", "Indiana", "Illinois", "Kentucky", "New York", "New Jersey", "Ontario"] %>
+				<%= select("state", "eligibility", @eligibilityArray, :include_blank => "Any", :class => "dropdownStyle" ) %></span> 
+				<!-- submit -->
+				<br>				
+				<%= submit_tag "Search", :class => "button2", :name => nil %>
+				<% end %>
+				</div>
+	</div>
+
+
+	<% if params[:search] && params[:search] != "" %>
+	<% @paramSearch = params[:search] %>
+	<% @match = "false" %>
+	<% @allHorses = Horse.all %>
+	<% @allHorses.each do |horse| %>
+	<% if horse.Name.downcase == params[:search].downcase %>
+	<% @match = "true" %>
+
+	<% end %>
+	<% end %>
+	<% end %>
+
+	<% @horses = Horse.all %>
+	<% @horseArray = Array.new %>
+	<% @horses.each do |h| %>
+	<% @horseArray.push h h.Name %>
+	<% end %>
+
+	<% @sires = Sire.all %>
+	<% @sireArray = Array.new %>
+	<% @sires.each do |s| %>
+	<% @sireArray.push s.Name %>
+	<% end %>
+
+
+	<!-- search results code below -->
+	<div align="center">
+		<div style="font-size:15px">
+			<!-- check for horse search -->
+			<% if !params[:search].nil? %>
+			<!-- test to see if valid hip number has been entered -->
+			<% @match = "false" %>
+			<% @allHorses = Horse.all %>
+				<% @allHorses.each do |horse|  %>
+				<% if horse.Name == params[:search] %>
+				<% @match = "true" %>
+				<% @matchHorse = horse %>
+				<% end %>
+			<% end %>
+			<% end %>
+			<!-- check for sire search -->
+			<% if !params[:search2].nil? %>
+			<!-- test to see if valid Sire Name has been entered -->
+			<% @match = "false" %>
+			<% @allSires = Sire.all %>
+				<% @allSires.each do |s|  %>
+					<% if s.Name == params[:search2] %>
+					<% @match = "trueSire" %>
+					<% @matchSire = s %>
+					<% end %>
+				<% end %>
+			<% end %>
+			<% if !params[:gait].nil? %>
+				<% @match = "trueSire" %>			
+			<% end %>
+			<% if !params[:gender].nil? %>
+				<% @match = "trueSire" %>
+			<% end %>
+
+
+			<% if @match == "trueSire" %>
+			<p>Here are the params:</p>
+ 			<%# if !params[:sale][:saleName].nil? %>
+			<%#= params[:sale][:saleName] %>	
+			<%#  => end %>			   
+			<!-- check attributes for selection -->
+    		<table style="background-color: #E1DDD4"  class="tableStyle" id="salePageTable" class="tablesorter">
+			<thead class="tableHeadHover">
+			<th width="5%"><strong>Hip #</strong></th>
+			<th width="5%"><strong>Name</strong></th>
+			<th class="hideColumn" width="5%"><strong>Gender</strong></th>
+			<th class="hideColumn" width="5%"><strong>Gait</strong></th>
+			<th class="hideColumn" width="5%"><strong>Sire</strong></th>
+			<th class="hideColumn" width="5%"><strong>Sale</strong></th>
+			<th class="hideColumn" width="5%"><strong>Farm</strong></th>
+			<th class="hideColumn" width="5%"><strong>Eligible State</strong></th>
+			</thead>
+				<% if params[:search2] != "" %>			
+ 				<% @sire = Sire.all %>
+					<% @sire.each do |s| %>
+						<% if s.Name == params[:search2] %>
+							<% @sireName = s.Name %>
+							<% @sireID = s.id %>
+							<% @horseList = Horse.where(:sire => @sireID) %>
+						<% end %>
+					<% end %>	
+				<% end %>	
+				<% if (params[:gait] == "pace" || params[:gait] == "trot") && (params[:gender] == "any") %>
+							<% @sireList = Sire.where(:gait => params[:gait].downcase) %>
+							<% @horses = Horse.all %>
+							<% @horseList = Array.new %>
+							<% @horses.each do |h| %>
+								<% @sireList.each do |s| %>
+								    <% if s.id.to_s == h.sire.to_s %>
+								        <% @horseList.push(h) %>	
+								    <% end %>
+							    <% end %>
+							<% end %>    				
+					<% elsif (params[:gender] == "colt" || params[:gender] == "filly" || params[:gender] == "gelding") && (params[:gait] == "any") %>
+							<% @horseList = Array.new %>
+							<% @horses = Horse.all %>	
+							<% @horses.each do |h| %>
+								<% if h.Gender == params[:gender] %>
+							        <% @horseList.push(h) %>	
+							    <% end %>								
+							<% end %>				
+					<% else %>
+							<% @horseList = Array.new %>
+							<% @horses = Horse.all %>	
+							<% @sireList = Sire.where(:gait => params[:gait]) %>
+							<% @horses.each do |h| %>
+								<% @sireList.each do |s| %>
+									<% if s.id.to_i == h.sire.to_i && h.Gender.downcase == params[:gender] %>
+										<% @horseList.push(h) %>
+									<% end %>
+								<% end %>
+							<% end %>
+					<% end %>
+				<% @horseList.each do |hs| %>
+				<tr id="clickableHand" class='clickable-row' data-href='<%= horse_path(hs) %>'>
+					<td  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;"><%= hs.HipNumber %></td>
+					<td  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;"><%= hs.Name %></td>
+					<td   class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;"><%= hs.Gender %></td>
+					<% if hs.sire == "00000" %>
+					<td  class="hideColumn"   style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;">&nbsp;</td>					
+					<% else %>
+					<% @sireResults = Sire.find_by(id: hs.sire)  %>
+					<td  class="hideColumn"   style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;"><%= @sireResults.gait %></td>
+					<% end %>
+					<% if hs.sire == "00000" %>
+					<td  class="hideColumn"   style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;">No Sire Found</td>					
+					<% else %>
+					<% @sireResults = Sire.find_by(id: hs.sire)  %>
+					<td   class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;"><%= @sireResults.Name %></td>
+					<% end %>
+					<% @saleResults = Sale.find_by(id: hs.Sale)  %>
+					<% @sales = Sale.all %>
+					<% @sales.each do |sale| %>
+					<% if sale.id.to_i == hs.Sale.to_i %>
+					<% @flag = 1 %>
+					<td   class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;"><%= sale.Name %></td>
+					<% end %>
+					<% end %>
+					<% @farms = Farm.all %>
+					<% @farms.each do |farm| %>
+					<% if farm.id.to_i == hs.farm.to_i %>
+					<% @flag = 1 %>
+					<td   class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;"><%= farm.name %></td>
+					<% end %>
+					<% end %>
+					<% if hs.sire == "00000" %>
+					<td  class="hideColumn"   style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;">&nbsp;</td>					
+					<% else %>
+					<% @sireResults = Sire.find_by(id: hs.sire)  %>
+					<td  class="hideColumn"   style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 14px;"><%= @sireResults.eligibility %></td>
+					<% end %>
+				</tr>
+				<% end %>				
+			</table>
+			<%end %>
+			<!-- Search by Name - when match is found,@match will be set to true and following code executed -->
+			<% if @match == "true" %>
+			<% @flag = 0 %>
+			<table style="background-color: #E1DDD4"  class="tableStyle" id="salePageTable" class="tablesorter">
+				<thead class="tableHeadHover">
+			<thead class="tableHeadHover">
+			<th width="5%"><strong>Hip #</strong></th>
+			<th width="5%"><strong>Name</strong></th>
+			<th class="hideColumn" width="5%"><strong>Gender</strong></th>
+			<th class="hideColumn" width="5%"><strong>Gait</strong></th>
+			<th class="hideColumn" width="5%"><strong>Sire</strong></th>
+			<th class="hideColumn" width="5%"><strong>Sale</strong></th>
+			<th class="hideColumn" width="5%"><strong>Farm</strong></th>
+			<th class="hideColumn" width="5%"><strong>Eligible State</strong></th>
+			</thead>
+				
+				<tr style="background-color:white; opacity: 0.6" id="clickableHand" class='clickable-row' data-href='<%= horse_path(@matchHorse) %>'>
+					<td  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;"><%= @matchHorse.HipNumber %></td>
+					<td  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;"><%= @matchHorse.Name %></td>
+					<td   class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;"><%= @matchHorse.Gender %></td>
+					<% if @matchHorse.sire == "00000" %>
+					<td  class="hideColumn"   style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;">&nbsp;</td>					
+					<% else %>
+					<% @sireResults = Sire.find_by(id: @matchHorse.sire)  %>
+					<td  class="hideColumn"   style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;"><%= @sireResults.gait %></td>
+					<td  class="hideColumn"   style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;"><%= @sireResults.Name %></td>
+					<% end %>
+					<% @saleResults = Sale.find_by(id: @matchHorse.Sale)  %>
+					<td   class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;"><%= @saleResults.Name %></td>
+					<% @farms = Farm.all %>
+					<% @farms.each do |farm| %>
+					<% if farm.id.to_i == @matchHorse.farm.to_i %>
+					<% @flag = 1 %>
+					<td   class="hideColumn"  style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;"><%= farm.name %></td>
+					<td  class="hideColumn"   style="vertical-align:middle; font-family:Merriweather Sans !important ;color:black;text-align: center; font-size: 1.2em;"><%= @sireResults.eligibility %></td>
+					<% end %>
+					<% end %>
+				</tr>
+			</table>
+			<% end %>
+			<br>
+			<br>
+			<br>
+		</div>
+	</div>
+</div>
+</div>
+<script>
+	jQuery(document).ready(function($) {
+		$(".clickable-row").click(function() {
+			window.document.location = $(this).data("href");
+		});
+	}); 
+</script>
+<!-- Jquery UI script for autocomplete -->
+<!-- autocomplete horses -->
+<script>
+	$(function() {
+var availableTags = [<% @horseArray.each do |h| %>"<%= sanitize h %>",<% end %>
+	];
+	$("#name").autocomplete({
+		source : availableTags
+	});
+	});
+</script>
+<!-- autocomplete sires -->
+<script>
+	$(function() {
+var availableTags = [<% @sireArray.each do |s| %>"<%= sanitize  s %>",<% end %>
+	];
+	$("#sire").autocomplete({
+		source : availableTags
+	});
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		$("#searchPageTable").tablesorter();
+		$('th').css('cursor', 'pointer');
+	}); 
+</script>

@@ -1,0 +1,72 @@
+<h1 align="center" style="margin-bottom:25px;font-size:40px;color:white;padding-top:25px">Add Horses to Your Farm</h1>	
+<!-- <%= render 'form' %> -->
+<div class= "flex-container">
+	<h3 style="font-size:1.0em; font-family: Helvetica;color:black;font-weight: 250">MULTIPLE HORSE UPLOAD</h3>  
+</div>
+<div align="center">
+<h2> Import Horses</h2>
+<%= form_tag import_horses_path, multipart: true do %>
+	<%= file_field_tag :file %>
+	<%= submit_tag "Import Horses" %>
+<% end %>
+</div>
+
+<%= form_for (@horse) do |f| %>
+		<%= f.submit "Save Changes"  %><br>
+<div style="width: 80%; margin: 0 auto">		
+<div style="display: block; margin: 0 auto; width: 30%;float: left; font-size: 24px;">
+	<div>
+		<%= f.label :Name %>
+		<br>
+		<%= f.text_field :Name %>
+	</div>
+	<div>
+		<%= f.label :HipNumber, "Hip Number" %>
+		<br>
+		<%= f.text_field :HipNumber %>
+	</div>
+	<div>
+		<%= f.label :Gender %>
+		<br>
+	    <%= f.select :Gender, [['Colt','colt'],['Filly','filly'],['Gelding','gelding']] %>
+<!-- 		<%= f.text_field :Gender %> -->
+	</div>
+</div>
+<div style="display: block; margin: 0 auto; width: 30%;float: left; font-size: 24px;">
+	<div>
+		<%= f.label :Sale %>
+		<br>
+ 		 <%= f.collection_select :Sale, Sale.order(:Name),:id,:Name, include_blank: true %> 
+<!-- 		<%= f.text_field :Sale %> -->
+	</div>
+	<div>
+		<%= f.label :sire %>
+		<br>
+ 		 <%= f.collection_select :sire, Sire.order(:Name),:id,:Name, include_blank: true %> 
+<!-- 		<%= f.text_field :sire %> -->
+	</div>
+	<div>
+		<%= f.hidden_field :farm %>
+		<br>
+		<%= f.hidden_field :farm %>
+	</div>
+	<div>
+		<%= f.hidden_field :farm2 %>
+		<br>
+		<%= f.hidden_field :farm2 %>
+	</div>
+</div>
+<div style="display: block; margin: 0 auto; width: 30%;float: left; font-size: 24px;">
+	<div>
+		<%= f.label :Description %>
+		<br>
+		<%= f.text_area :Description, :cols => "100", :rows => "10" %>
+	</div>
+		<%= f.hidden_field :BulkUploadVideoName %>
+		<br>
+		<%= f.hidden_field :BulkUploadVideoName %>
+	</div>
+<% end %>
+
+<!-- Jquery UI script for autocomplete -->
+<!-- autocomplete gender -->

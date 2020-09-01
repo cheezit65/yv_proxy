@@ -1,0 +1,53 @@
+<div style="background-color: white; width: 100%; padding-left: 30%" %>
+	<% @sales = Sale.all %>
+	<% @saleArray = Array.new %>
+	<% @sales.each do |s| %>
+	<% @saleArray.push h s.Name %>
+	<% end %>
+<<h1>Sale Report</h1>
+<div>
+		<h1 style="font-size:14pt">	Choose the sale you want to print out the hipnum, name, and url. Report will open in .doc format.</h1>
+	<!-- the form actually reloads the page with a GET to pass parameters to use when generating the report. This code does NOT generate the report, only pulls in farm & sale params -->
+	<%= form_tag(new_upload_path, :method => "get") do %>
+	<%= collection_select(:sale, :sale_id, Sale.all, :id, :Name) %>	
+	  <%= submit_tag("Create", :sale => :sale) %>
+<% end %>
+</div>
+
+<div>
+	<% if !params[:sale].blank? %>
+		<% @salelist = Sale.all %>
+		<% @salelist.each do |sale| %>
+			<% if sale.id.to_i == params[:sale][:sale_id].to_i %>
+
+				<% @sale = sale %>				
+			<% end %>			
+		<% end %>
+		<% filewrite = File.open("app/PDFs/#{@sale.Name}.doc",'w') %> 
+		<% filewrite.write(@sale.Name + "\n\n")%>
+		<% @horselist1 = Horse.where(:Sale => @sale.id).all %>
+		<% @horselist = @horselist1.order('created_at DESC') %>
+		<% @horselist.each do |hy| %>						
+				<% filewrite.write(hy.HipNumber + "\t") %>
+				<% filewrite.write(hy.Name) %>
+				<% if hy.Name.length > 5 %>
+					<% filewrite.write("\t\t") %>
+				<% else %>
+					<% filewrite.write("\t\t\t") %>
+				<% end %>
+				<% filewrite.write("http://www.yearlingvideos.com/horses/" + hy.id.to_s + "\n") %>				
+		<% end %>		
+		<% filewrite.close %> 
+		<p style="color:blue; margin-top: 0pt; font-size:18pt"><%= link_to "Get Sale Textfile", new_upload_path(:sale => params[:sale][:sale_id]) %></p>
+	<% end %>
+</div>
+</div>
+<script>
+	$(function() {
+var availableTags = [<% @saleArray.each do |sale| %>"<%= sanitize sale %>",<% end %>
+	];
+	$("#sale2").autocomplete({
+		source : availableTags
+	});
+	});
+</script>

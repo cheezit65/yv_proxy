@@ -1,0 +1,42 @@
+<h1 align="center" style="margin-bottom:50px;font-size:40px;color:white;padding-top:50px">SALES BY CONSIGNOR</h1>
+<% @return = "" %>
+<% horseList = Array.new(0) %>
+<div class= "flex-container-saleButtons">
+	<% @consignors = Consignor.order(name: :asc) %>
+	<% @consignor.each do |consignor| %>
+	<% @horses = Horse.where(farm: consignor.id).count %>
+	<% if @horses.to_i > 0 %>
+	<div class="flex-items-default-saleButtons">
+		<%= button_to consignor.name, consignor_path(consignor), :method => :get,  :class => "buttonStyle2" %>
+	</div>
+	<% else %>
+	<% horseList.push consignor.id %>
+	<% end %>
+	<% end %>
+</div>
+
+
+<con><h2 align="center" id="clickableHand2" style="margin-top:10px;font-size:40px;color:white;">Click to View Inactive Consignors</h2><br></butt>
+<span1>
+	<div class= "flex-container-saleButtons">
+	<% horseList.each do |list| %>
+		<div class="flex-items-default-saleButtons">
+			<% @consignor =  Consignor.find_by(id: list) %>
+			<%= button_to @consignor.name, consignor_path(list), :method => :get,  :class => "buttonStyle2" %>
+		</div>	
+	<% end %>
+</div>
+</con>
+</div>
+
+<script>
+$(document).ready(function(){
+$('span1').hide();
+$("con").click(function(){
+$('span1').fadeToggle();
+});
+
+});
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>

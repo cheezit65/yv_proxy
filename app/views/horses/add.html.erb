@@ -1,0 +1,82 @@
+<% if params[:id] %>
+<% @horse = Horse.find(params[:id])%>
+<% if current_user.farm.to_i == @horse.farm.to_i %>
+<div style="height: 900px;background-color: white !important">
+<div style="height: 900px; margin: 0 auto; text-align: center; font-size: 40px;">
+	<h1 style="text-align:center;font-size:1.0em !important;">You Are Adding a Horse
+	<br>
+<div>	
+	<strong><span style="color:red"><%= @horse.Name %>, Hip #<%= @horse.HipNumber %></span></strong></h1>
+	<%= form_for @horse, :url => { :action => "add" }  do |f| %>
+		<%= f.submit "Save Changes"  %><br>
+<div style="width: 80%; margin: 0 auto">		
+<div style="display: block; margin: 0 auto; width: 30%;float: left; font-size: 24px;">
+	<div>
+		<%= f.label :Name %>
+		<br>
+		<%= f.text_field :Name %>
+	</div>
+	<div>
+		<%= f.label :HipNumber, "Hip Number" %>
+		<br>
+		<%= f.text_field :HipNumber %>
+	</div>
+	<div>
+		<%= f.label :Gender %>
+		<br>
+	    <%= f.select :Gender, [['Colt','colt'],['Filly','filly'],['Gelding','gelding']] %>
+<!-- 		<%= f.text_field :Gender %> -->
+	</div>
+</div>
+<div style="display: block; margin: 0 auto; width: 30%;float: left; font-size: 24px;">
+	<div>
+		<%= f.label :Sale %>
+		<br>
+ 		 <%= f.collection_select :Sale, Sale.order(:Name),:id,:Name, include_blank: true %> 
+<!-- 		<%= f.text_field :Sale %> -->
+	</div>
+	<div>
+		<%= f.label :sire %>
+		<br>
+ 		 <%= f.collection_select :sire, Sire.order(:Name),:id,:Name, include_blank: true %> 
+<!-- 		<%= f.text_field :sire %> -->
+	</div>
+	<div>
+		<%= f.hidden_field :farm %>
+		<br>
+		<%= f.hidden_field :farm %>
+	</div>
+	<div>
+		<%= f.hidden_field :farm2 %>
+		<br>
+		<%= f.hidden_field :farm2 %>
+	</div>
+</div>
+<div style="display: block; margin: 0 auto; width: 30%;float: left; font-size: 24px;">
+	<div>
+		<%= f.label :Description %>
+		<br>
+		<%= f.text_area :Description, :cols => "100", :rows => "10" %>
+	</div>
+		<%= f.hidden_field :BulkUploadVideoName %>
+		<br>
+		<%= f.hidden_field :BulkUploadVideoName %>
+	</div>
+	<%= button_to 'See Horse on YearlingVideos.com', horse_path(@horse),  {:style=>'color:white !important;font-size: 18px;line-height: .7em;text-decoration:none', :method => :get}  %>
+	<%= button_to '        Back to Account        ', edit_user_registration_path,  {:style=>'color:white !important;font-size: 18px;line-height: .7em;text-decoration:none', :method => :get}  %><br>
+	
+</div>
+	<% end %>
+</div>
+</div>
+</div>
+</div>
+</div>
+<% else %>
+<div align="center">
+	<h1>You are not permitted to edit this horse.</h1>
+	<h2><%= link_to "Back", :back %></h2>
+</div>	
+<% end %>
+
+<% end %>
