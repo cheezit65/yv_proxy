@@ -8,7 +8,6 @@ config.per_page = 5000
  action_item :only => :index do
     link_to 'Upload CSV', :action => 'upload_csv'
   end
-  
 # action_item do
   # link_to 'Download CSV Template', '../Template.csv', download: ''
 # end
