@@ -87,7 +87,15 @@ form input[type=submit],form input[type=button],form button
 
 
 <!-- *** This is the Social Sticky section. Put on HOLD until other cosmetic fixed are complete. -->
-<!--        <li><a href="https://twitter.com/share?url=http://www.yearlingvideos.com/<%= @horse.id %>&amp;text=Check out this new video from YearlingVideos.com" class="entypo-social twitter" target="_blank"><span>Twitter</span></a></li> -->
+<div id="sticky-social">
+    <ul>
+        <li><a href="http://www.facebook.com/sharer.php?u=http://www.yearlingvideos.com/horses/<%= @horse.id %>"  onclick="return theFunction();" class="entypo-social facebook" target="_blank"><span>Facebook</span></a></li> -->
+		<% @f_url = "http://www.facebook.com/sharer.php?u=http://www.yearlingvideos.com/horses/" + params[:horse_id].to_s %>
+ 		<% @t_url = "https://twitter.com/share?text=Check out this new video from YearlingVideos.com!&nbsp;&nbsp;&nbsp;&amp;url=http://www.yearlingvideos.com/horses/#{params[:horse_id].to_s}" %>
+        <li><a href="<%= bounces_path(:horse_id => @horse.id, :tag=>"fb_count", :url => @f_url) %>" class="entypo-social facebook" target="_blank"></a></li>
+        <li><a href="<%= bounces_path(:horse_id => @horse.id, :tag=>"tw_count", :url => @t_url) %>" class="entypo-social twitter" target="_blank"><span>Twitter</span></a></li>
+    </ul>
+</div>	
 <!----- increment social count ----->
 <% Horse.increment_counter(:PageViews, @horse.id) %>
 <% @sale = Sale.all %>
@@ -322,7 +330,10 @@ form input[type=submit],form input[type=button],form button
 			<%= f.hidden_field :id, :value => @horse.id %>
 			<%= f.hidden_field :yearling, :value => @horse.Name %>
 			<%= f.hidden_field :hip, :value => @horse.HipNumber %>
-			<%= submit_tag "Send", :email1 => :email1,:email2 => :email2, :user1 => :user1,:user2 => :user2, :id => :id, :yearling => :yearling	, :hip => :hip %> </span>
+			<%= recaptcha_tags %>
+			<%= submit_tag "Send", :email1 => :email1,:email2 => :email2, :user1 => :user1,:user2 => :user2, :id => :id, :yearling => :yearling	, :hip => :hip %> </span>			
+
+
 		<span>				
 		<% if flash[:notice] %>
 		<div>

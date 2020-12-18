@@ -136,7 +136,7 @@ GEM
     erubi (1.10.0)
     excon (0.78.1)
     execjs (2.7.0)
-    ffi (1.13.1-x86-mingw32)
+    ffi (1.14.0-x86-mingw32)
     fog-aws (3.7.0)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
@@ -255,6 +255,8 @@ GEM
       thor (~> 1.0)
     rake (13.0.1)
     rdoc (4.3.0)
+    recaptcha (5.6.0)
+      json
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -318,6 +320,7 @@ DEPENDENCIES
   rails (~> 6.0, >= 6.0.2.2)
   rails4-autocomplete
   ransack!
+  recaptcha
   rqrcode
   sdoc (~> 0.4.0)
   spring

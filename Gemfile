@@ -10,6 +10,7 @@ gem 'prawn'
 gem 'rqrcode'
  gem 'carrierwave'
 gem 'fog-aws'
+gem "recaptcha"
 
 #gem 'sqlite3'
 
