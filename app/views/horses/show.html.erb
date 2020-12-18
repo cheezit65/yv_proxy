@@ -330,7 +330,7 @@ form input[type=submit],form input[type=button],form button
 			<%= f.hidden_field :id, :value => @horse.id %>
 			<%= f.hidden_field :yearling, :value => @horse.Name %>
 			<%= f.hidden_field :hip, :value => @horse.HipNumber %>
-			<%= recaptcha_tags %>
+			<!-- <%= recaptcha_tags %> -->
 			<%= submit_tag "Send", :email1 => :email1,:email2 => :email2, :user1 => :user1,:user2 => :user2, :id => :id, :yearling => :yearling	, :hip => :hip %> </span>			
 
 
