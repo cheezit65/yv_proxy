@@ -10,6 +10,7 @@ gem 'prawn'
 gem 'rqrcode'
  gem 'carrierwave'
 gem 'fog-aws'
+
 #gem 'sqlite3'
 
 gem "ransack", github: "activerecord-hackery/ransack", ref: "aada8"
