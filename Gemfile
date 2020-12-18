@@ -3,20 +3,20 @@ ruby "2.6.6"
 gem 'rails', '~> 6.0', '>= 6.0.2.2'
 gem 'tzinfo-data'
 gem 'devise', '>= 1.3.4'
-gem 'activeadmin', '~> 2.7'
+ gem 'activeadmin', '~> 2.7'
 gem 'pg'
 gem 'aws-sdk-s3'
 gem 'prawn'
 gem 'rqrcode'
-# gem 'carrierwave'
+ gem 'carrierwave'
 gem 'fog-aws'
-#gem 'sqlite3'
+gem 'sqlite3'
 gem "ransack", github: "activerecord-hackery/ransack", ref: "aada8"
 #gem 'sqlite3', git: "https://github.com/larskanis/sqlite3-ruby", branch: "add-gemspec"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 # Use sqlite3 as the database for Active Record
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+# gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
