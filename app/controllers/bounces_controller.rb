@@ -34,8 +34,8 @@ def index
          zipfile.add(attachment,File.join(folder_path,attachment))
       end
    end
-   
-   
+   send_file(File.join("#{Rails.root}/public/", 'archive.zip'), :type => 'application/zip', :filename => "#{Time.now.to_date}.zip")
+   FileUtils.remove_dir(folder_path) if Dir.exist?(folder_path)
  end
 end
 
