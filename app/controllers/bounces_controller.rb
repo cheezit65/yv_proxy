@@ -12,6 +12,10 @@ def index
    redirect_to params[:url] + params[:horse_id] 
  elsif  params[:id]
    redirect_to edit_user_registration_path(id: params[:id], method: post)      
+ elsif params[:saleid]
+   folder_path = "#{Rails.root}/public/downloads/"
+   zipfile_name = "#{Rails.root}/public/archive.zip"
+   
  end
 end
 
