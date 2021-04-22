@@ -1,7 +1,6 @@
 class BouncesController < InheritedResources::Base
 
 require 'open-uri'
-require 'net/ping'
 
 def index  
  if params[:tag] == "fb_count"
@@ -33,7 +32,6 @@ def index
    @horses.each do |horse|  
         resp = s3.get_object({ bucket:'yv-input', key: horse.BulkUploadVideoName }, target: folder_path + horse.BulkUploadVideoName)
         p1 = Net::Ping::External.new(good)
-        p p1.ping?  
    end
    input_filenames = Dir.entries(folder_path).select {|f| !File.directory? f}
    Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
