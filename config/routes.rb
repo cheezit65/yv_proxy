@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :linkers
+  resources :viewers
   resources :downloads
   resources :bounces
   get 'homes/show'
