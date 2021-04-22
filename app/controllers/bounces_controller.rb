@@ -19,6 +19,12 @@ def index
    FileUtils.remove_entry(zipfile_name) if File.exist?(zipfile_name)
    Dir.mkdir("#{Rails.root}/public/downloads")
    @horses = Horse.where(Sale: params[:saleid])
+   s3 = Aws::S3::Client.new({
+      region:            'us-east-1',
+      access_key_id:     'AKIAI6FXAV2E76ELVK5Q',
+      secret_access_key: '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'
+   })
+   Aws.use_bundled_cert!
    
    
  end
