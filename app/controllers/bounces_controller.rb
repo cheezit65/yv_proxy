@@ -1,7 +1,6 @@
 class BouncesController < InheritedResources::Base
 
 require 'open-uri'
-require 'zip'
 
 def index  
  if params[:tag] == "fb_count"
