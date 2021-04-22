@@ -28,6 +28,12 @@ def index
    @horses.each do |horse|  
         resp = s3.get_object({ bucket:'yv-input', key: horse.BulkUploadVideoName }, target: folder_path + horse.BulkUploadVideoName)
    end
+   input_filenames = Dir.entries(folder_path).select {|f| !File.directory? f}
+   Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
+      input_filenames.each do |attachment|
+         zipfile.add(attachment,File.join(folder_path,attachment))
+      end
+   end
    
    
  end
