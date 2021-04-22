@@ -15,6 +15,9 @@ def index
  elsif params[:saleid]
    folder_path = "#{Rails.root}/public/downloads/"
    zipfile_name = "#{Rails.root}/public/archive.zip"
+   FileUtils.remove_dir(folder_path) if Dir.exist?(folder_path)
+   FileUtils.remove_entry(zipfile_name) if File.exist?(zipfile_name)
+   Dir.mkdir("#{Rails.root}/public/downloads")
    
  end
 end
