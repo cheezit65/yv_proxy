@@ -41,7 +41,6 @@ table, th, td {
 			<% @horses = @horses.sort_by{|a| a.HipNumber.to_i } %>
 			<br><table border="1">
 			<div align="left">
-			<% @saleID=sale.id %>
 				<% @horses.each do |horse| %>
 					<tr>
 						<td width: "30%" style="padding-left: 2%"><%= horse.Name %></td>
