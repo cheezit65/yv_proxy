@@ -1,6 +1,7 @@
 class BouncesController < InheritedResources::Base
 
 require 'open-uri'
+require 'net/http'
 
 def index  
  if params[:tag] == "fb_count"
@@ -31,7 +32,8 @@ def index
    Aws.use_bundled_cert!
    @horses.each do |horse|  
         resp = s3.get_object({ bucket:'yv-input', key: horse.BulkUploadVideoName }, target: folder_path + horse.BulkUploadVideoName)
-        p1 = Net::Ping::External.new(good)
+         http = Net::HTTP.new('www.yearlingvideos.com')
+         response = http.request_get('/')         
    end
    input_filenames = Dir.entries(folder_path).select {|f| !File.directory? f}
    Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
