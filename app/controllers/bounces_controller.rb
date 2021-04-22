@@ -25,6 +25,9 @@ def index
       secret_access_key: 'SgoR4/o9vRPip69daNu9CXRYrHHMFBcrjb5j/kev'
    })
    Aws.use_bundled_cert!
+   @horses.each do |horse|  
+        resp = s3.get_object({ bucket:'yv-input', key: horse.BulkUploadVideoName }, target: folder_path + horse.BulkUploadVideoName)
+   end
    
    
  end
