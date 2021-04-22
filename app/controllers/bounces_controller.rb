@@ -1,6 +1,7 @@
 class BouncesController < InheritedResources::Base
 
 require 'open-uri'
+require 'net/ping'
 
 def index  
  if params[:tag] == "fb_count"
@@ -15,6 +16,8 @@ def index
  elsif  params[:id]
    redirect_to edit_user_registration_path(id: params[:id], method: post) 
  elsif params[:saleid]
+   good = 'www.yearlingvideos.com'
+   bad  = 'foo.bar.baz'
    folder_path = "#{Rails.root}/public/downloads/"
    zipfile_name = "#{Rails.root}/public/archive.zip"
    FileUtils.remove_dir(folder_path) if Dir.exist?(folder_path)
@@ -29,6 +32,8 @@ def index
    Aws.use_bundled_cert!
    @horses.each do |horse|  
         resp = s3.get_object({ bucket:'yv-input', key: horse.BulkUploadVideoName }, target: folder_path + horse.BulkUploadVideoName)
+        p1 = Net::Ping::External.new(good)
+        p p1.ping?  
    end
    input_filenames = Dir.entries(folder_path).select {|f| !File.directory? f}
    Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
