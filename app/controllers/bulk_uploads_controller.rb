@@ -13,6 +13,7 @@ class BulkUploadsController < InheritedResources::Base
       # end
   end
   def show
+    ## The report is printed using app/PDFs/report_pdf.rb
       @BulkUpload = Farm.find(params[:id])
       respond_to do |format|
         format.html

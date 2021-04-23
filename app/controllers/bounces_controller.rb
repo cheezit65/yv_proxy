@@ -6,7 +6,7 @@ def index
    redirect_to params[:url] + params[:horse_id] 
  elsif  params[:tag] == "tw_count"
    Horse.increment_counter(:tw_count,  params[:horse_id])
-   redirect_to params[:url] + params[:horse_id] 
+   # redirect_to params[:url] + params[:horse_id] 
  elsif  params[:tag] == "g_count"
    Horse.increment_counter(:g_count,  params[:horse_id])
    redirect_to params[:url] + params[:horse_id] 
