@@ -1,6 +1,8 @@
 ActiveAdmin.register Horse do
 
-
+  action_item :add, only: :show do
+    link_to "New Horse", new_admin_horse_path
+  end
  # action_item do
   # link_to 'View Website', root_path, :target => "_blank"
 # end
