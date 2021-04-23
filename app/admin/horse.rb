@@ -1,5 +1,6 @@
 ActiveAdmin.register Horse do
 
+
  # action_item do
   # link_to 'View Website', root_path, :target => "_blank"
 # end
@@ -8,6 +9,9 @@ config.per_page = 5000
  action_item :only => :index do
     link_to 'Upload CSV', :action => 'upload_csv'
   end
+action_item only: :show do
+  link_to 'View Website', root_path, :target => "blank"
+end
   
 # action_item do
   # link_to 'Download CSV Template', '../Template.csv', download: ''
@@ -104,8 +108,8 @@ end
    Sales = Sale.order(:Name)
    Farms = Farm.order(:name)
     f.inputs do
-      f.input :Name
       f.input :HipNumber
+      f.input :Name
       f.input :Gender, :as => :select, :collection => ["filly","colt", "gelding"]
       f.input :farm, :as => :select, :collection => Farms.map{|u| ["#{u.name}", u.id]}
       f.input :farm2, :as => :select, :collection => Farms.map{|u| ["#{u.name}", u.id]}
