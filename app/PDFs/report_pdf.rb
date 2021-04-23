@@ -6,7 +6,7 @@ class ReportPdf < Prawn::Document
     text "#{@farm.name} Report for ", :align => :center, :size => 18 
     text "#{sale.Name}", :align => :center, :size => 18
     move_down 15
-    printHorses(sale)
+    #printHorses(sale)
   end
   def printHorses(sale)
   @horsePerPage = 1    
