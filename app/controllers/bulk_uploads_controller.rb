@@ -1,15 +1,16 @@
 class BulkUploadsController < InheritedResources::Base
   
   def index
-    respond_to do |format|
-      format.html
-      format.pdf do 
-        @sale = Sale.find(params[:e])       
-        pdf = ReportPdf.new(@farm, @sale)
-        send_data pdf.render, filename: "1Report.pdf",
-                type: "application/pdf"
-      end
-      end
+    # respond_to do |format|
+      # format.html
+      # format.pdf do 
+        # @sale = Sale.find(params[:e])       
+        # @farm = Farm.find(params[:farmID])
+        # pdf = ReportPdf.new(@farm, @sale)
+        # send_data pdf.render, filename: "1Report.pdf",
+                # type: "application/pdf"
+      # end
+      # end
   end
   def show
       @BulkUpload = Farm.find(params[:id])
