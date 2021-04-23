@@ -1,27 +1,19 @@
 class ViewersController < InheritedResources::Base
-   def index
-    respond_to do |format|
-      format.html
-      format.pdf do 
-        @sale = Sale.find(params[:e])       
-        pdf = ReportPdf.new(@farm, @sale)
-        send_data pdf.render, filename: "1Report.pdf",
-                type: "application/pdf"
-      end
-      end
+  def index
   end
+
   def show
-      @Viewers = Farm.find(params[:id])
+    ## The report is printed using app/PDFs/report_pdf.rb
+      @ViewReport = Farm.find(params[:id])
       respond_to do |format|
         format.html
         format.pdf do 
          @sale = Sale.find(params[:e])       
-         pdf = ReportPdf.new(@Viewers, @sale)
-         send_data pdf.render, filename: "#{@Viewers.name} Report.pdf",
+         pdf = ReportPdf.new(@ViewReport, @sale)
+         send_data pdf.render, filename: "#{@ViewReport.name} Report.pdf",
                 type: "application/pdf"
         end
       end
   end
-  
 
 end

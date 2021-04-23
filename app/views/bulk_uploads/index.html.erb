@@ -42,7 +42,7 @@
 		<%= params[:search2] %><br>
 		<% @sale = Sale.find(@saleID) %>
 		<% @farm = Farm.find(@farmID) %>
-	<!-- The code below is what generates the report, with the bulk_upload_path method -->
+	<!-- The code below is what generates the report, with the bulk_upload_path method that goes to the 'show' in the controller -->
 		<span style="color:blue; font-size:18pt"><%= link_to "View Report", bulk_upload_path(@farm, format: "pdf", :e => @sale) %></span></h4>
 	<% end %><br/>
 	 		<% @email = "" %> 
