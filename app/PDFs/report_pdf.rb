@@ -6,17 +6,17 @@ class ReportPdf < Prawn::Document
     text "#{@farm.name} Report for ", :align => :center, :size => 18 
     text "#{sale.Name}", :align => :center, :size => 18
     move_down 15
-    #printHorses(sale)
+    printHorses(sale)
   end
   def printHorses(sale)
   @horsePerPage = 1    
   @pageNumber = 1
   @horses = Horse.where(:farm => @farm.id).all ||Horse.where(:farm2 => @farm.id).all
-        @saleDetails = Sale.find(sale)
+       @saleDetails = Sale.find(@sale.id)
        @horses = Horse.all 
        @horses = @horses.sort_by{|a| a.HipNumber.to_i }
-     text "Hip Number             Name                                         Views               Facebook            Twitter             Google       ", :align => :left, :size => 11
-       text "-------------------------------------------------------------------------------------------------------------------------------------------------", :align => :left, :size => 11
+     text "Hip Number             Name                                         Views               Facebook            Twitter       ", :align => :left, :size => 11
+       text "------------------------------------------------------------------------------------------------------------------------", :align => :left, :size => 11
             move_down 24
               
        @horses.each do |horse| 
@@ -37,9 +37,9 @@ class ReportPdf < Prawn::Document
           bounding_box([435, y_position],:width => 30,:height => 30) do
           text "#{horse.tw_count}", :align => :left, :size => 12
           end
-          bounding_box([505, y_position],:width => 30,:height => 30) do
-          text "#{horse.g_count}", :align => :left, :size => 12
-          end
+          # bounding_box([505, y_position],:width => 30,:height => 30) do
+          # text "#{horse.g_count}", :align => :left, :size => 12
+          # end
        if @horsePerPage.to_i == 17 && @pageNumber.to_i == 1
             start_new_page
             move_down 20
