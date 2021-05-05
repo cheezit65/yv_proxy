@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_22_213627) do
+ActiveRecord::Schema.define(version: 2021_05_05_225606) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -46,6 +46,11 @@ ActiveRecord::Schema.define(version: 2021_04_22_213627) do
   create_table "bounces", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "bulk_adds", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "bulk_uploads", force: :cascade do |t|
@@ -119,11 +124,6 @@ ActiveRecord::Schema.define(version: 2021_04_22_213627) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "links", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "mains", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -186,11 +186,6 @@ ActiveRecord::Schema.define(version: 2021_04_22_213627) do
   end
 
   create_table "viewers", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "views", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

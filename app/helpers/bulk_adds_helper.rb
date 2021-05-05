@@ -1,0 +1,2 @@
+module BulkAddsHelper
+end

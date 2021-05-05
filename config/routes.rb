@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bulk_adds
   resources :linkers
   resources :viewers
   resources :downloads

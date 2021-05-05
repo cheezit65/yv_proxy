@@ -1,0 +1,17 @@
+<%= form_with(model: bulk_add) do |form| %>
+  <% if bulk_add.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bulk_add.errors.count, "error") %> prohibited this bulk_add from being saved:</h2>
+
+      <ul>
+        <% bulk_add.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

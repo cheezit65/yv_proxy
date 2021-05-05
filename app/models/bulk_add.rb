@@ -1,0 +1,2 @@
+class BulkAdd < ApplicationRecord
+end
