@@ -1,25 +1,78 @@
-<p id="notice"><%= notice %></p>
+<div align="center">
+	<% @sales = Sale.all %>
+	<% @saleArray = Array.new %>
+	<% @sales.each do |s| %>
+	<% @saleArray.push h s.Name %>
+	<% end %>
 
-<h1>Bulk Adds</h1>
+	<% @sires = Sire.all %>
+	<% @sireArray = Array.new %>
+	<% @sires.each do |s| %>
+	<% @sireArray.push h s.Name %>
+	<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+	<% @farms = Farm.all %>
+	<% @farmArray = Array.new %>
+	<% @farms.each do |f| %>
+	<% @farmArray.push h f.name %>
+	<% end %>
 
-  <tbody>
-    <% @bulk_adds.each do |bulk_add| %>
-      <tr>
-        <td><%= link_to 'Show', bulk_add %></td>
-        <td><%= link_to 'Edit', edit_bulk_add_path(bulk_add) %></td>
-        <td><%= link_to 'Destroy', bulk_add, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+	<h1 style="font-size:20pt">	Add Horses </h1>
+	<!-- the form actually reloads the page with a GET to pass parameters to use when generating the report. This code does NOT generate the report, only pulls in farm & sale params -->
+	<%= form_tag(bulk_adds_path, :method => "get") do %>
+	<span style="font-size: 20pt;">
+		<%= text_field_tag :Name, params[:Name], :size => 15, :id => "sale", placeholder: "Name" %>
+		<%= text_field_tag :HipNumber, params[:HipNumber], :size => 15, placeholder: "HipNumber" %>
+		<%= text_field_tag :Gender, params[:Gender], :size => 15, :id => "gender", placeholder: "Gender" %>
+		<%= text_field_tag :Sale, params[:Sale], :size => 15, :id => "sale", placeholder: "Sale" %>
+		<%= text_field_tag :sire, params[:sire], :size => 15, :id => "sire", placeholder: "Sire" %>
+		<%= text_field_tag :farm, params[:farm], :size => 15, :id => "farm", placeholder: "Farm" %>
+		<%= text_field_tag :farm2, params[:farm2], :size => 15, :id => "farm", placeholder: "Farm2" %>
+		<%= text_field_tag :BulkUploadVideoName, params[:BulkUploadVideoName], :size => 15, placeholder: "VideoName" %>
+	</span>
+		<%= hidden_field_tag :PageViews, params[:PageViews] %>
+	
+	<% @sale = Sale.where(:name => params[:search1])%>		<br><br>
 
-<br>
+	  <%= submit_tag("Create") %>
+<% end %>
 
-<%= link_to 'New Bulk Add', new_bulk_add_path %>
+</div>
+
+<script>
+	$(function() {
+var availableTags = [<% @saleArray.each do |sale| %>"<%= sanitize sale %>",<% end %>
+	];
+	$("#sale").autocomplete({
+		source : availableTags
+	});
+	});
+</script>
+<script>
+	$(function() {
+var availableTags = [<% @sireArray.each do |sire| %>"<%= sanitize sire %>",<% end %>
+	];
+	$("#sire").autocomplete({
+		source : availableTags
+	});
+	});
+</script>
+	
+<script>
+	$(function() {
+var availableTags = [<% @farmArray.each do |farm| %>"<%= sanitize farm %>",<% end %>
+	];
+	$("#farm").autocomplete({
+		source : availableTags
+	});
+	});
+</script>
+	
+<script>
+	$(function() {
+var availableTags = ['Colt', 'Gelding', 'Filly'];
+	$("#gender").autocomplete({
+		source : availableTags
+	});
+	});
+</script>
