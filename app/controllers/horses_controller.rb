@@ -15,7 +15,7 @@ require 'carrierwave/orm/activerecord'
   end
 
    def create
-
+    if params[:horse][:video].present?
         Aws.use_bundled_cert!
         s3 = Aws::S3::Resource.new(
         credentials: Aws::Credentials.new('AKIAI6FXAV2E76ELVK5Q', 'SgoR4/o9vRPip69daNu9CXRYrHHMFBcrjb5j/kev'),
@@ -24,6 +24,7 @@ require 'carrierwave/orm/activerecord'
           obj = s3.bucket('depo-input').object(params[:horse][:video].original_filename)
           obj.upload_file(params[:horse][:video].tempfile.path, acl:'public-read')
           obj.public_url
+    end
           
         @horse = Horse.new(horse_params)
         respond_to do |format|

@@ -31,14 +31,106 @@
 	<h1 style="font-size:20pt">	Add Horses</h1>
 	<%= form_tag(new_bulk_add_path, :method => "get") do %>
 	<span style="font-size: 20pt;">
-		<%= text_field_tag :Name, params[:Name], :size => 15, placeholder: "Name" %>
-		<%= text_field_tag :HipNumber, params[:HipNumber], :size => 15, placeholder: "HipNumber" %>
-		<%= text_field_tag :Gender, params[:Gender], :size => 15, :id => "gender", placeholder: "Gender" %>
-		<%= text_field_tag :Sale, params[:Sale], :size => 15, :id => "sale", placeholder: "Sale" %>
-		<%= text_field_tag :sire, params[:sire], :size => 15, :id => "sire", placeholder: "Sire" %>
-		<%= text_field_tag :farm, params[:farm], :size => 15, :id => "farm", placeholder: "Farm" %>
-		<%= text_field_tag :farm2, params[:farm2], :size => 15, :id => "farm2", placeholder: "Farm2" %>
-		<%= text_field_tag :BulkUploadVideoName, params[:BulkUploadVideoName], :size => 15, placeholder: "VideoName" %>
+		<%= text_field_tag :Name1, params[:Name1], :size => 15, placeholder: "Name" %>
+		<%= text_field_tag :HipNumber1, params[:HipNumber1], :size => 15, placeholder: "HipNumber" %>
+		<%= text_field_tag :Gender1, params[:Gender1], :size => 15, :class => "gender", placeholder: "Gender" %>
+		<%= text_field_tag :Sale1, params[:Sale1], :size => 15, :class => "sale", placeholder: "Sale" %>
+		<%= text_field_tag :sire1, params[:sire1], :size => 15, :class => "sire", placeholder: "Sire" %>
+		<%= text_field_tag :farm1, params[:farm1], :size => 15, :class => "farm", placeholder: "Farm" %>
+		<%= text_field_tag :farm21, params[:farm21], :size => 15, :class => "farm", placeholder: "Farm2" %>
+		<%= text_field_tag :BulkUploadVideoName1, params[:BulkUploadVideoName1], :size => 15, placeholder: "VideoName" %>
+		<br>
+
+		<%= text_field_tag :Name2, params[:Name2], :size => 15, placeholder: "Name" %>
+		<%= text_field_tag :HipNumber2, params[:HipNumber2], :size => 15, placeholder: "HipNumber" %>
+		<%= text_field_tag :Gender2, params[:Gender2], :size => 15, :class => "gender", placeholder: "Gender" %>
+		<%= text_field_tag :Sale2, params[:Sale2], :size => 15, :class => "sale", placeholder: "Sale" %>
+		<%= text_field_tag :sire2, params[:sire2], :size => 15, :class => "sire", placeholder: "Sire" %>
+		<%= text_field_tag :farm2, params[:farm2], :size => 15, :class => "farm", placeholder: "Farm" %>
+		<%= text_field_tag :farm22, params[:farm22], :size => 15, :class => "farm", placeholder: "Farm2" %>
+		<%= text_field_tag :BulkUploadVideoName2, params[:BulkUploadVideoName2], :size => 15, placeholder: "VideoName" %>
+		<br>
+
+		<%= text_field_tag :Name3, params[:Name3], :size => 15, placeholder: "Name" %>
+		<%= text_field_tag :HipNumber3, params[:HipNumber3], :size => 15, placeholder: "HipNumber" %>
+		<%= text_field_tag :Gender3, params[:Gender3], :size => 15, :class => "gender", placeholder: "Gender" %>
+		<%= text_field_tag :Sale3, params[:Sale3], :size => 15, :class => "sale", placeholder: "Sale" %>
+		<%= text_field_tag :sire3, params[:sire3], :size => 15, :class => "sire", placeholder: "Sire" %>
+		<%= text_field_tag :farm3, params[:farm3], :size => 15, :class => "farm", placeholder: "Farm" %>
+		<%= text_field_tag :farm23, params[:farm23], :size => 15, :class => "farm", placeholder: "Farm2" %>
+		<%= text_field_tag :BulkUploadVideoName3, params[:BulkUploadVideoName3], :size => 15, placeholder: "VideoName" %>
+		<br>
+
+		<%= text_field_tag :Name4, params[:Name4], :size => 15, placeholder: "Name" %>
+		<%= text_field_tag :HipNumber4, params[:HipNumber4], :size => 15, placeholder: "HipNumber" %>
+		<%= text_field_tag :Gender4, params[:Gender4], :size => 15, :class => "gender", placeholder: "Gender" %>
+		<%= text_field_tag :Sale4, params[:Sale4], :size => 15, :class => "sale", placeholder: "Sale" %>
+		<%= text_field_tag :sire4, params[:sire4], :size => 15, :class => "sire", placeholder: "Sire" %>
+		<%= text_field_tag :farm4, params[:farm4], :size => 15, :class => "farm", placeholder: "Farm" %>
+		<%= text_field_tag :farm24, params[:farm24], :size => 15, :class => "farm", placeholder: "Farm2" %>
+		<%= text_field_tag :BulkUploadVideoName4, params[:BulkUploadVideoName4], :size => 15, placeholder: "VideoName" %>
+		<br>
+
+		<%= text_field_tag :Name5, params[:Name5], :size => 15, placeholder: "Name" %>
+		<%= text_field_tag :HipNumber5, params[:HipNumber5], :size => 15, placeholder: "HipNumber" %>
+		<%= text_field_tag :Gender5, params[:Gender5], :size => 15, :class => "gender", placeholder: "Gender" %>
+		<%= text_field_tag :Sale5, params[:Sale5], :size => 15, :class => "sale", placeholder: "Sale" %>
+		<%= text_field_tag :sire5, params[:sire5], :size => 15, :class => "sire", placeholder: "Sire" %>
+		<%= text_field_tag :farm5, params[:farm5], :size => 15, :class => "farm", placeholder: "Farm" %>
+		<%= text_field_tag :farm25, params[:farm25], :size => 15, :class => "farm", placeholder: "Farm2" %>
+		<%= text_field_tag :BulkUploadVideoName5, params[:BulkUploadVideoName5], :size => 15, placeholder: "VideoName" %>
+		<br>
+
+		<%= text_field_tag :Name6, params[:Name6], :size => 15, placeholder: "Name" %>
+		<%= text_field_tag :HipNumber6, params[:HipNumber6], :size => 15, placeholder: "HipNumber" %>
+		<%= text_field_tag :Gender6, params[:Gender6], :size => 15, :class => "gender", placeholder: "Gender" %>
+		<%= text_field_tag :Sale6, params[:Sale6], :size => 15, :class => "sale", placeholder: "Sale" %>
+		<%= text_field_tag :sire6, params[:sire6], :size => 15, :class => "sire", placeholder: "Sire" %>
+		<%= text_field_tag :farm6, params[:farm6], :size => 15, :class => "farm", placeholder: "Farm" %>
+		<%= text_field_tag :farm26, params[:farm26], :size => 15, :class => "farm", placeholder: "Farm2" %>
+		<%= text_field_tag :BulkUploadVideoName6, params[:BulkUploadVideoName6], :size => 15, placeholder: "VideoName" %>
+		<br>
+
+		<%= text_field_tag :Name7, params[:Name7], :size => 15, placeholder: "Name" %>
+		<%= text_field_tag :HipNumber7, params[:HipNumber7], :size => 15, placeholder: "HipNumber" %>
+		<%= text_field_tag :Gender7, params[:Gender7], :size => 15, :class => "gender", placeholder: "Gender" %>
+		<%= text_field_tag :Sale7, params[:Sale7], :size => 15, :class => "sale", placeholder: "Sale" %>
+		<%= text_field_tag :sire7, params[:sire7], :size => 15, :class => "sire", placeholder: "Sire" %>
+		<%= text_field_tag :farm7, params[:farm7], :size => 15, :class => "farm", placeholder: "Farm" %>
+		<%= text_field_tag :farm27, params[:farm27], :size => 15, :class => "farm", placeholder: "Farm2" %>
+		<%= text_field_tag :BulkUploadVideoName7, params[:BulkUploadVideoName7], :size => 15, placeholder: "VideoName" %>
+		<br>
+
+		<%= text_field_tag :Name8, params[:Name8], :size => 15, placeholder: "Name" %>
+		<%= text_field_tag :HipNumber8, params[:HipNumber8], :size => 15, placeholder: "HipNumber" %>
+		<%= text_field_tag :Gender8, params[:Gender8], :size => 15, :class => "gender", placeholder: "Gender" %>
+		<%= text_field_tag :Sale8, params[:Sale8], :size => 15, :class => "sale", placeholder: "Sale" %>
+		<%= text_field_tag :sire8, params[:sire8], :size => 15, :class => "sire", placeholder: "Sire" %>
+		<%= text_field_tag :farm8, params[:farm8], :size => 15, :class => "farm", placeholder: "Farm" %>
+		<%= text_field_tag :farm28, params[:farm28], :size => 15, :class => "farm", placeholder: "Farm2" %>
+		<%= text_field_tag :BulkUploadVideoName8, params[:BulkUploadVideoName8], :size => 15, placeholder: "VideoName" %>
+		<br>
+
+		<%= text_field_tag :Name9, params[:Name9], :size => 15, placeholder: "Name" %>
+		<%= text_field_tag :HipNumber9, params[:HipNumber9], :size => 15, placeholder: "HipNumber" %>
+		<%= text_field_tag :Gender9, params[:Gender9], :size => 15, :class => "gender", placeholder: "Gender" %>
+		<%= text_field_tag :Sale9, params[:Sale9], :size => 15, :class => "sale", placeholder: "Sale" %>
+		<%= text_field_tag :sire9, params[:sire9], :size => 15, :class => "sire", placeholder: "Sire" %>
+		<%= text_field_tag :farm9, params[:farm9], :size => 15, :class => "farm", placeholder: "Farm" %>
+		<%= text_field_tag :farm29, params[:farm29], :size => 15, :class => "farm", placeholder: "Farm2" %>
+		<%= text_field_tag :BulkUploadVideoName9, params[:BulkUploadVideoName9], :size => 15, placeholder: "VideoName" %>
+		<br>
+
+		<%= text_field_tag :Name10, params[:Name10], :size => 15, placeholder: "Name" %>
+		<%= text_field_tag :HipNumber10, params[:HipNumber10], :size => 15, placeholder: "HipNumber" %>
+		<%= text_field_tag :Gender10, params[:Gender10], :size => 15, :class => "gender", placeholder: "Gender" %>
+		<%= text_field_tag :Sale10, params[:Sale10], :size => 15, :class => "sale", placeholder: "Sale" %>
+		<%= text_field_tag :sire10, params[:sire10], :size => 15, :class => "sire", placeholder: "Sire" %>
+		<%= text_field_tag :farm10, params[:farm10], :size => 15, :class => "farm", placeholder: "Farm" %>
+		<%= text_field_tag :farm210, params[:farm210], :size => 15, :class => "farm", placeholder: "Farm2" %>
+		<%= text_field_tag :BulkUploadVideoName10, params[:BulkUploadVideoName10], :size => 15, placeholder: "VideoName" %>
+		<br><br>
+	  <%= submit_tag("Create") %>
 <% end %>
 
 </div>
@@ -47,7 +139,7 @@
 	$(function() {
 var availableTags = [<% @saleArray.each do |sale| %>"<%= sanitize sale %>",<% end %>
 	];
-	$("#sale").autocomplete({
+	$(".sale").autocomplete({
 		source : availableTags
 	});
 	});
@@ -56,7 +148,7 @@ var availableTags = [<% @saleArray.each do |sale| %>"<%= sanitize sale %>",<% en
 	$(function() {
 var availableTags = [<% @sireArray.each do |sire| %>"<%= sanitize sire %>",<% end %>
 	];
-	$("#sire").autocomplete({
+	$(".sire").autocomplete({
 		source : availableTags
 	});
 	});
@@ -66,26 +158,16 @@ var availableTags = [<% @sireArray.each do |sire| %>"<%= sanitize sire %>",<% en
 	$(function() {
 var availableTags = [<% @farmArray.each do |farm| %>"<%= sanitize farm %>",<% end %>
 	];
-	$("#farm").autocomplete({
+	$(".farm").autocomplete({
 		source : availableTags
 	});
 	});
 </script>
-	
-<script>
-	$(function() {
-var availableTags = [<% @farmArray2.each do |farm2| %>"<%= sanitize farm2 %>",<% end %>
-	];
-	$("#farm2").autocomplete({
-		source : availableTags
-	});
-	});
-</script>
-	
+		
 <script>
 	$(function() {
 var availableTags = ['Colt', 'Gelding', 'Filly'];
-	$("#gender").autocomplete({
+	$(".gender").autocomplete({
 		source : availableTags
 	});
 	});
