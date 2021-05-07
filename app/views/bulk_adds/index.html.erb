@@ -1,3 +1,8 @@
+<% if current_user == nil %>
+<p>You are not authorized to use this page</p>
+
+<% else %>
+
 <div align="center">
 	<% @sales = Sale.all %>
 	<% @saleArray = Array.new %>
@@ -17,24 +22,23 @@
 	<% @farmArray.push h f.name %>
 	<% end %>
 
-	<h1 style="font-size:20pt">	Add Horses </h1>
-	<!-- the form actually reloads the page with a GET to pass parameters to use when generating the report. This code does NOT generate the report, only pulls in farm & sale params -->
-	<%= form_tag(bulk_adds_path, :method => "get") do %>
+	<% @farms2 = Farm.all %>
+	<% @farmArray2 = Array.new %>
+	<% @farms2.each do |f| %>
+	<% @farmArray2.push h f.name %>
+	<% end %>
+
+	<h1 style="font-size:20pt">	Add Horses</h1>
+	<%= form_tag(new_bulk_add_path, :method => "get") do %>
 	<span style="font-size: 20pt;">
-		<%= text_field_tag :Name, params[:Name], :size => 15, :id => "sale", placeholder: "Name" %>
+		<%= text_field_tag :Name, params[:Name], :size => 15, placeholder: "Name" %>
 		<%= text_field_tag :HipNumber, params[:HipNumber], :size => 15, placeholder: "HipNumber" %>
 		<%= text_field_tag :Gender, params[:Gender], :size => 15, :id => "gender", placeholder: "Gender" %>
 		<%= text_field_tag :Sale, params[:Sale], :size => 15, :id => "sale", placeholder: "Sale" %>
 		<%= text_field_tag :sire, params[:sire], :size => 15, :id => "sire", placeholder: "Sire" %>
 		<%= text_field_tag :farm, params[:farm], :size => 15, :id => "farm", placeholder: "Farm" %>
-		<%= text_field_tag :farm2, params[:farm2], :size => 15, :id => "farm", placeholder: "Farm2" %>
+		<%= text_field_tag :farm2, params[:farm2], :size => 15, :id => "farm2", placeholder: "Farm2" %>
 		<%= text_field_tag :BulkUploadVideoName, params[:BulkUploadVideoName], :size => 15, placeholder: "VideoName" %>
-	</span>
-		<%= hidden_field_tag :PageViews, params[:PageViews] %>
-	
-	<% @sale = Sale.where(:name => params[:search1])%>		<br><br>
-
-	  <%= submit_tag("Create") %>
 <% end %>
 
 </div>
@@ -70,9 +74,20 @@ var availableTags = [<% @farmArray.each do |farm| %>"<%= sanitize farm %>",<% en
 	
 <script>
 	$(function() {
+var availableTags = [<% @farmArray2.each do |farm2| %>"<%= sanitize farm2 %>",<% end %>
+	];
+	$("#farm2").autocomplete({
+		source : availableTags
+	});
+	});
+</script>
+	
+<script>
+	$(function() {
 var availableTags = ['Colt', 'Gelding', 'Filly'];
 	$("#gender").autocomplete({
 		source : availableTags
 	});
 	});
 </script>
+<% end %>
