@@ -1,0 +1,1 @@
+On 7.1.2021, the release included the new bulk_adds page.
