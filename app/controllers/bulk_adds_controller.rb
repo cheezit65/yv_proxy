@@ -3,7 +3,8 @@ require 'csv'
   
   def new
     @ccontr=current_user.id
-    file = "#{Rails.root}/public/dataUploads/horse_data.csv"
+    @time=Time.now.strftime("%m-%d-%Y")
+    file = "#{Rails.root}/public/dataUploads/" + @time.to_s + "_" + @ccontr.to_s + "_" + Random.rand(100..900).to_s + "_upload.csv"
     headers = ["farm", "HipNumber", "Name", "Gender", "sire", "Sale","BulkUploadVideoName","Description"]
     CSV.open(file, 'w', write_headers: true, headers: headers) do |csv|
         break if params[:Name1].length == 0 
