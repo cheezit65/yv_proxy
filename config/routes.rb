@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get 'search/simple'
   get 'search/advanced'
   devise_scope :user do 
-    get 'login' => "devise/sessions#destroy" 
+    get 'login' => "devise/sessions#new" 
     get 'logout' => "devise/sessions#destroy" 
     
   end

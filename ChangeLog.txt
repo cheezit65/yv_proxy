@@ -1,4 +1,9 @@
 On 7.1.2021, the release included the new bulk_adds page.
 On 7.4.2021, attempted to change signin url by adding this to routes.rb:
-  devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout'}
+   devise_scope :user do 
+    get 'login' => "devise/sessions#destroy" 
+    get 'logout' => "devise/sessions#destroy" 
+    
+  end
+  
   
