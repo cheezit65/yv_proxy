@@ -15,7 +15,11 @@ Rails.application.routes.draw do
   resources :uploads
   get 'search/simple'
   get 'search/advanced'
-  devise_scope :user do get 'users/sign_out' => "devise/sessions#destroy" end
+  devise_scope :user do 
+    get 'login' => "devise/sessions#destroy" 
+    get 'logout' => "devise/sessions#destroy" 
+    
+  end
   resources :messages
   resources :horses do
     collection { post :import }
@@ -24,7 +28,7 @@ Rails.application.routes.draw do
   resources :farms
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout'}
+  devise_for :users
   resources :sales
   resources :consignors
   resources :mains
