@@ -17,8 +17,7 @@ Rails.application.routes.draw do
   get 'search/advanced'
   devise_scope :user do 
     get 'consignor/yvsi' => "devise/sessions#new" 
-    get 'consignor/yvso' => "devise/sessions#destroy" 
-    
+    get 'consignor/yvso' => "devise/sessions#destroy"     
   end
   resources :messages
   resources :horses do

@@ -1,8 +1,8 @@
 On 7.1.2021, the release included the new bulk_adds page.
 On 7.4.2021, attempted to change signin url by adding this to routes.rb:
-   devise_scope :user do 
-    get 'yvsi' => "devise/sessions#new" 
-    get 'yvso' => "devise/sessions#destroy"     
+  devise_scope :user do 
+    get 'consignor/yvsi' => "devise/sessions#new" 
+    get 'consignor/yvso' => "devise/sessions#destroy"     
   end
   
   
