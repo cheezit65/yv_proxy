@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   get 'search/simple'
   get 'search/advanced'
   devise_scope :user do 
-    get 'login' => "devise/sessions#new" 
-    get 'logout' => "devise/sessions#destroy" 
+    get 'consignor/yvsi' => "devise/sessions#new" 
+    get 'consignor/yvso' => "devise/sessions#destroy" 
     
   end
   resources :messages
