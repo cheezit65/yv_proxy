@@ -4,5 +4,6 @@ On 7.4.2021, attempted to change signin url by adding this to routes.rb:
     get 'consignor/yvsi' => "devise/sessions#new" 
     get 'consignor/yvso' => "devise/sessions#destroy"     
   end
+ https://github.com/heartcombo/devise/wiki/How-To:-Change-the-default-sign_in-and-sign_out-routes
   
   
