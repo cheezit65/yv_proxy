@@ -11,7 +11,7 @@ gem 'rqrcode'
 gem 'carrierwave'
 gem 'fog-aws'
 gem "recaptcha"
-
+gem 'net-http'
 #gem 'sqlite3'
 
 gem "ransack", github: "activerecord-hackery/ransack", ref: "aada8"

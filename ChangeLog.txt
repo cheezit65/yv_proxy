@@ -20,7 +20,7 @@ Removed:
 		<% uri = URI(@path) %>
 		<% res = Net::HTTP.get_response(uri) %>
  		<!-- <% uri = URI.parse(@path) %>
-		<% http = Net::HTTP.new(uri.host, uri.port) %>
+		<% http = Net::HTTP.new(uri.host, uri.port, use_ssl: true) %>
 		<% request = Net::HTTP::Get.new(uri.request_uri) %>
 		<% res = http.request(request) %> -->
 <!-- take the OTHER path to find video with uppercase letters for Sale Code -->
@@ -28,7 +28,7 @@ Removed:
 		<% uri = URI(@path2) %>
 		<% res = Net::HTTP.get_response(uri) %>
 		<!-- <% uri = URI.parse(@path2) %>
-		<% http = Net::HTTP.new(uri.host, uri.port) %>
+		<% http = Net::HTTP.new(uri.host, uri.port, use_ssl: true) %>
 		<% request = Net::HTTP::Get.new(uri.request_uri) %>
 		<% res2 = http.request(request) %>	 -->
 		<% if res.code.to_s == "200" %>
