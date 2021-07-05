@@ -11,5 +11,7 @@ On 7.5.2021, changed show.html.erb in horses
       	<% @path = "http://s3.amazonaws.com/yv-output/" + @horse.BulkUploadVideoName[0...-4] + "/hls_" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
 to
     	<% @path = "https://yv-output2.s3.us-east-2.amazonaws.com/" + @horse.BulkUploadVideoName[0...-4] + "/" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
- 
+Removed:
+ 		<% http = Net::HTTP.new(uri.host, uri.port) %>
+
  
