@@ -1,4 +1,4 @@
-<% require "net/https" %>
+<% require "net/http" %>
 <% require "uri" %>
 
 <style>
@@ -225,19 +225,23 @@ form input[type=submit],form input[type=button],form button
 </div>
 		</div>
 	<div class="lexis">
-					<% if !@horse.BulkUploadVideoName.nil? %>
+		<% if !@horse.BulkUploadVideoName.nil? %>
 <!-- take the happy path to find video with lower case letters for Sale Code -->
     	<% @path = "https://yv-output2.s3.us-east-2.amazonaws.com/" + @horse.BulkUploadVideoName[0...-4] + "/" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
- 		<% uri = URI.parse(@path) %>
-		<!-- <% http = Net::HTTP.new(uri.host, uri.port) %> -->
+		<% uri = URI(@path) %>
+		<% res = Net::HTTP.get_response(uri) %>
+ 		<!-- <% uri = URI.parse(@path) %>
+		<% http = Net::HTTP.new(uri.host, uri.port) %>
 		<% request = Net::HTTP::Get.new(uri.request_uri) %>
-		<% res = http.request(request) %>
+		<% res = http.request(request) %> -->
 <!-- take the OTHER path to find video with uppercase letters for Sale Code -->
     	<% @path2 = "https://yv-output2.s3.us-east-2.amazonaws.com/" + @horse.BulkUploadVideoName[0...-4] + "/" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
-		<% uri = URI.parse(@path2) %>
-		<!-- <% http = Net::HTTP.new(uri.host, uri.port) %> -->
+		<% uri = URI(@path2) %>
+		<% res = Net::HTTP.get_response(uri) %>
+		<!-- <% uri = URI.parse(@path2) %>
+		<% http = Net::HTTP.new(uri.host, uri.port) %>
 		<% request = Net::HTTP::Get.new(uri.request_uri) %>
-		<% res2 = http.request(request) %>	
+		<% res2 = http.request(request) %>	 -->
 		<% if res.code.to_s == "200" %>
 
 <video style="background-color: #e9ebee;" id=example-video width="820" height="461" class="video-js vjs-16-9 vjs-default-skin vjs-playing vjs-fullscreen vjs-big-play-centered" controls > 
