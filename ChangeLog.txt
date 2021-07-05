@@ -1,11 +1,13 @@
 On 7.1.2021, the release included the new bulk_adds page.
+
 On 7.4.2021, attempted to change signin url by adding this to routes.rb:
   devise_scope :user do 
     get 'consignor/yvsi' => "devise/sessions#new" 
     get 'consignor/yvso' => "devise/sessions#destroy"     
   end
  https://github.com/heartcombo/devise/wiki/How-To:-Change-the-default-sign_in-and-sign_out-routes
-  7.5.2021, changed
+
+On 7.5.2021, changed
       	<% @path = "http://s3.amazonaws.com/yv-output/" + @horse.BulkUploadVideoName[0...-4] + "/hls_" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
 to
     	<% @path = "https://yv-output2.s3.us-east-2.amazonaws.com/" + @horse.BulkUploadVideoName[0...-4] + "/" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
