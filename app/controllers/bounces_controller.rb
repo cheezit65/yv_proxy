@@ -51,8 +51,8 @@ end
       secret_access_key: 'SgoR4/o9vRPip69daNu9CXRYrHHMFBcrjb5j/kev'
   })
   #Get the object
-    Aws.use_bundled_cert!
-  resp = s3.get_object({ bucket:'yv-output2', key: params[:filename] }, target: params[:filename])
+    # Aws.use_bundled_cert!
+  # resp = s3.get_object({ bucket:'yv-output2', key: params[:filename] }, target: params[:filename])
 
  #resp.body
  #=> #<StringIO ...> 
