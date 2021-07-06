@@ -34,7 +34,7 @@ def index
          zipfile.add(attachment,File.join(folder_path,attachment))
       end
    end
-   send_file(File.join("#{Rails.root}/public/", 'archive.zip'), :type => 'application/zip', :filename => "#{Time.now.to_date}.zip")
+   # send_file(File.join("#{Rails.root}/public/", 'archive.zip'), :type => 'application/zip', :filename => "#{Time.now.to_date}.zip")
    FileUtils.remove_dir(folder_path) if Dir.exist?(folder_path)
  end
 end
@@ -51,14 +51,14 @@ end
       secret_access_key: 'SgoR4/o9vRPip69daNu9CXRYrHHMFBcrjb5j/kev'
   })
   #Get the object
-    # Aws.use_bundled_cert!
-  # resp = s3.get_object({ bucket:'yv-output2', key: params[:filename] }, target: params[:filename])
+    Aws.use_bundled_cert!
+  resp = s3.get_object({ bucket:'yv-output2', key: params[:filename] }, target: params[:filename])
 
  #resp.body
  #=> #<StringIO ...> 
 
  #resp.body.read
- send_file params[:filename]
+ # send_file params[:filename]
  #redirect_back(fallback_location: root_path, params: resp)
  end
   
