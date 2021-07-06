@@ -34,32 +34,32 @@ def index
          zipfile.add(attachment,File.join(folder_path,attachment))
       end
    end
-   # send_file(File.join("#{Rails.root}/public/", 'archive.zip'), :type => 'application/zip', :filename => "#{Time.now.to_date}.zip")
+   send_file(File.join("#{Rails.root}/public/", 'archive.zip'), :type => 'application/zip', :filename => "#{Time.now.to_date}.zip")
    FileUtils.remove_dir(folder_path) if Dir.exist?(folder_path)
  end
 end
 
 
   def new
-# To get the code below to work, make sure that the yaml and aws.rb files are either deleted or have
-# the correct access_key_id/secret_access_key/bucket or this will fail.
-
-  #initiate the client
-  s3 = Aws::S3::Client.new({
-      region:            'us-east-2',
-      access_key_id:     'AKIAI6FXAV2E76ELVK5Q',
-      secret_access_key: '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'
-  })
-  #Get the object
-    Aws.use_bundled_cert!
-  resp = s3.get_object({ bucket:'yv-output2', key: params[:filename] }, target: params[:filename])
-
- #resp.body
- #=> #<StringIO ...> 
-
- #resp.body.read
+# # To get the code below to work, make sure that the yaml and aws.rb files are either deleted or have
+# # the correct access_key_id/secret_access_key/bucket or this will fail.
+# 
+  # #initiate the client
+  # s3 = Aws::S3::Client.new({
+      # region:            'us-east-2',
+      # access_key_id:     'AKIAI6FXAV2E76ELVK5Q',
+      # secret_access_key: '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'
+  # })
+  # #Get the object
+    # Aws.use_bundled_cert!
+  # resp = s3.get_object({ bucket:'yv-output2', key: params[:filename] }, target: params[:filename])
+# 
+ # #resp.body
+ # #=> #<StringIO ...> 
+# 
+ # #resp.body.read
  # send_file params[:filename]
- #redirect_back(fallback_location: root_path, params: resp)
+ # #redirect_back(fallback_location: root_path, params: resp)
  end
   
   private
