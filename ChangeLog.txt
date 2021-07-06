@@ -1,6 +1,6 @@
 On 7.1.2021, the release included the new bulk_adds page.
 #######################################
-On 7.4.2021, attempted to change signin url by adding this to routes.rb:
+On 7.4.2021, changed the signin url by adding this to routes.rb:
  devise_scope :user do 
     get 'consignor/yvsi' => "devise/sessions#new" 
     get 'consignor/yvso' => "devise/sessions#destroy"     
@@ -13,27 +13,16 @@ On 7.5.2021, changed show.html.erb in horses
       	<% @path = "http://s3.amazonaws.com/yv-output/" + @horse.BulkUploadVideoName[0...-4] + "/hls_" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
 to
     	<% @path = "https://yv-output2.s3.us-east-2.amazonaws.com/" + @horse.BulkUploadVideoName[0...-4] + "/" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
-Removed:
- 		<% http = Net::HTTP.new(uri.host, uri.port) %>
 
- kind of original:
- <!-- take the happy path to find video with lower case letters for Sale Code -->
-    	<% @path = "https://yv-output2.s3.us-east-2.amazonaws.com/" + @horse.BulkUploadVideoName[0...-4] + "/" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
-		<% uri = URI(@path) %>
-		<% res = Net::HTTP.get_response(uri) %>
- 		<!-- <% uri = URI.parse(@path) %>
-		<% http = Net::HTTP.new(uri.host, uri.port, use_ssl: true) %>
-		<% request = Net::HTTP::Get.new(uri.request_uri) %>
+
+#####################
+On 7.6.2021 changed the net http code
+
 		<% res = http.request(request) %> -->
-<!-- take the OTHER path to find video with uppercase letters for Sale Code -->
-    	<% @path2 = "https://yv-output2.s3.us-east-2.amazonaws.com/" + @horse.BulkUploadVideoName[0...-4] + "/" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
-		<% uri = URI(@path2) %>
+to
 		<% res = Net::HTTP.get_response(uri) %>
-		<!-- <% uri = URI.parse(@path2) %>
-		<% http = Net::HTTP.new(uri.host, uri.port, use_ssl: true) %>
-		<% request = Net::HTTP::Get.new(uri.request_uri) %>
-		<% res2 = http.request(request) %>	 -->
-		<% if res.code.to_s == "200" %>
-		
-		 		<% uri = URI.parse(@path) %>
-		<% res = Net::HTTP.get_response(uri) %>
+SOURCE: https://ruby-doc.org/stdlib-2.7.2/libdoc/net/http/rdoc/Net/HTTP.html
+
+############################	
+
+On 7.6.2021 noticed that the email broke while 	
