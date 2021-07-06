@@ -50,8 +50,8 @@ end
       access_key_id:     'AKIAI6FXAV2E76ELVK5Q',
       secret_access_key: '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'
   })
-  # #Get the object
-    # Aws.use_bundled_cert!
+  #Get the object
+    Aws.use_bundled_cert!
   # resp = s3.get_object({ bucket:'yv-output2', key: params[:filename] }, target: params[:filename])
 # 
  # #resp.body
@@ -59,7 +59,7 @@ end
 # 
  # #resp.body.read
  # send_file params[:filename]
- # #redirect_back(fallback_location: root_path, params: resp)
+ #redirect_back(fallback_location: root_path, params: resp)
  end
   
   private
