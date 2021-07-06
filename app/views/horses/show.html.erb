@@ -227,17 +227,17 @@ form input[type=submit],form input[type=button],form button
 	<div class="lexis">
 					<% if !@horse.BulkUploadVideoName.nil? %>
 <!-- take the happy path to find video with lower case letters for Sale Code -->
-    	<% @path = "http://s3.amazonaws.com/yv-output/" + @horse.BulkUploadVideoName[0...-4] + "/hls_" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
+    	<% @path = "https://yv-output2.s3.us-east-2.amazonaws.com/" + @horse.BulkUploadVideoName[0...-4] + "/" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
  		<% uri = URI.parse(@path) %>
 		<% http = Net::HTTP.new(uri.host, uri.port) %>
 		<% request = Net::HTTP::Get.new(uri.request_uri) %>
-		<% res = http.request(request) %>
+		<% res = Net::HTTP.get_response(uri) %>
 <!-- take the OTHER path to find video with uppercase letters for Sale Code -->
-    	<% @path2 = "http://s3.amazonaws.com/yv-output/" + @horse.BulkUploadVideoName[0...-4] + "/hls_" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
+    	<% @path2 = "https://yv-output2.s3.us-east-2.amazonaws.com/" + @horse.BulkUploadVideoName[0...-4] + "/" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
 		<% uri = URI.parse(@path2) %>
 		<% http = Net::HTTP.new(uri.host, uri.port) %>
 		<% request = Net::HTTP::Get.new(uri.request_uri) %>
-		<% res2 = http.request(request) %>	
+		<% res = Net::HTTP.get_response(uri) %>	
 		<% if res.code.to_s == "200" %>
 
 <video style="background-color: #e9ebee;" id=example-video width="820" height="461" class="video-js vjs-16-9 vjs-default-skin vjs-playing vjs-fullscreen vjs-big-play-centered" controls > 
@@ -327,11 +327,6 @@ form input[type=submit],form input[type=button],form button
 			<span style="font-size: 25pt;"><%= email_field(:user1, :email1) %><br></span>
 			<br>Enter YOUR FRIEND's email address:
 			<span style="font-size: 25pt;"><%= email_field(:user2, :email2) %><br>
-			<%= f.hidden_field :id, :value => @horse.id %>
-			<%= f.hidden_field :yearling, :value => @horse.Name %>
-			<%= f.hidden_field :hip, :value => @horse.HipNumber %>
-			<%= recaptcha_tags %>
-			<%= submit_tag "Send", :email1 => :email1,:email2 => :email2, :user1 => :user1,:user2 => :user2, :id => :id, :yearling => :yearling	, :hip => :hip %> </span>			
 
 
 		<span>				
