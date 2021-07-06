@@ -1,4 +1,4 @@
-<% require "net/http" %>
+<% require "net/https" %>
 <% require "uri" %>
 
 <style>
@@ -225,39 +225,39 @@ form input[type=submit],form input[type=button],form button
 </div>
 		</div>
 	<div class="lexis">
-		<% if !@horse.BulkUploadVideoName.nil? %>
+					<% if !@horse.BulkUploadVideoName.nil? %>
 <!-- take the happy path to find video with lower case letters for Sale Code -->
     	<% @path = "https://yv-output2.s3.us-east-2.amazonaws.com/" + @horse.BulkUploadVideoName[0...-4] + "/" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
  		<% uri = URI.parse(@path) %>
-		<!-- <% http = Net::HTTP.new(uri.host, uri.port) %> -->
-		<!-- <% request = Net::HTTP::Get.new(uri.request_uri) %> -->
-		<!-- <% res = http.request(request) %> -->
+		<% http = Net::HTTP.new(uri.host, uri.port) %>
+		<% request = Net::HTTP::Get.new(uri.request_uri) %>
+		<% res = Net::HTTP.get_response(uri) %>
 <!-- take the OTHER path to find video with uppercase letters for Sale Code -->
     	<% @path2 = "https://yv-output2.s3.us-east-2.amazonaws.com/" + @horse.BulkUploadVideoName[0...-4] + "/" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
 		<% uri = URI.parse(@path2) %>
-		<!-- <% http = Net::HTTP.new(uri.host, uri.port) %> -->
-		<!-- <% request = Net::HTTP::Get.new(uri.request_uri) %> -->
-		<!-- <% res2 = http.request(request) %>	 -->
+		<% http = Net::HTTP.new(uri.host, uri.port) %>
+		<% request = Net::HTTP::Get.new(uri.request_uri) %>
+		<% res = Net::HTTP.get_response(uri) %>	
+		<% if res.code.to_s == "200" %>
 
-<!-- <% if res.code.to_s == "200" %> -->
-
-<!-- <video style="background-color: #e9ebee;" id=example-video width="820" height="461" class="video-js vjs-16-9 vjs-default-skin vjs-playing vjs-fullscreen vjs-big-play-centered" controls > 
+<video style="background-color: #e9ebee;" id=example-video width="820" height="461" class="video-js vjs-16-9 vjs-default-skin vjs-playing vjs-fullscreen vjs-big-play-centered" controls > 
   <source
      src=<%= @path %>
      type="application/x-mpegURL">
 </video>     
-     	<!-- <% elsif res2.code.to_s == "200" %> -->
+     	<% elsif res2.code.to_s == "200" %>
 	
-<!-- <video style="background-color: #e9ebee;" id=example-video width="820" height="461" class="video-js vjs-16-9 vjs-default-skin vjs-playing vjs-fullscreen vjs-big-play-centered" controls >
+<video style="background-color: #e9ebee;" id=example-video width="820" height="461" class="video-js vjs-16-9 vjs-default-skin vjs-playing vjs-fullscreen vjs-big-play-centered" controls >
   <source
      src=<%= @path %>
      type="application/x-mpegURL">
 </video>     
-			<% end %> -->	 -->	
-	<!-- <% else %>				 -->
+			<% end %>
+		<% else %>				
 		<h1 style="font-size:1.5em;font-family:Merriweather Sans !important ;color:red">
 		The video is not available yet. Please try again later.</h1>
-		<!-- <% end %>		 -->
+		<% end %>		
+
 		</div>
 		<div style="width: 100%; height: 10%; float: left; vertical-align: middle; ">
 			<div class="saleNameStyle">
@@ -327,11 +327,6 @@ form input[type=submit],form input[type=button],form button
 			<span style="font-size: 25pt;"><%= email_field(:user1, :email1) %><br></span>
 			<br>Enter YOUR FRIEND's email address:
 			<span style="font-size: 25pt;"><%= email_field(:user2, :email2) %><br>
-			<%= f.hidden_field :id, :value => @horse.id %>
-			<%= f.hidden_field :yearling, :value => @horse.Name %>
-			<%= f.hidden_field :hip, :value => @horse.HipNumber %>
-			<%= recaptcha_tags %>
-			<%= submit_tag "Send", :email1 => :email1,:email2 => :email2, :user1 => :user1,:user2 => :user2, :id => :id, :yearling => :yearling	, :hip => :hip %> </span>			
 
 
 		<span>				

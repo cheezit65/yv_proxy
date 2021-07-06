@@ -34,3 +34,6 @@ Removed:
 		<% request = Net::HTTP::Get.new(uri.request_uri) %>
 		<% res2 = http.request(request) %>	 -->
 		<% if res.code.to_s == "200" %>
+		
+		 		<% uri = URI.parse(@path) %>
+		<% res = Net::HTTP.get_response(uri) %>
