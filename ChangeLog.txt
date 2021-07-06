@@ -25,4 +25,18 @@ SOURCE: https://ruby-doc.org/stdlib-2.7.2/libdoc/net/http/rdoc/Net/HTTP.html
 
 ############################	
 
-On 7.6.2021 noticed that the email broke while 	
+On 7.6.2021  noticed QR PDF generator broke. I changed two things:
+
+1. in farm_pdf.rb:
+
+    @farm = farm
+to 
+	@farm = Farm.find(farm)
+
+2. In farms controller:
+
+	pdf = FarmPdf.new(@farm, sale)
+to
+	pdf = FarmPdf.new(@farm.id, sale.id)
+
+

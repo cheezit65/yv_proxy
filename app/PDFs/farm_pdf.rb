@@ -2,7 +2,7 @@ class FarmPdf < Prawn::Document
     require 'rqrcode'
   def initialize(farm, sale)
     super()
-    @farm = farm
+    @farm = Farm.find(farm)
     text "QR Code List for #{@farm.name}", :align => :center, :size => 18
     start_new_page
     printHorses(sale)

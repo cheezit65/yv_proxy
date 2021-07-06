@@ -22,7 +22,7 @@ class FarmsController < InheritedResources::Base
       format.html
       format.pdf do
         sale = Sale.find(params[:e])
-        pdf = FarmPdf.new(@farm, sale)
+        pdf = FarmPdf.new(@farm.id, sale.id)
         send_data pdf.render, filename: "Farm_#{@farm.name}.pdf",
                 type: "application/pdf"
       end
