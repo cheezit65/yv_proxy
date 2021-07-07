@@ -1,16 +1,16 @@
 class BouncesController < InheritedResources::Base
 
 def index  
- if params[:tag] == "fb_count"
-   Horse.increment_counter(:fb_count,  params[:horse_id])
-   redirect_to params[:url] + params[:horse_id] 
- elsif  params[:tag] == "tw_count"
-   Horse.increment_counter(:tw_count,  params[:horse_id])
-   redirect_to params[:url] + params[:horse_id] 
- elsif  params[:tag] == "g_count"
-   Horse.increment_counter(:g_count,  params[:horse_id])
-   redirect_to params[:url] + params[:horse_id] 
- elsif  params[:id]
+ # if params[:tag] == "fb_count"
+   # Horse.increment_counter(:fb_count,  params[:horse_id])
+   # redirect_to params[:url] + params[:horse_id] 
+ # elsif  params[:tag] == "tw_count"
+   # Horse.increment_counter(:tw_count,  params[:horse_id])
+   # redirect_to params[:url] + params[:horse_id] 
+ # elsif  params[:tag] == "g_count"
+   # Horse.increment_counter(:g_count,  params[:horse_id])
+   # redirect_to params[:url] + params[:horse_id] 
+ if  params[:id]
    redirect_to edit_user_registration_path(id: params[:id], method: post)      
  elsif params[:saleid]
    folder_path = "#{Rails.root}/public/downloads/"
