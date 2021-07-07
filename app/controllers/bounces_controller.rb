@@ -52,6 +52,7 @@ end
   })
   #Get the object
     Aws.use_bundled_cert!
+    foldery=params[:filename][0...-4]
   resp = s3.get_object({ bucket:'yv-output2', key: params[:filename] }, target: params[:filename])
 
  # #resp.body
