@@ -20,13 +20,13 @@ def index
    Dir.mkdir("#{Rails.root}/public/downloads")
    @horses = Horse.where(Sale: params[:saleid])
    s3 = Aws::S3::Client.new({
-      region:            'us-east-2',
+      region:            'us-east-1',
       access_key_id:     'AKIAI6FXAV2E76ELVK5Q',
       secret_access_key: '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'
    })
    Aws.use_bundled_cert!
    @horses.each do |horse|  
-        resp = s3.get_object({ bucket:'yv-output2', key: horse.BulkUploadVideoName }, target: folder_path + horse.BulkUploadVideoName)
+        resp = s3.get_object({ bucket:'yv-input', key: horse.BulkUploadVideoName }, target: folder_path + horse.BulkUploadVideoName)
    end
    input_filenames = Dir.entries(folder_path).select {|f| !File.directory? f}
    Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
@@ -46,13 +46,13 @@ end
 
   #initiate the client
   s3 = Aws::S3::Client.new({
-      region:            'us-east-2',
+      region:            'us-east-1',
       access_key_id:     'AKIAI6FXAV2E76ELVK5Q',
       secret_access_key: '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'
   })
   #Get the object
     Aws.use_bundled_cert!
-  resp = s3.get_object({ bucket:'yv-output2', key: params[:filename] }, target: params[:filename])
+  resp = s3.get_object({ bucket:'yv-input', key: params[:filename] }, target: params[:filename])
 
  # #resp.body
  # #=> #<StringIO ...> 
