@@ -52,7 +52,8 @@ end
   })
   #Get the object
     Aws.use_bundled_cert!
-  resp = s3.get_object({ bucket:'yv-input', key: params[:filename] }, target: params[:filename])
+    buckety='yv-input/' + :filename
+  resp = s3.get_object({ bucket:buckety, key: params[:filename] }, target: params[:filename])
 
  # #resp.body
  # #=> #<StringIO ...> 
