@@ -26,7 +26,7 @@ def index
    })
    Aws.use_bundled_cert!
    @horses.each do |horse|  
-        resp = s3.get_object({ bucket:'kim-yv-bucket', key: horse.BulkUploadVideoName }, target: folder_path + horse.BulkUploadVideoName)
+        resp = s3.get_object({ bucket:'yv-output2', key: horse.BulkUploadVideoName }, target: folder_path + horse.BulkUploadVideoName)
    end
    input_filenames = Dir.entries(folder_path).select {|f| !File.directory? f}
    Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
@@ -52,13 +52,13 @@ end
   })
   #Get the object
     Aws.use_bundled_cert!
-  resp = s3.get_object({ bucket:'kim-yv-bucket', key: params[:filename] }, target: params[:filename])
+  resp = s3.get_object({ bucket:'yv-output2', key: params[:filename] }, target: params[:filename])
 
  # #resp.body
  # #=> #<StringIO ...> 
 # 
  # #resp.body.read
- # send_file params[:filename]
+ send_file params[:filename]
  #redirect_back(fallback_location: root_path, params: resp)
  end
   
