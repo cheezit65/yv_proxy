@@ -39,4 +39,11 @@ to
 to
 	pdf = FarmPdf.new(@farm.id, sale.id)
 
+#################
+ On 7.7, i changed the bounces controller to find the download on S3:
+ 
+  	resp = s3.get_object({ bucket:'yv-output2', key: params[:filename] }, target: params[:filename])
+to 
+	foldery=params[:filename][0...-4] + "/"
+   	resp = s3.get_object({ bucket:'yv-output2', key: params[:filename] }, target: params[:filename])
 
