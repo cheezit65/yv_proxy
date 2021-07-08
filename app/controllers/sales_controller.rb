@@ -10,7 +10,11 @@ class SalesController < ApplicationController
   # GET /sales/1
   # GET /sales/1.json
   def show
-  end
+     @clientip = request.ip[0..2]
+    if @clientip == "10."
+      redirect_back(fallback_location:"/")
+    end
+end
 
   # GET /sales/new
   def new
