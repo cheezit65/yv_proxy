@@ -46,10 +46,6 @@ end
  if !params[:token]
    redirect_back fallback_location: "https://www.google.com"
  end
- if !params[:token] == 'random'
-   redirect_back fallback_location: "https://www.google.com"
- end
-   redirect_to edit_user_registration_path(id: params[:id], method: post)  
   #initiate the client
   s3 = Aws::S3::Client.new({
       region:            'us-east-1',
