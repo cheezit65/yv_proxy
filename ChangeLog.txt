@@ -48,6 +48,11 @@ to
    	resp = s3.get_object({ bucket:'yv-output2', key: foldery + params[:filename] }, target: params[:filename])
 
 #################
+
+	On 7.7., I removed all social media from the horse show page and the bounces controller
+
+#################
+
  On 7.8, I added a parameter to the bounces/download pages to see if this stops some bot from automatically trying to download
 bounces controller:
  if  params[:token] == 'random'
