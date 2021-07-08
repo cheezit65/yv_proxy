@@ -12,9 +12,13 @@ def new
 end
 
 def index
-
+    @clientip = request.ip[0..2]
+    if @clientip == "10."
+      redirect_back(fallback_location:"/")
+    end
+    
+    
 end
-
 
 end
 
