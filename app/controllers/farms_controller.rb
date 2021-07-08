@@ -16,6 +16,11 @@ class FarmsController < InheritedResources::Base
   
   
   def show
+     @clientip = request.ip[0..2]
+    if @clientip == "10."
+      redirect_back(fallback_location:"/")
+    end
+
       @farm = Farm.find(params[:id])
       @sale = Sale.all
     respond_to do |format|
