@@ -12,11 +12,6 @@ def new
 end
 
 def index
-render plain: "You IP address is #{client_ip}"
-end
-def client_ip
-    request.ip.length
-  end
 
 end
 
