@@ -16,8 +16,6 @@ def index
     if @clientip == "10."
       redirect_back(fallback_location:"/")
     end
-    
-    
 end
 
 end
