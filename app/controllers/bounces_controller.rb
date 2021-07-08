@@ -44,7 +44,7 @@ end
     # To get the code below to work, make sure that the yaml and aws.rb files are either deleted or have
     # the correct access_key_id/secret_access_key/bucket or this will fail.
      if params[:workin]
-       redirect_to "https://www.google.com"
+       format.html { redirect_to :back, notice: 'Farm was successfully updated. Congratulations.'}
      end
         s3 = Aws::S3::Client.new({
             region:            'us-east-1',
