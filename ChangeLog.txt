@@ -47,3 +47,20 @@ to
 	foldery=params[:filename][0...-4] + "/"
    	resp = s3.get_object({ bucket:'yv-output2', key: foldery + params[:filename] }, target: params[:filename])
 
+#################
+ On 7.8, I added a parameter to the bounces/download pages to see if this stops some bot from automatically trying to download
+bounces controller:
+ if  params[:token] == 'random'
+   redirect_to "https://www.google.com"
+ end
+ if !params[:token]
+   redirect_to "https://www.google.com"
+ end
+ 
+ downloads index
+	<td width="35%" style="padding-left: 2%"><%= link_to "Download video", new_bounce_path(:filename => horse.BulkUploadVideoName,:token => 'random') %></td>
+
+#########################################
+
+
+
