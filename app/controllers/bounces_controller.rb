@@ -43,7 +43,7 @@ end
   def new
 # To get the code below to work, make sure that the yaml and aws.rb files are either deleted or have
 # the correct access_key_id/secret_access_key/bucket or this will fail.
- if !params[:token]
+ if params[:token]
    redirect_back fallback_location: "https://www.google.com"
  end
  if !params[:token] == 'random'
