@@ -41,6 +41,11 @@ end
 
 
   def new
+    @clientip = request.ip[0..2]
+    if @clientip == "10."
+      redirect_back(fallback_location:"/")
+    end
+
     # # To get the code below to work, make sure that the yaml and aws.rb files are either deleted or have
     # # the correct access_key_id/secret_access_key/bucket or this will fail.
      # if params[:workin]
