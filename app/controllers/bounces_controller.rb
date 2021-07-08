@@ -46,10 +46,6 @@ end
      if params[:workin]
        redirect_to "https://www.google.com"
      end
-     if params[:workin] == 'random'
-       redirect_to "https://www.google.com"
-       #initiate the client
-      else
         s3 = Aws::S3::Client.new({
             region:            'us-east-1',
             access_key_id:     'AKIAI6FXAV2E76ELVK5Q',
@@ -61,7 +57,6 @@ end
           resp = s3.get_object({ bucket:'yv-output2', key: foldery + params[:filename] }, target: params[:filename])
     
        send_file params[:filename]
-     end
   end
   
   private
