@@ -10,6 +10,13 @@ require 'carrierwave/orm/activerecord'
   end  
 
 
+def show
+     @clientip = request.ip[0..2]
+    if @clientip == "10."
+      redirect_back(fallback_location:"/")
+    end
+
+end
   def index
     @horses = Horse.all
   end
