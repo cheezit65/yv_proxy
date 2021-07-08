@@ -46,6 +46,9 @@ end
  if !params[:token]
    redirect_back fallback_location: "https://www.google.com"
  end
+ if !params[:token] == 'random'
+   redirect_back fallback_location: "https://www.google.com"
+ end
   #initiate the client
   s3 = Aws::S3::Client.new({
       region:            'us-east-1',
