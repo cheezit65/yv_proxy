@@ -41,22 +41,22 @@ end
 
 
   def new
-    # To get the code below to work, make sure that the yaml and aws.rb files are either deleted or have
-    # the correct access_key_id/secret_access_key/bucket or this will fail.
-     if params[:workin]
-       format.html { redirect_to :back, notice: 'Farm was successfully updated. Congratulations.'}
-     end
-        s3 = Aws::S3::Client.new({
-            region:            'us-east-1',
-            access_key_id:     'AKIAI6FXAV2E76ELVK5Q',
-            secret_access_key: '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'
-        })
-        #Get the object
-          Aws.use_bundled_cert!
-          foldery=params[:filename][0...-4] + "/"
-          resp = s3.get_object({ bucket:'yv-output2', key: foldery + params[:filename] }, target: params[:filename])
-    
-       send_file params[:filename]
+    # # To get the code below to work, make sure that the yaml and aws.rb files are either deleted or have
+    # # the correct access_key_id/secret_access_key/bucket or this will fail.
+     # if params[:workin]
+       # format.html { redirect_to :back, notice: 'Farm was successfully updated. Congratulations.'}
+     # end
+        # s3 = Aws::S3::Client.new({
+            # region:            'us-east-1',
+            # access_key_id:     'AKIAI6FXAV2E76ELVK5Q',
+            # secret_access_key: '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'
+        # })
+        # #Get the object
+          # Aws.use_bundled_cert!
+          # foldery=params[:filename][0...-4] + "/"
+          # resp = s3.get_object({ bucket:'yv-output2', key: foldery + params[:filename] }, target: params[:filename])
+#     
+       # send_file params[:filename]
   end
   
   private
