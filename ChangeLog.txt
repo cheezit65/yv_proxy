@@ -77,3 +77,20 @@ def index
     end
 end
 
+########################################
+On 7.13.2021, added this to application controller:
+
+    before_action :block_ip_addresses
+
+  protected
+
+  def block_ip_addresses
+    head :unauthorized if current_ip_address[0..2] == "10."
+  end
+
+  def current_ip_address
+    request.env['HTTP_X_REAL_IP'] || request.env['REMOTE_ADDR']
+  end
+#################################################
+
+
