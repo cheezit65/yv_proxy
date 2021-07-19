@@ -78,7 +78,7 @@ def index
 end
 
 ########################################
-On 7.13.2021, added this to application controller:
+On 7.13.2021, added then removed this to application controller:
 
     before_action :block_ip_addresses
 
@@ -92,5 +92,11 @@ On 7.13.2021, added this to application controller:
     request.env['HTTP_X_REAL_IP'] || request.env['REMOTE_ADDR']
   end
 #################################################
+
+On 7.1.2921: installed rack-attack:
+https://github.com/rack/rack-attack
+
+Installed gem
+created rack_attack.rb in config/initializers dir
 
 
