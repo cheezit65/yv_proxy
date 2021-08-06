@@ -85,6 +85,19 @@ form input[type=submit],form input[type=button],form button
 }
 </style>
 
+
+<!-- *** This is the Social Sticky section. Put on HOLD until other cosmetic fixed are complete. -->
+<div id="sticky-social">
+    <ul>
+        <!-- <li><a href="http://www.facebook.com/sharer.php?u=http://www.yearlingvideos.com/horses/<%= @horse.id %>"  onclick="return theFunction();" class="entypo-social facebook" target="_blank"><span>Facebook</span></a></li> -->
+		<% @f_url = "http://www.facebook.com/sharer.php?u=http://www.yearlingvideos.com/horses/" + params[:horse_id].to_s %>
+ 		<% @t_url = "https://twitter.com/share?text=Check out this new video from YearlingVideos.com!&nbsp;&nbsp;&nbsp;&amp;url=http://www.yearlingvideos.com/horses/#{params[:horse_id].to_s}" %>
+        <li><a href="<%= bounces_path(:horse_id => @horse.id, :tag=>"fb_count", :url => @f_url) %>" class="entypo-social facebook" target="_blank"></a></li>
+        <li><a href="<%= bounces_path(:horse_id => @horse.id, :tag=>"tw_count", :url => @t_url) %>" class="entypo-social twitter" target="_blank"><span>Twitter</span></a></li>
+    </ul>
+</div>	
+<!----- increment social count ----->
+<% Horse.increment_counter(:PageViews, @horse.id) %>
 <% @sale = Sale.all %>
 <% if !@horse.farm2.nil? && @horse.farm2 != "" %>
 	<% @farm = Farm.find(@horse.farm) %>
@@ -214,14 +227,18 @@ form input[type=submit],form input[type=button],form button
 	<div class="lexis">
 					<% if !@horse.BulkUploadVideoName.nil? %>
 <!-- take the happy path to find video with lower case letters for Sale Code -->
-    	<% @path = "https://yv-output2.s3.us-east-2.amazonaws.com/" + @horse.BulkUploadVideoName[0...-4] + "/" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
+    	<% @path = "http://s3.amazonaws.com/yv-output/" + @horse.BulkUploadVideoName[0...-4] + "/hls_" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
  		<% uri = URI.parse(@path) %>
-		<% res = Net::HTTP.get_response(uri) %>
+		<% http = Net::HTTP.new(uri.host, uri.port) %>
+		<% request = Net::HTTP::Get.new(uri.request_uri) %>
+		<% res = http.request(request) %>
 <!-- take the OTHER path to find video with uppercase letters for Sale Code -->
-    	<% @path2 = "https://yv-output2.s3.us-east-2.amazonaws.com/" + @horse.BulkUploadVideoName[0...-4] + "/" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
+    	<% @path2 = "http://s3.amazonaws.com/yv-output/" + @horse.BulkUploadVideoName[0...-4] + "/hls_" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
 		<% uri = URI.parse(@path2) %>
-		<% res = Net::HTTP.get_response(uri) %>	
-<% if res.code.to_s == "200" %>
+		<% http = Net::HTTP.new(uri.host, uri.port) %>
+		<% request = Net::HTTP::Get.new(uri.request_uri) %>
+		<% res2 = http.request(request) %>	
+		<% if res.code.to_s == "200" %>
 
 <video style="background-color: #e9ebee;" id=example-video width="820" height="461" class="video-js vjs-16-9 vjs-default-skin vjs-playing vjs-fullscreen vjs-big-play-centered" controls > 
   <source
@@ -314,8 +331,7 @@ form input[type=submit],form input[type=button],form button
 			<%= f.hidden_field :yearling, :value => @horse.Name %>
 			<%= f.hidden_field :hip, :value => @horse.HipNumber %>
 			<%= recaptcha_tags %>
-			<%= submit_tag "Send", :email1 => :email1,:email2 => :email2, :user1 => :user1,:user2 => :user2, :id => :id, :yearling => :yearling	, :hip => :hip %> </span>			 
-
+			<%= submit_tag "Send", :email1 => :email1,:email2 => :email2, :user1 => :user1,:user2 => :user2, :id => :id, :yearling => :yearling	, :hip => :hip %> </span>			
 
 
 		<span>				
