@@ -99,4 +99,15 @@ https://github.com/rack/rack-attack
 Installed gem
 created rack_attack.rb in config/initializers dir
 
+#################################################
+On 8.6.2021 removed this entirely from horse show:
+
+<!-- <div id="sticky-social">
+    <ul>        
+		<% @f_url = "http://www.facebook.com/sharer.php?u=http://www.yearlingvideos.com/horses/" + params[:horse_id].to_s %>
+ 		<% @t_url = "https://twitter.com/share?text=Check out this new video from YearlingVideos.com!&nbsp;&nbsp;&nbsp;&amp;url=http://www.yearlingvideos.com/horses/#{params[:horse_id].to_s}" %>
+        <li><a href="<%= bounces_path(:horse_id => @horse.id, :tag=>"fb_count", :url => @f_url) %>" class="entypo-social facebook" target="_blank"></a></li>
+        <li><a href="<%= bounces_path(:horse_id => @horse.id, :tag=>"tw_count", :url => @t_url) %>" class="entypo-social twitter" target="_blank"><span>Twitter</span></a></li>
+    </ul>
+</div>	
 
