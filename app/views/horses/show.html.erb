@@ -85,11 +85,6 @@ form input[type=submit],form input[type=button],form button
 }
 </style>
 
-
-<!-- *** This is the Social Sticky section. Put on HOLD until other cosmetic fixed are complete. -->
-
-<!----- increment social count ----->
-<% Horse.increment_counter(:PageViews, @horse.id) %>
 <% @sale = Sale.all %>
 <% if !@horse.farm2.nil? && @horse.farm2 != "" %>
 	<% @farm = Farm.find(@horse.farm) %>
