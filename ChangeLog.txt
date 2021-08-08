@@ -111,3 +111,15 @@ On 8.6.2021 removed this entirely from horse show:
     </ul>
 </div>	
 
+#################################################
+On 8.8.2021
+
+I removed from admin/horse.rb to hide these fields in activeadmin
+    column :fb_count
+    column :tw_count
+    column :g_count
+    
+#################################################
+    
+    
+

@@ -95,10 +95,7 @@ end
        farm2.farm2
     end
     end
-    column :fb_count
-    column :tw_count
     column :e_count
-    column :g_count
     column :BulkUploadVideoName
       actions
   end
