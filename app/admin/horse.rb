@@ -53,9 +53,6 @@ csv do
     column :farm
     column :farm2
     column :BulkUploadVideoName
-    column :fb_count
-    column :tw_count
-    column :g_count
     column :e_count
 
 end
