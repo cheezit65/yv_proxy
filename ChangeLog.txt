@@ -121,5 +121,11 @@ I removed from admin/horse.rb to hide these fields in activeadmin
     
 #################################################
     
+   On 8.9.2021, changed the signin url to activeadmin by adding this in routes:
     
+ devise_scope :user do 
+    get 'consignor/yvsi' => "devise/sessions#new" 
+  end
+ https://github.com/heartcombo/devise/wiki/How-To:-Change-the-default-sign_in-and-sign_out-routes
+###################################
 
