@@ -27,14 +27,7 @@ Rails.application.routes.draw do
   resources :sires
   resources :farms
   devise_for :admin_users, ActiveAdmin::Devise.config
-  Rails.application.routes.draw do
-  scope 'prawgavp' do
-    ActiveAdmin.routes(self)
-    get '/', to: 'admin/dashboard#index'
-  end
-end
-#commented the line below out on 8/9/2021 and added the block above
-##  ActiveAdmin.routes(self)
+  ActiveAdmin.routes(self)
   devise_for :users
   resources :sales
   resources :consignors
