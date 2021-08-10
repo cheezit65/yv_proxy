@@ -26,7 +26,8 @@ Rack::Attack.blocklist('fail2ban pentesters') do |req|
     req.path.include?('/etc/passwd') ||
     req.path.include?('wp-admin') ||
     req.path.include?('wp-login')
-
+    msg = [req.env['rack.attack.match_type'], req.ip, req.request_method, req.fullpath, ('"' + req.user_agent.to_s + '"')].join(' ')
+    LOGGER.info(msg)
   end
 end
 end
