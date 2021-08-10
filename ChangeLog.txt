@@ -150,4 +150,6 @@ Rack::Attack.blocklist('fail2ban pentesters') do |req|
 end
 ###################################
 
+On 8.10.2021
 
+I restored the admin/horses.rb page because the view button wasn't working.
