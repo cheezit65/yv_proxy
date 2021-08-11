@@ -4,7 +4,13 @@ ActiveAdmin.register_page "Dashboard" do
 # end
 #       
 # 
+ action_item :super_action  do
+   link_to 'New Horse', new_prawgavp_horse_path
+ end
+       
 
+       
+ 
 
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
   menu parent: 'Reports'
