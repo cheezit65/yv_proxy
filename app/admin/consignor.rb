@@ -1,6 +1,12 @@
 ActiveAdmin.register Consignor do
   
-  
+action_item :super_action do
+   link_to 'View Website', root_path, :target => "_blank"
+ end
+        
+ action_item :super_action  do
+   link_to 'New Horse', new_prawgavp_horse_path
+ end
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
