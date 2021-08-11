@@ -3,6 +3,9 @@ ActiveAdmin.register Sale do
   # link_to 'View Website', root_path, :target => "_blank"
 # end
         
+ action_item :super_action  do
+   link_to 'New Horse', new_prawgavp_horse_path
+ end
 
 
 # See permitted parameters documentation:
