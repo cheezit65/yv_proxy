@@ -166,4 +166,7 @@ I restored the New Horse buttons in activeadmin (and added New Sire to the horse
    link_to 'New Sire', new_prawgavp_sire_path
  end
        
+###################################
+On 8.11.2021
 
+I added the bounces controller back in
