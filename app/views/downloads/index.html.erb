@@ -1,4 +1,4 @@
-<!-- <style>
+<style>
 table, th, td {
     border: 1px solid black;
 
@@ -16,7 +16,8 @@ table, th, td {
 			<br><table border="1">
 			<div align="left">
 			<% @saleID=sale.id %>
-			<h2><%= sale.Name %>, <%= sale.StartDate %><%= link_to " Download All Horses in this sale", bounces_path(:saleid => @saleID) %><br></h2>
+			<!-- <h2><%= sale.Name %>, <%= sale.StartDate %><%= link_to " Download All Horses in this sale", bounces_path(:saleid => @saleID) %><br></h2> -->
+			<h2><%= sale.Name %>, <%= sale.StartDate %></h2>
 				<% @horses.each do |horse| %>
 					<tr>
 						<td width: "30%" style="padding-left: 2%"><%= horse.Name %></td>
@@ -57,4 +58,4 @@ table, th, td {
 	
 	<% end%>
 <% end%>
-</div> -->
+</div>
