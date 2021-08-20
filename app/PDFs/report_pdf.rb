@@ -25,7 +25,7 @@ class ReportPdf < Prawn::Document
           bounding_box([10, y_position],:width => 30,:height => 30) do
           text "#{horse.HipNumber}", :align => :left, :size => 14
           end
-          bounding_box([260, y_position],:width => 280,:height => 30) do
+          bounding_box([160, y_position],:width => 280,:height => 30) do
           text "#{horse.Name}", :align => :left, :size => 12
           end
           bounding_box([435, y_position],:width => 30,:height => 30) do
