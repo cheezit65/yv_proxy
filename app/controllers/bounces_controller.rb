@@ -52,6 +52,8 @@ end
   })
   #Get the object
     Aws.use_bundled_cert!
+    @horse = Horse.find_by(bulkvideoupload: params[:filename])
+    Horse.increment_counter(:e_count, @horse.id)
     foldery=params[:filename][0...-4] + "/"
     resp = s3.get_object({ bucket:'yv-output2', key: foldery + params[:filename] }, target: params[:filename])
  #resp.body
