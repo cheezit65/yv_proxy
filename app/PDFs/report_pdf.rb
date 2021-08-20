@@ -15,7 +15,7 @@ class ReportPdf < Prawn::Document
        @saleDetails = Sale.find(@sale.id)
        @horses = Horse.all 
        @horses = @horses.sort_by{|a| a.HipNumber.to_i }
-     text "Hip Number             Name                                        Page Views               Facebook            Twitter       ", :align => :left, :size => 11
+     text "Hip Number                                        Name                                        Page Views       ", :align => :left, :size => 11
        text "----------------------------------------------------------------------------------------------------------------------------", :align => :left, :size => 11
             move_down 24
               
@@ -25,17 +25,11 @@ class ReportPdf < Prawn::Document
           bounding_box([10, y_position],:width => 30,:height => 30) do
           text "#{horse.HipNumber}", :align => :left, :size => 14
           end
-          bounding_box([85, y_position],:width => 280,:height => 30) do
+          bounding_box([360, y_position],:width => 280,:height => 30) do
           text "#{horse.Name}", :align => :left, :size => 12
           end
-          bounding_box([260, y_position],:width => 30,:height => 30) do
-          text "#{horse.PageViews}", :align => :left, :size => 12
-          end
-          bounding_box([360, y_position],:width => 30,:height => 30) do
-          text "#{horse.fb_count}", :align => :left, :size => 12
-          end
           bounding_box([435, y_position],:width => 30,:height => 30) do
-          text "#{horse.tw_count}", :align => :left, :size => 12
+          text "#{horse.PageViews}", :align => :left, :size => 12
           end
           # bounding_box([505, y_position],:width => 30,:height => 30) do
           # text "#{horse.g_count}", :align => :left, :size => 12

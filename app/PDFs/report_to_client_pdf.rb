@@ -15,7 +15,7 @@ class ReportToClientPdf < Prawn::Document
         @saleDetails = Sale.find(sale)
        @horses = Horse.all 
        @horses = @horses.sort_by{|a| a.HipNumber.to_i }
-     text "Hip Number             Name                                         Views               Facebook            Twitter             Google       ", :align => :left, :size => 11
+     text "Hip Number                                        Name                                         Views                      ", :align => :left, :size => 11
        text "-------------------------------------------------------------------------------------------------------------------------------------------------", :align => :left, :size => 11
             move_down 24
               
