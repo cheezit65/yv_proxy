@@ -5,7 +5,7 @@ def index
    # Horse.increment_counter(:fb_count,  params[:horse_id])
    # redirect_to params[:url] + params[:horse_id] 
  if  params[:tag] == "tw_count"
-    redirect_back fallback_location: "http://www.google.com"
+    redirect_to "http://google.com"
  end
    # Horse.increment_counter(:tw_count,  params[:horse_id])
    # redirect_to params[:url] + params[:horse_id] 
