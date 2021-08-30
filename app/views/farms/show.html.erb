@@ -78,7 +78,7 @@
 			<% @uniqueSale = @salesArray.uniq %>
 			<% @uniqueSale.each do |sale| %>
 				<% @saleDetails = Sale.find(sale) %>
-				<% if @saleDetails.StartDate >= Date.today %>
+				<% if @saleDetails.StartDate >= Date.today or (!@saleDetails.EndDate.nil? and @saleDetails.EndDate >= Date.today ) %>
 				<% @flag = "YES" %>				
 				<h1 align="center" id="hoverLink" class="farmPageName">
 				<%= link_to @saleDetails.Name,sale_path(sale) %>&nbsp;
