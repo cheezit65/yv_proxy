@@ -170,3 +170,15 @@ I restored the New Horse buttons in activeadmin (and added New Sire to the horse
 On 8.11.2021
 
 I added the bounces controller back in
+
+###################################
+On 8.30.2021
+
+Changed Farm page so that the Private sales would not show as ended:
+
+<% if @saleDetails.StartDate >= Date.today %>
+
+
+to
+
+<% if @saleDetails.StartDate >= Date.today or (!@saleDetails.EndDate.nil? and @saleDetails.EndDate >= Date.today) %>
