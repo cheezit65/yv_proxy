@@ -109,8 +109,8 @@ end
    Sales = Sale.order(:Name)
    Farms = Farm.order(:name)
     f.inputs do
-      f.input :Name
       f.input :HipNumber
+      f.input :Name
       f.input :Gender, :as => :select, :collection => ["filly","colt", "gelding"]
       f.input :farm, :as => :select, :collection => Farms.map{|u| ["#{u.name}", u.id]}
       f.input :farm2, :as => :select, :collection => Farms.map{|u| ["#{u.name}", u.id]}
