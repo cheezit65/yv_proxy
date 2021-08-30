@@ -5,7 +5,7 @@ def index
     redirect_to "http://google.com"
  end
  if  params[:tag] == "tw_count"
-    redirect_to "http://google.com"
+    redirect_to "http://amazon.com"
  end
    # Horse.increment_counter(:tw_count,  params[:horse_id])
    # redirect_to params[:url] + params[:horse_id] 
@@ -46,7 +46,8 @@ end
 # To get the code below to work, make sure that the yaml and aws.rb files are either deleted or have
 # the correct access_key_id/secret_access_key/bucket or this will fail.
   if  !params[:worker]
-    redirect_back fallback_location: "http://www.yearlingvideos.com"
+    redirect_to "http://curl.se"
+    # redirect_back fallback_location: "http://www.yearlingvideos.com"
   end
   #initiate the client
   s3 = Aws::S3::Client.new({
