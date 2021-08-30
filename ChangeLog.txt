@@ -181,4 +181,7 @@ Changed Farm page so that the Private sales would not show as ended:
 
 to
 
-<% if @saleDetails.StartDate >= Date.today or (!@saleDetails.EndDate.nil? and @saleDetails.EndDate >= Date.today) %>
+<<% if @saleDetails.StartDate >= Date.today or (!@saleDetails.EndDate.nil? and @saleDetails.EndDate >= Date.today ) %>
+
+
+
