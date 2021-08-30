@@ -1,9 +1,9 @@
 class BouncesController < InheritedResources::Base
 
 def index  
- # if params[:tag] == "fb_count"
-   # Horse.increment_counter(:fb_count,  params[:horse_id])
-   # redirect_to params[:url] + params[:horse_id] 
+  if params[:tag] == "fb_count"
+    redirect_to "http://google.com"
+ end
  if  params[:tag] == "tw_count"
     redirect_to "http://google.com"
  end
