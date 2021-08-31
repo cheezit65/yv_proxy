@@ -26,9 +26,9 @@ def new
             filewrite.write(hy.HipNumber + "\t\t")
           end          
           filewrite.write(hy.Name)
-          if hy.Name.length > 12
+          if hy.Name.length > 11
             filewrite.write("\t\t")
-          elsif hy.Name.length < 13
+          elsif hy.Name.length < 12
             filewrite.write("\t\t\t")
           else
             filewrite.write("\t")
