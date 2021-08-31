@@ -36,39 +36,7 @@ def new
           if !hy.farm.nil? && !hy.farm2.nil? && hy.farm2 != ""  
             @farm = Farm.find(hy.farm)
             @farm2 = Farm.find(hy.farm2)
-            filewrite.write(@farm.name + "\t\t" + @farm2.name + "\n")
-          else
-            @farm = Farm.find(hy.farm)
-            filewrite.write(@farm.name + "\n")
-          end
-        end
-      end
-    end   
-    @farmList = Farm.all
-    @farmList.each do |farmy|
-      @horselist1 = Horse.where(:Sale => @sale.id).all 
-      @horselist = @horselist1.order('created_at DESC') 
-      @horselist.each do |hy|      
-        if hy.farm2.to_s == farmy.id.to_s
-          if hy.HipNumber.length == 1          
-            filewrite.write(hy.HipNumber + "\t\t")
-          elsif hy.HipNumber.length == 2          
-            filewrite.write(hy.HipNumber + "\t\t")
-          elsif hy.HipNumber.length == 3          
-            filewrite.write(hy.HipNumber + "\t\t")
-          end          
-          filewrite.write(hy.Name)
-          if hy.Name.length > 13
-            filewrite.write("\t")
-          elsif hy.Name.length < 8
-            filewrite.write("\t\t\t")
-          else
-            filewrite.write("\t")
-          end
-          if !hy.farm.nil? && !hy.farm2.nil? && hy.farm2 != ""  
-            @farm = Farm.find(hy.farm)
-            @farm2 = Farm.find(hy.farm2)
-            filewrite.write(@farm.name + "\t\t" + @farm2.name + "\n")
+            filewrite.write(@farm.name + "\t\t\t" + @farm2.name + "\n")
           else
             @farm = Farm.find(hy.farm)
             filewrite.write(@farm.name + "\n")
