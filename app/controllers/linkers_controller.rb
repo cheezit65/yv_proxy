@@ -36,7 +36,7 @@ def new
           if !hy.farm.nil? && !hy.farm2.nil? && hy.farm2 != ""  
             @farm = Farm.find(hy.farm)
             @farm2 = Farm.find(hy.farm2)
-            filewrite.write(@farm.name + "\t\t\t" + @farm2.name + "\n")
+            filewrite.write(@farm.name + "\t" + @farm2.name + "\n")
           else
             @farm = Farm.find(hy.farm)
             filewrite.write(@farm.name + "\n")
