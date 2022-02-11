@@ -68,8 +68,8 @@ end
  # send_file params[:filename]
  # end
   
-  private
-  
+  # private
+#   
 
 end
 
