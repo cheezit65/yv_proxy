@@ -42,13 +42,13 @@ def index
 end
 
 
-  def new
+  # def new
 # To get the code below to work, make sure that the yaml and aws.rb files are either deleted or have
 # the correct access_key_id/secret_access_key/bucket or this will fail.
-  if  !params[:worker]
+  # if  !params[:worker]
     redirect_to "http://curl.se"
     # redirect_back fallback_location: "http://www.yearlingvideos.com"
-  end
+  # end
   # #initiate the client
   # s3 = Aws::S3::Client.new({
       # region:            'us-east-2',
@@ -66,7 +66,7 @@ end
 # 
  # #resp.body.read
  # send_file params[:filename]
- end
+ # end
   
   private
   
