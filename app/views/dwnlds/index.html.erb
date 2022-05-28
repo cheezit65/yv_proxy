@@ -4,8 +4,10 @@ table, th, td {
 
 }
 </style>
+<%= recaptcha_tags %>
 
 <div style="margin-bottom: 8%; background-color: white;">
+	
 <% @sales = Sale.order(StartDate: :asc) %>
 <% @sales.each do |sale| %>
 	<% if  sale.EndDate >= Date.today %>
