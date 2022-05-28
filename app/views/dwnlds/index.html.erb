@@ -1,6 +1,7 @@
-<% current_status = "untrusted" %>
+<% if page_status == nil %>
+<p>You are not authorized to use this page</p>
 
-<% if current_stats == "trusted" %>
+<% else %>
 
 <style>
 table, th, td {
