@@ -1,0 +1,2 @@
+class Dwnld < ApplicationRecord
+end

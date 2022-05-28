@@ -1,0 +1,28 @@
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+<div style="margin-bottom: 10%">
+<% @sales = Sale.order(StartDate: :asc) %>
+<% @sales.each do |sale| %>
+	<div style="width: 40%; margin:0 auto;""align="center">
+		
+	<% @horses = Horse.where(:Sale => sale.id).all %>
+	<% if @horses.count > 0 %>
+		<br><table border="1">
+		<div align="left">
+		<h2><%= sale.Name %><br></h2>
+		<% @horses.each do |horse| %>
+			<tr>
+				<td width: "30%" style="padding-left: 2%"><%= horse.Name %></td>
+				<td width="35%" style="padding-left: 2%"><%= horse.HipNumber %></td>
+				<td width="35%" style="padding-left: 2%"><%= link_to "Download video", new_vector_path(:filename => horse.BulkUploadVideoName) %></td>
+			</tr>
+		<% end%>
+		</table>
+		
+	<% end%>
+	</div>
+<% end%>
+</div>

@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  resources :dwnlds
   resources :bulk_adds
   resources :linkers
   resources :viewers
-  resources :downloads
+  resources :dwnlds
   resources :vectors
   get 'homes/show'
   get 'messages/show'
