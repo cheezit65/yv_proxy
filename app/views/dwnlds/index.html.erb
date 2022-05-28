@@ -1,8 +1,6 @@
-<% if flash[:notice] %>
-		<div>
-<%= flash[:notice] %>
-		</div>
-<% end %>
+<% if flash[:notice] %>		
+	<%= recaptcha_tags %>
+<% else %>		
 
 <style>
 table, th, td {
@@ -66,3 +64,4 @@ table, th, td {
 	<% end%>
 <% end%>
 </div>
+<% end %>

@@ -8,6 +8,7 @@ class MessagesController < InheritedResources::Base
         flash[:notice] = "Email Sent to your friend at #{params[:user2][:email2]} "
         redirect_back(fallback_location: root_path)
       else
+        flash[:success] = "Verified"
         redirect_to dwnlds_url
       end
     
