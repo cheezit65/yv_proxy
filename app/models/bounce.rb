@@ -1,2 +1,0 @@
-class Bounce < ApplicationRecord
-end

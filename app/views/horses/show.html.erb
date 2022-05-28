@@ -229,7 +229,7 @@ form input[type=submit],form input[type=button],form button
      src=<%= @path %>
      type="application/x-mpegURL">
 </video>     
-     	<% elsif res2.code.to_s == "200" %>
+     	<% elsif res.code.to_s == "200" %>
 	
 <video style="background-color: #e9ebee;" id=example-video width="820" height="461" class="video-js vjs-16-9 vjs-default-skin vjs-playing vjs-fullscreen vjs-big-play-centered" controls >
   <source
