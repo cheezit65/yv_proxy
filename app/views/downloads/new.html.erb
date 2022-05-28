@@ -17,7 +17,7 @@ table, th, td {
 			<tr>
 				<td width: "30%" style="padding-left: 2%"><%= horse.Name %></td>
 				<td width="35%" style="padding-left: 2%"><%= horse.HipNumber %></td>
-				<td width="35%" style="padding-left: 2%"><%= link_to "Download video", new_bounce_path(:filename => horse.BulkUploadVideoName) %></td>
+				<td width="35%" style="padding-left: 2%"><%= link_to "Download video", new_vector_path(:filename => horse.BulkUploadVideoName) %></td>
 			</tr>
 		<% end%>
 		</table>

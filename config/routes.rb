@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :linkers
   resources :viewers
   resources :downloads
-  resources :bounces
+  resources :vectors
   get 'homes/show'
   get 'messages/show'
   get 'uploads/new'
