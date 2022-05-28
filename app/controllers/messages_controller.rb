@@ -9,7 +9,7 @@ class MessagesController < InheritedResources::Base
         redirect_back(fallback_location: root_path)
       else
         flash[:notice] = "Verified"
-        #redirect_to dwnlds_url
+        redirect_back(fallback_location: root_path)
       end
     
     else
