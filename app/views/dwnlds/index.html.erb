@@ -1,5 +1,7 @@
-<% if flash[:notice] %>		
+<% if not flash[:notice]== "Verified" %>	
+
 	<%= recaptcha_tags %>
+
 <% else %>		
 
 <style>
