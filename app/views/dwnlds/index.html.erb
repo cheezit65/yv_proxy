@@ -30,7 +30,7 @@ table, th, td {
 	<p><div style="margin: 0 auto; width: 50%;"><button  class="my_popup_open" id="button1" style="background: linear-gradient(#00bfff, #4267b2);">Show Horse Downloads</button></div> 
 	<% @email = "" %> 
 	<div id="my_popup">
-		<button onclick="window.close()"; style="margin-bottom:30px; border: thick 2px black;" class="my_popup_close">Close</button>
+		<button onclick="window.close()"; style="margin-bottom:10px; border: thick 2px black;" class="my_popup_close">Close</button>
 		<%= form_for @email, url: {controller: "messages", action: "create"} do |f| %>
 			<span style="font-size:18px;text-align:center !important;color:black">
 			<%= f.hidden_field :vfy, :value => "vfying" %>
