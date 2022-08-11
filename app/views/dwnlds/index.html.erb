@@ -27,7 +27,7 @@ table, th, td {
 <script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.13/jquery.popupoverlay.js"></script>
 
 <% if not flash[:notice]== "Verified" %>
-	<p><button  class="my_popup_open" id="button1" style="background: linear-gradient(#00bfff, #4267b2);">Show Horse Downloads</button><br> </br></p> 
+	<p><div style-'margin: 0 auto; width: 50%;'><button  class="my_popup_open" id="button1" style="background: linear-gradient(#00bfff, #4267b2);">Show Horse Downloads</button><br> </br></p> 
 	<% @email = "" %> 
 	<div id="my_popup">
 		<button onclick="window.close()"; style="margin-bottom:30px; border: thick 2px black;" class="my_popup_close">Close</button>
