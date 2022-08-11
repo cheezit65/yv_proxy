@@ -8,7 +8,8 @@ class MessagesController < InheritedResources::Base
         flash[:notice] = "Email Sent to your friend at #{params[:user2][:email2]} "
         redirect_back(fallback_location: root_path)
       else
-        flash[:notice] = "Verified"
+      flash[:notice] = "Captcha checkbox not checked. Try again."
+        # flash[:notice] = "Verified"
         redirect_back(fallback_location: root_path)
       end
     
