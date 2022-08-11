@@ -33,10 +33,10 @@ table, th, td {
 		<button onclick="window.close()"; style="margin-bottom:30px; border: thick 2px black;" class="my_popup_close">Close</button>
 		<%= form_for @email, url: {controller: "messages", action: "create"} do |f| %>
 		<br><span style="font-size:16px;color: white;">
-		EMAIL THIS HORSE TO A FRIEND!<br></span>
+		<br></span>
 		<span style="font-size:18px;text-align:center !important;color:black">
 		<%= f.hidden_field :vfy, :value => "vfying" %>
-		<%= recaptcha_tags %>
+		<span style='margin:0 auto;width: 75%;'><%= recaptcha_tags %></span>
 		<%= submit_tag "Send", :vfy => :vfy %> </span>			 
 		<% end %>
 	</div>
