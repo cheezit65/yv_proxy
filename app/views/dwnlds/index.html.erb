@@ -1,4 +1,19 @@
+<style>
 
+ #my_popup{
+	text-align: center !important;
+	padding-top:1%;
+	height: 400px; 
+	width: 400px; 
+	visibility: visible; 
+	display: none; 
+	outline: none; 
+	background-color: #4F5458 !important;
+	text-align: center !important; 
+	position: relative; 
+	vertical-align: middle; 
+}
+</style>
 <% if not flash[:notice]== "Verified" %>
 
 	<%= recaptcha_tags %>
