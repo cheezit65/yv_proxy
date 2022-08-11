@@ -5,7 +5,7 @@ table, th, td {
  #my_popup{
 	text-align: center !important;
 	padding-top:1%;
-	height: 400px; 
+	height: 200px; 
 	width: 400px; 
 	visibility: visible; 
 	display: none; 
@@ -37,7 +37,7 @@ table, th, td {
 		<span style="font-size:18px;text-align:center !important;color:black">
 		<%= f.hidden_field :vfy, :value => "vfying" %>
 		<div style='margin:0 auto;width: 75%;'><%= recaptcha_tags %></div>
-		<%= submit_tag "Send", :vfy => :vfy %> </span>			 
+		<%= submit_tag "Verify", :vfy => :vfy %> </span>			 
 		<% end %>
 	</div>
 <% else %>		
