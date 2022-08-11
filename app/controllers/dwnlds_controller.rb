@@ -1,5 +1,7 @@
 class DwnldsController < InheritedResources::Base
-  # def new
+   def new
+     
+   end
   # flash[:notice] = "Verified"
   # redirect_to :back, notice: "Verified"
 # To get the code below to work, make sure that the yaml and aws.rb files are either deleted or have
