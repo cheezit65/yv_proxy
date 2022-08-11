@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'uploads/new'
   get 'uploads/create'
   get 'uploads/index'
+  get 'vectors/new'
+  get 'vectors/index'
   post 'horses/new'
   resources :bulk_uploads
   resources :searches
