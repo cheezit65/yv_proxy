@@ -1,9 +1,19 @@
 <p><%= flash[:notice] %></p>
 
+
 <% if not flash[:notice]== "Verified" %>	
+	<% @email = "" %> 
+	<div id="my_popup">
+ 			<%= form_for @email, url: {controller: "messages", action: "create"} do |f| %>
+			<br><span style="font-size:16px;color: white;">
+			RECAPTCHA CHECK<br></span>
+			<span style="font-size:18px;text-align:center !important;color:black">
+			<%= f.hidden_field :id, :value => @horse.id %>
+			<%= recaptcha_tags %>
+			<%= submit_tag "Send" %> </span>			 
 
-	<%= recaptcha_tags %>
-
+</div>
+	<!-- <%= recaptcha_tags %> -->
 <% else %>		
 <!-- 	
 	
