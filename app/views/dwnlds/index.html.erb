@@ -1,5 +1,6 @@
-<% if not flash[:notice]== "Verified" %>	
+<% while not flash[:notice]== "Verified" %>	
 
+	<%= flash[:notice] %>
 	<%= recaptcha_tags %>
 
 <% else %>		

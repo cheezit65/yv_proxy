@@ -1,0 +1,44 @@
+05/28/2022
+Installed rails_refactor to rename bunce controller. Ran Bundle update to update all gems & upload to Heroku to make sure this update works.
+
+Added controller vector - remember to run rake db:migrate on heroku).
+Then copied controller bounce file into vector bounce file.
+Then went & replaced all necessary files with vector.
+I test uploaded the new package and it was okay on the web, but i had trouble viewing it locally when i went to view a horse. Not sure if it was because of the aws link now or not.
+I removed controller bounce.
+
+I added scaffold dwnld & put any code in the views download into the views dwnld.
+Then another search/replace.
+Then I uploaded the package and checked it. I also ran heroku run rake db:migrate. Website is still stable.
+Then I modified the dwnlds page to say what it should say.
+--Then I added the recaptcha. This caused a problem locally. I had to set up for multiple uses of recaptcha in the messages_controller:
+
+I added the if params[:user] part and the else to redirect to dwnlds_url.
+
+    if verify_recaptcha
+      if params[:user1]
+        EmailPage.email_friend(params[:user1][:email1],params[:user2][:email2], params[:id], params[:yearling], params[:hip]).deliver
+        flash[:notice] = "Email Sent to your friend at #{params[:user2][:email2]} "
+        redirect_back(fallback_location: root_path)
+      else
+        redirect_to dwnlds_url
+      end
+    
+    else
+      flash[:notice] = "Captcha checkbox not checked. Try again."
+      redirect_back(fallback_location: root_path)
+
+    end
+    
+    Almost worked. The recaptcha was on the dwnld page but also the download page was visible. I put this in the dwnld controller:
+    
+    def index
+  		recaptcha_tags
+	end
+	This didn't work so I took it out.
+	
+	
+
+Evan wants to know if video.js is up to date.
+heroku rake db:migrate (not sure if we need this done.)
+

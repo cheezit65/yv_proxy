@@ -1,0 +1,186 @@
+On 7.1.2021, the release included the new bulk_adds page.
+#######################################
+On 7.4.2021, changed the signin url by adding this to routes.rb:
+ devise_scope :user do 
+    get 'consignor/yvsi' => "devise/sessions#new" 
+    get 'consignor/yvso' => "devise/sessions#destroy"     
+    get "consignor/yvsu" => "devise/registrations#new", as: "new_user_registration"     
+  end
+ https://github.com/heartcombo/devise/wiki/How-To:-Change-the-default-sign_in-and-sign_out-routes
+###################################
+
+On 7.5.2021, changed show.html.erb in horses
+      	<% @path = "http://s3.amazonaws.com/yv-output/" + @horse.BulkUploadVideoName[0...-4] + "/hls_" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
+to
+    	<% @path = "https://yv-output2.s3.us-east-2.amazonaws.com/" + @horse.BulkUploadVideoName[0...-4] + "/" + @horse.BulkUploadVideoName[0...-4] + ".m3u8" %>
+
+
+#####################
+On 7.6.2021 changed the net http code
+
+		<% res = http.request(request) %> -->
+to
+		<% res = Net::HTTP.get_response(uri) %>
+SOURCE: https://ruby-doc.org/stdlib-2.7.2/libdoc/net/http/rdoc/Net/HTTP.html
+
+############################	
+
+On 7.6.2021  noticed QR PDF generator broke. I changed two things:
+
+1. in farm_pdf.rb:
+
+    @farm = farm
+to 
+	@farm = Farm.find(farm)
+
+2. In farms controller:
+
+	pdf = FarmPdf.new(@farm, sale)
+to
+	pdf = FarmPdf.new(@farm.id, sale.id)
+
+#################
+ On 7.7, i changed the bounces controller to find the download on S3:
+ 
+  	resp = s3.get_object({ bucket:'yv-output2', key: params[:filename] }, target: params[:filename])
+to 
+	foldery=params[:filename][0...-4] + "/"
+   	resp = s3.get_object({ bucket:'yv-output2', key: foldery + params[:filename] }, target: params[:filename])
+
+#################
+
+	On 7.7., I removed all social media from the horse show page and the bounces controller
+
+#################
+
+ On 7.8, I added a parameter to the bounces/download pages to see if this stops some bot from automatically trying to download
+bounces controller:
+ if  params[:token] == 'random'
+   redirect_to "https://www.google.com"
+ end
+ if !params[:token]
+   redirect_to "https://www.google.com"
+ end
+ 
+ downloads index
+	<td width="35%" style="padding-left: 2%"><%= link_to "Download video", new_bounce_path(:filename => horse.BulkUploadVideoName,:token => 'random') %></td>
+
+#########################################
+
+On 7.8.2021, changed the name of the downloads index file and the bounces index file & commented out the new section in the bounces controller.
+Changed bounces/new html page to garbage name.
+Also added this to the searches & bounces & horse/show & sales/show & farms/show controllers:
+def index
+    @clientip = request.ip[0..2]
+    if @clientip == "10."
+      redirect_back(fallback_location:"/")
+    end
+end
+
+########################################
+On 7.13.2021, added then removed this to application controller:
+
+    before_action :block_ip_addresses
+
+  protected
+
+  def block_ip_addresses
+    head :unauthorized if current_ip_address[0..2] == "10."
+  end
+
+  def current_ip_address
+    request.env['HTTP_X_REAL_IP'] || request.env['REMOTE_ADDR']
+  end
+#################################################
+
+On 7.1.2921: installed rack-attack:
+https://github.com/rack/rack-attack
+
+Installed gem
+created rack_attack.rb in config/initializers dir
+
+#################################################
+On 8.6.2021 removed this entirely from horse show:
+
+<!-- <div id="sticky-social">
+    <ul>        
+		<% @f_url = "http://www.facebook.com/sharer.php?u=http://www.yearlingvideos.com/horses/" + params[:horse_id].to_s %>
+ 		<% @t_url = "https://twitter.com/share?text=Check out this new video from YearlingVideos.com!&nbsp;&nbsp;&nbsp;&amp;url=http://www.yearlingvideos.com/horses/#{params[:horse_id].to_s}" %>
+        <li><a href="<%= bounces_path(:horse_id => @horse.id, :tag=>"fb_count", :url => @f_url) %>" class="entypo-social facebook" target="_blank"></a></li>
+        <li><a href="<%= bounces_path(:horse_id => @horse.id, :tag=>"tw_count", :url => @t_url) %>" class="entypo-social twitter" target="_blank"><span>Twitter</span></a></li>
+    </ul>
+</div>	
+
+#################################################
+On 8.8.2021
+
+I removed from admin/horse.rb to hide these fields in activeadmin
+    column :fb_count
+    column :tw_count
+    column :g_count
+    
+#################################################
+    
+   On 8.9.2021
+   
+   Changed the signin url from www.yearlingvideos.com/admin to www.yearlingvideos.com/prawgavp ( activeadmin change) by adding this config/initializers/active_admin.rb:
+        
+   config.default_namespace = :prawgavp
+
+https://stackoverflow.com/questions/11691169/how-can-i-change-the-default-url-of-activeadmin/25193448    
+###################################
+
+On 8.9.2021
+
+I added this to config/initializers/rack_attack.rb
+
+# Block suspicious requests for '/etc/password' or wordpress specific paths.
+# After 3 blocked requests in 10 minutes, block all requests from that IP for 5 minutes.
+Rack::Attack.blocklist('fail2ban pentesters') do |req|
+  # `filter` returns truthy value if request fails, or if it's from a previously banned IP
+  # so the request is blocked
+  Rack::Attack::Fail2Ban.filter("pentesters-#{req.ip}", maxretry: 1, findtime: 10.minutes, bantime: 50000000000000.minutes) do
+    # The count for the IP is incremented if the return value is truthy
+    CGI.unescape(req.query_string) =~ %r{/etc/passwd} ||
+    req.path.include?('/etc/passwd') ||
+    req.path.include?('wp-admin') ||
+    req.path.include?('wp-login')
+
+  end
+end
+###################################
+
+On 8.10.2021
+
+I restored the admin/horses.rb page because the view button wasn't working.
+
+###################################
+On 8.11.2021
+
+I restored the New Horse buttons in activeadmin (and added New Sire to the horse admin page):
+
+ action_item :super_action  do
+   link_to 'New Horse', new_prawgavp_horse_path
+ end
+ action_item :only => :index  do
+   link_to 'New Sire', new_prawgavp_sire_path
+ end
+       
+###################################
+On 8.11.2021
+
+I added the bounces controller back in
+
+###################################
+On 8.30.2021
+
+Changed Farm page so that the Private sales would not show as ended:
+
+<% if @saleDetails.StartDate >= Date.today %>
+
+to
+
+<<% if @saleDetails.StartDate >= Date.today or (!@saleDetails.EndDate.nil? and @saleDetails.EndDate >= Date.today ) %>
+
+Also removed everything from uploads controller because it was replaced by linkers controller.
+
