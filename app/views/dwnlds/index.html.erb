@@ -1,6 +1,24 @@
+<style>
+
+ #my_popup{
+	text-align: center !important;
+	padding-top:1%;
+	height: 400px; 
+	width: 400px; 
+	visibility: visible; 
+	display: none; 
+	outline: none; 
+	background-color: #4F5458 !important;
+	text-align: center !important; 
+	position: relative; 
+	vertical-align: middle; 
+}
+</style>
 <p><%= flash[:notice] %></p>
 
 <% if not flash[:notice]== "Verified" %>	
+		<button  class="my_popup_open" id="button1" style="background: linear-gradient(#00bfff, #4267b2);">Show Horse Downloads</button><br> </br> 
+
 	<% @email = "" %> 
 	<div id="my_popup">
  			<button onclick="window.close()"; style="margin-bottom:30px; border: thick 2px black;" class="my_popup_close">Close</button>
@@ -18,6 +36,7 @@
 			</div>
 			<% end %>
 		<% end %>
+	</div>
 
 	<!-- <%= recaptcha_tags %> -->
 <% else %>		
