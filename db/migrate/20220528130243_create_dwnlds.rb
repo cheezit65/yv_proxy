@@ -1,6 +1,6 @@
-class CreateDwnlds < ActiveRecord::Migration[6.1]
+class CreateVectors < ActiveRecord::Migration[6.1]
   def change
-    create_table :dwnlds do |t|
+    create_table :vectors do |t|
 
       t.timestamps
     end

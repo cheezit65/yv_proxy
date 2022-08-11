@@ -90,6 +90,11 @@ ActiveRecord::Schema.define(version: 2022_05_28_130243) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "vectors", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "farms", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
