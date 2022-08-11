@@ -36,7 +36,7 @@ table, th, td {
 		<br></span>
 		<span style="font-size:18px;text-align:center !important;color:black">
 		<%= f.hidden_field :vfy, :value => "vfying" %>
-		<span style='margin:0 auto;width: 75%;'><%= recaptcha_tags %></span>
+		<div style='margin:0 auto;width: 75%;'><%= recaptcha_tags %></div>
 		<%= submit_tag "Send", :vfy => :vfy %> </span>			 
 		<% end %>
 	</div>
