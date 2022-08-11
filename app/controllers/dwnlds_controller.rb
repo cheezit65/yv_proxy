@@ -9,20 +9,20 @@ class DwnldsController < InheritedResources::Base
   # end
   ####### 2022#
   
-  # #initiate the client
-  # s3 = Aws::S3::Client.new({
-      # region:            'us-east-2',
-      # access_key_id:     'AKIAI6FXAV2E76ELVK5Q',
-      # secret_access_key: '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'
-  # })
-  # #Get the object
-    # Aws.use_bundled_cert!
-    # @horse = Horse.find_by(BulkUploadVideoName: params[:filename])
-    # Horse.increment_counter(:e_count, @horse.id)
-    # foldery=params[:filename][0...-4] + "/"
-    # resp = s3.get_object({ bucket:'yv-output2', key: foldery + params[:filename] }, target: params[:filename])
-# 
- # send_file params[:filename]
+  #initiate the client
+  s3 = Aws::S3::Client.new({
+      region:            'us-east-2',
+      access_key_id:     'AKIAI6FXAV2E76ELVK5Q',
+      secret_access_key: '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'
+  })
+  #Get the object
+    Aws.use_bundled_cert!
+    @horse = Horse.find_by(BulkUploadVideoName: params[:filename])
+    Horse.increment_counter(:e_count, @horse.id)
+    foldery=params[:filename][0...-4] + "/"
+    resp = s3.get_object({ bucket:'yv-output2', key: foldery + params[:filename] }, target: params[:filename])
+
+ send_file params[:filename]
 
 end
   
