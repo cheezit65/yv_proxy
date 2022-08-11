@@ -1,6 +1,8 @@
 <% if not flash[:notice]== "Verified" %>	
 
+	<div><p>NOTICE</p></div>
 	<%= flash[:notice] %>
+	<div><p>RECAPTCHA</p></div>
 	<%= recaptcha_tags %>
 
 <% else %>		
