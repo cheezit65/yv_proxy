@@ -14,6 +14,12 @@
 	vertical-align: middle; 
 }
 </style>
+<% if flash[:notice] %>
+	<div>
+		<%= flash[:notice] %>
+	</div>
+<% end %>
+
 <% if not flash[:notice]== "Verified" %>
 
 	<%= recaptcha_tags %>
