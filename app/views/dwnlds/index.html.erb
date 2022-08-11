@@ -1,43 +1,8 @@
-<!-- <style>
 
- #my_popup{
-	text-align: center !important;
-	padding-top:1%;
-	height: 400px; 
-	width: 400px; 
-	visibility: visible; 
-	display: none; 
-	outline: none; 
-	background-color: #4F5458 !important;
-	text-align: center !important; 
-	position: relative; 
-	vertical-align: middle; 
-}
-</style>
-<p><%= flash[:notice] %></p> -->
+<% if not flash[:notice]== "Verified" %>
 
-<% if not flash[:notice]== "Verified" %>	
-		<button  class="my_popup_open" id="button1" style="background: linear-gradient(#00bfff, #4267b2);">Show Horse Downloads</button><br> </br> 
-<!-- 
-	<% @email = "" %> 
-	<div id="my_popup">
- 			<button onclick="window.close()"; style="margin-bottom:30px; border: thick 2px black;" class="my_popup_close">Close</button>
- 			<%= form_for @very, url: {controller: "messages", action: "create"} do |f| %>
-			<br><span style="font-size:16px;color: white;">
-			Show Download Page<br></span>
-			<span style="font-size:18px;text-align:center !important;color:black">
-			<%= f.hidden_field :dwnloadID, :value => "Hubba" %>
-			<%= recaptcha_tags %>
-			<%= submit_tag "Send", :very => :very %> </span>			 
-			<span>				
-		<% if flash[:notice] %>
-			<div>
-				<%= flash[:notice] %>
-			</div>
-			<% end %>
-		<% end %>
-	</div> -->
-	<!-- <%= recaptcha_tags %> -->
+	<%= recaptcha_tags %>
+
 <% else %>		
 <!-- 	
 	
