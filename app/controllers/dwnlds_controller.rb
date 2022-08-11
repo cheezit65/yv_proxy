@@ -1,7 +1,7 @@
 class DwnldsController < InheritedResources::Base
-  def new
-  flash[:notice] = "Verified"
-  redirect_to :back, notice: "Verified"
+  # def new
+  # flash[:notice] = "Verified"
+  # redirect_to :back, notice: "Verified"
 # To get the code below to work, make sure that the yaml and aws.rb files are either deleted or have
 # the correct access_key_id/secret_access_key/bucket or this will fail.
   # if  !params[:worker]
@@ -25,7 +25,7 @@ class DwnldsController < InheritedResources::Base
 # 
  # send_file params[:filename]
 
-end
+# end
 
   private
     def dwnld_params
