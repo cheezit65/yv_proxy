@@ -1,5 +1,7 @@
 <style>
-
+table, th, td {
+    border: 1px solid black;
+}
  #my_popup{
 	text-align: center !important;
 	padding-top:1%;
@@ -45,15 +47,7 @@
 		<% end %>
 	</div>
 <% else %>		
-<!-- 	
 	
-<style>
-table, th, td {
-    border: 1px solid black;
-
-}
-</style>
-
 <div style="margin-bottom: 8%; background-color: white;">
 	
 <% @sales = Sale.order(StartDate: :asc) %>
