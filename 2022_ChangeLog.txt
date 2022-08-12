@@ -118,5 +118,13 @@ table, th, td {
 	</div>
 <% else %>		
 
-  Now having problems getting the video to download.
+  Now having problems getting the video to download. I finally resolved it by not using the vectors page (which I would have liked to have used) but having the download link point to the dwnlds new page.
+  I was then able to update the controller with the S3 info to download the horse. Success!!
+  
+  
+  8.12.2022
+  Changed the signout link on the application.html.erb file:
+  
+  <span><%= link_to "Log Out",  consignor_yvso_path %> </span>
+  
   

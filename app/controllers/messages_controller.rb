@@ -4,6 +4,7 @@ class MessagesController < InheritedResources::Base
     
     if verify_recaptcha
       if params[:user1]
+        Horse.increment_counter(:g_count, params[:id])
         EmailPage.email_friend(params[:user1][:email1],params[:user2][:email2], params[:id], params[:yearling], params[:hip]).deliver
         flash[:notice] = "Email Sent to your friend at #{params[:user2][:email2]} "
         redirect_back(fallback_location: root_path)
