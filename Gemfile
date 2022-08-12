@@ -12,7 +12,7 @@ gem 'carrierwave'
 gem 'fog-aws'
 gem "recaptcha"
 
-#gem 'sqlite3'
+gem 'sqlite3'
 gem 'rack-attack'
 
 gem "ransack", github: "activerecord-hackery/ransack", ref: "aada8"
