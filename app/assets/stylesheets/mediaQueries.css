@@ -80,12 +80,35 @@
 .hideTable{		
 	padding-top:15%;
 }	
+.saleNameStyle2{
+	border-top: 1px solid black;
+	text-align: center;
+	line-height: 20px;
+	text-align: left;
+	padding: 1%;
+	font-size: 1.0em;
+	width: 50%;
+	float: left;
+	margin-bottom: 0px;
 }
+}
+
 @media only screen and (min-device-width: 10px) and (max-device-width: 993px) {
 .hideTable{		
 	margin-top:-35px;
 	padding-top:8%;
 }	
+.saleNameStyle2{
+	border-top: 1px solid black;
+	text-align: center;
+	line-height: 20px;
+	text-align: left;
+	padding: 1%;
+	font-size: 1.0em;
+	width: 50%;
+	float: left;
+	margin-bottom: 0px;
+}
 #flex-container-horse-style{
 		width: 100%;
 	}
@@ -206,6 +229,17 @@
 	width: 50%;
 	float: left;
 }	
+.saleNameStyle2{
+	border-top: 1px solid black;
+	text-align: center;
+	line-height: 20px;
+	text-align: left;
+	padding: 1%;
+	font-size: 1.0em;
+	width: 50%;
+	float: left;
+	margin-bottom: 0px;
+}
 #hideMe{
 	display: none;
 }
@@ -398,6 +432,17 @@ width: 80%;
 .firstLetter{
 	display: none;
 }	
+.saleNameStyle2{
+	border-top: 1px solid black;
+	text-align: center;
+	line-height: 20px;
+	text-align: left;
+	padding: 1%;
+	font-size: 1.0em;
+	width: 50%;
+	float: left;
+	margin-bottom: 0px;
+}
 .firstLetter1{
 display: block;
 }	
