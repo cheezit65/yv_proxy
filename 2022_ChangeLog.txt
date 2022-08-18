@@ -128,3 +128,5 @@ table, th, td {
   <span><%= link_to "Log Out",  consignor_yvso_path %> </span>
   
   
+  8.18.2022
+  I added a media query so that the notes on a mobile phone wouldn't create a big blank block below.
