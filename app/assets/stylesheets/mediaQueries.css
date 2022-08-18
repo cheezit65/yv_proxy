@@ -151,8 +151,7 @@
 	color: white !important;
 	font-family: 'Roboto', sans-serif;
 	font-size: 10px !important;
-	bottom: 0;
-	
+	/*bottom: 0;*/	
 }	
 .buttonStyle3
 {
@@ -164,8 +163,8 @@
 	position: fixed;
 	margin-left: 0px;
 	white-space: normal;
-	bottom: 0;
-}
+	/*bottom: 0;*/
+	}
 #button1{
 	width: 25% !important;
 	height: 70px !important;
