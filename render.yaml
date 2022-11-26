@@ -1,5 +1,5 @@
 databases:
-  - name: postgres
+  - name: YVDB
     ipAllowList: []
     plan: free
 services:
