@@ -1,4 +1,4 @@
-class AddFieldsToFarm < ActiveRecord::Migration
+class AddFieldsToFarm < ActiveRecord::Migration[6.0]
   def change
     add_column :farms, :name, :string
     add_column :farms, :address, :string

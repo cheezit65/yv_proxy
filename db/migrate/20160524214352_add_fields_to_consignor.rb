@@ -1,4 +1,4 @@
-class AddFieldsToConsignor < ActiveRecord::Migration
+class AddFieldsToConsignor < ActiveRecord::Migration[6.0]
   def change
     add_column :consignors, :name, :string
     add_column :consignors, :address, :string

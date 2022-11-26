@@ -1,4 +1,4 @@
-class CreateBulkUploads < ActiveRecord::Migration
+class CreateBulkUploads < ActiveRecord::Migration[6.0]
   def change
     create_table :bulk_uploads do |t|
       t.string :Name
