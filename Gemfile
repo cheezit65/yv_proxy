@@ -11,7 +11,7 @@ gem 'rqrcode'
 gem 'carrierwave'
 gem 'fog-aws'
 gem "recaptcha"
-
+gem "puma"
 #gem 'sqlite3'
 gem 'rack-attack'
 
