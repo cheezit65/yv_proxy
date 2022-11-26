@@ -24,6 +24,6 @@ test:
 production:
   <<: *default
   url: <%= ENV["DATABASE_URL"] %>
-  database: "yvdb_k6fd""
-  username: "yvdb_k6fd_user"
-  password: "QZYuwqZvD19j2LbcBRm6f03JKvqaKWUq"
+  database: yvdb_k6fd
+  username: yvdb_k6fd_user
+  password: QZYuwqZvD19j2LbcBRm6f03JKvqaKWUq
