@@ -135,3 +135,6 @@ table, th, td {
 While deploying to RENDER, i had to remove the log/dvelopment.log file/folder & then run:
 
 git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch log/development.log' HEAD
+
+
+How to change your password on the commandline.
