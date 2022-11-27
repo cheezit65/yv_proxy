@@ -8,5 +8,6 @@ class AddFieldsToFarm < ActiveRecord::Migration
     add_column :farms, :phonenumber, :string
     add_column :farms, :website, :string
     add_column :farms, :email, :string
+    add_column :farms, :FarmCode, :string
   end
 end
