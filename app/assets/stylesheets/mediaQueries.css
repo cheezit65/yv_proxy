@@ -151,8 +151,12 @@
 	color: white !important;
 	font-family: 'Roboto', sans-serif;
 	font-size: 10px !important;
+<<<<<<< HEAD
 	bottom: 0;
 	
+=======
+	/*bottom: 0;*/	
+>>>>>>> 0b5ef0f1bd73282edb88e714d88dac7275197f2b
 }	
 .buttonStyle3
 {
@@ -164,8 +168,13 @@
 	position: fixed;
 	margin-left: 0px;
 	white-space: normal;
+<<<<<<< HEAD
 	bottom: 0;
 }
+=======
+	/*bottom: 0;*/
+	}
+>>>>>>> 0b5ef0f1bd73282edb88e714d88dac7275197f2b
 #button1{
 	width: 25% !important;
 	height: 70px !important;

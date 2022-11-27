@@ -4,9 +4,9 @@ class MainsController < ApplicationController
   # GET /mains
   # GET /mains.json
   def index
-    # @horses = Horse.where("created_at > ?", Time.now-4.days).order!  'created_at DESC'
-    # @farms = Farm.all
-    # @sales = Sale.all
+    @horses = Horse.where("created_at > ?", Time.now-4.days).order!  'created_at DESC'
+    @farms = Farm.all
+    @sales = Sale.all
   end
 
   # GET /mains/1

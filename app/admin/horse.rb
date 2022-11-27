@@ -113,26 +113,26 @@ end
       f.input :HipNumber
       f.input :Name
       f.input :Gender, :as => :select, :collection => ["filly","colt", "gelding"]
-      #f.input :farm, :as => :select, :collection => Farms.map{|u| ["#{u.name}", u.id]}
-      # f.input :farm2, :as => :select, :collection => Farms.map{|u| ["#{u.name}", u.id]}
+      f.input :farm, :as => :select, :collection => Farms.map{|u| ["#{u.name}", u.id]}
+      f.input :farm2, :as => :select, :collection => Farms.map{|u| ["#{u.name}", u.id]}
       f.input :Description
       f.input :Sale, :as => :select, :collection => Sales.map{|u| ["#{u.Name}", u.id]}
-      # f.input :sire, :as => :select, :collection => Sires.map{|u| ["#{u.Name}", u.id]}
+      f.input :sire, :as => :select, :collection => Sires.map{|u| ["#{u.Name}", u.id]}
       f.input :BulkUploadVideoName
     end
     f.actions
      end               
           
-      # filter :Name
-      # filter :HipNumber
-      # filter :Gender, :as => :select, :collection => ["filly","colt", "gelding"]
-      # filter :farm, :as => :select, :collection => Farm.all.map{|u| ["#{u.name}", u.id]}
-      # filter :farm2, :as => :select, :collection => Farm.all.map{|u| ["#{u.name}", u.id]}
-      # filter :Description
-      # filter :Sale, :as => :select, :collection => Sale.all.map{|u| ["#{u.Name}", u.id]}
-      # filter :sire, :as => :select, :collection => Sire.all.map{|u| ["#{u.Name}", u.id]}
-      # filter :BulkUploadVideoName 
-      # filter :PageViews 
+      filter :Name
+      filter :HipNumber
+      filter :Gender, :as => :select, :collection => ["filly","colt", "gelding"]
+      filter :farm, :as => :select, :collection => Farm.all.map{|u| ["#{u.name}", u.id]}
+      filter :farm2, :as => :select, :collection => Farm.all.map{|u| ["#{u.name}", u.id]}
+      filter :Description
+      filter :Sale, :as => :select, :collection => Sale.all.map{|u| ["#{u.Name}", u.id]}
+      filter :sire, :as => :select, :collection => Sire.all.map{|u| ["#{u.Name}", u.id]}
+      filter :BulkUploadVideoName 
+      filter :PageViews 
      
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
