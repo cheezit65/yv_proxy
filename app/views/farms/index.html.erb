@@ -31,6 +31,7 @@ form input[type=submit],form input[type=button],form button
 	<% @farms = Farm.order(name: :asc) %>
 	<% @farms.each do |farm| %>
 	<div class="flex-items-default-saleButtons">
+		<%= button_to farm.name, farm_path(farm), :method => :get,  :class => "buttonStyle2" %>
 	</div>
 	<% end %>
 </div>
