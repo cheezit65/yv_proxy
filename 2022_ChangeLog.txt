@@ -40,7 +40,7 @@ I added the if params[:user] part and the else to redirect to dwnlds_url.
 
 Evan wants to know if video.js is up to date.
 heroku rake db:migrate (not sure if we need this done.)
-
+hello
 
 08/11/2022
 
@@ -132,7 +132,7 @@ table, th, td {
   I added a media query so that the notes on a mobile phone wouldn't create a big blank block below.
 
 
-While deploying to RENDER, i had to remove the log/dvelopment.log file/folder & then run:
+While deploying to RENDER (actually pushing to github), i had to remove the log/dvelopment.log file/folder & then run:
 
 git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch log/development.log' HEAD
 
