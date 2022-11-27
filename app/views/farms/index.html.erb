@@ -29,6 +29,10 @@ form input[type=submit],form input[type=button],form button
 <!-- <% @return = "" %> -->
 <div class= "flex-container-saleButtons">
 	<% @farms = Farm.order(name: :asc) %>
+	<% @farms.each do |farm| %>
+	<div class="flex-items-default-saleButtons">
+	</div>
+	<% end %>
 </div>
 </div>
 
