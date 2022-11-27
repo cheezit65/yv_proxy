@@ -7,10 +7,17 @@ class CreateHorses < ActiveRecord::Migration[6.0]
       t.string :Gait
       t.string :Description
       t.string :Sale
-      t.string :PageViews
+      t.integer :PageViews
+      t.string :sire
+      t.string :farm
+      t.string :farm2
       t.string :BulkUploadVideoName
-
-      t.timestamps null: false
+      t.integer :fb_count
+      t.integer :tw_count
+      t.integer :g_count
+      t.integer :e_count
+      t.integer :video
+     t.timestamps null: false
     end
   end
 end
