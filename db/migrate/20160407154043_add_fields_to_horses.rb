@@ -1,4 +1,4 @@
-class AddFieldsToHorses < ActiveRecord::Migration
+class AddFieldsToHorses < ActiveRecord::Migration[6.0]
   def change
     add_column :horses, :Name, :string
     add_column :horses, :HipNumber, :string
