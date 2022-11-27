@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
-ruby "3.1.0"
+ruby "2.6.6"
+gem 'sassc-rails' 
 gem 'rails', '~> 6.0', '>= 6.0.2.2'
 gem 'tzinfo-data'
 gem 'devise', '>= 1.3.4'
@@ -11,8 +12,8 @@ gem 'rqrcode'
 gem 'carrierwave'
 gem 'fog-aws'
 gem "recaptcha"
-
-#gem 'sqlite3'
+gem "puma"
+gem 'sqlite3'
 gem 'rack-attack'
 
 gem "ransack", github: "activerecord-hackery/ransack", ref: "aada8"

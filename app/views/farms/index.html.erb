@@ -26,33 +26,15 @@ form input[type=submit],form input[type=button],form button
 }</style>
 <div align="center" style=" height:800px; width:100%;display:block;overflow:auto;">
 <h1 align="center" style="margin-bottom:20px;font-size:30px; color:#643A13;padding-top:20px">Farms</h1>
-<% @return = "" %>
-<% horseList = Array.new(0) %>
+<!-- <% @return = "" %> -->
 <div class= "flex-container-saleButtons">
 	<% @farms = Farm.order(name: :asc) %>
 	<% @farms.each do |farm| %>
-	<% @horses = Horse.where(farm: farm.id).count + Horse.where(farm2: farm.id).count %>
-	<% if @horses.to_i > 0 %>
 	<div class="flex-items-default-saleButtons">
 		<%= button_to farm.name, farm_path(farm), :method => :get,  :class => "buttonStyle2" %>
 	</div>
-	<% else %>
-	<% horseList.push farm.id %>
-	<% end %>
 	<% end %>
 </div>
-
-<!-- <area1><h1 align="center" id="clickableHand2" style="margin-top:10px;font-size:30px;color:#643A13;">Inactive Farms</h1><br></area1>
-	<div class= "flex-container-saleButtons">
-	<% horseList.each do |list| %>
-		<div class="flex-items-default-saleButtons">
-			<% @farm =  Farm.find_by(id: list) %>
-			<%= button_to @farm.name, farm_path(list), :method => :get,  :class => "buttonStyle2" %>
-		</div>	
-	<% end %>
-</div>
-</div>
---> 
 </div>
 
 <!-- if you want to use the script below, put <span1> tags around a chunk of code. It will hide/show it.-->

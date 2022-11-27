@@ -5,7 +5,8 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
+  encoding: unicode
   pool: 5
   timeout: 5000
 
@@ -22,4 +23,7 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  url: <%= ENV["DATABASE_URL"] %>
+  database: yvdb_k6fd
+  username: yvdb_k6fd_user
+  password: QZYuwqZvD19j2LbcBRm6f03JKvqaKWUq

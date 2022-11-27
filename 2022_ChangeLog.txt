@@ -22,7 +22,7 @@ I added the if params[:user] part and the else to redirect to dwnlds_url.
         redirect_back(fallback_location: root_path)
       else
         redirect_to dwnlds_url
-      end
+      enda
     
     else
       flash[:notice] = "Captcha checkbox not checked. Try again."
@@ -40,7 +40,7 @@ I added the if params[:user] part and the else to redirect to dwnlds_url.
 
 Evan wants to know if video.js is up to date.
 heroku rake db:migrate (not sure if we need this done.)
-
+hello
 
 08/11/2022
 
@@ -130,12 +130,11 @@ table, th, td {
   
   8.18.2022
   I added a media query so that the notes on a mobile phone wouldn't create a big blank block below.
-<<<<<<< HEAD
+
 
 While deploying to RENDER (actually pushing to github), i had to remove the log/dvelopment.log file/folder & then run:
 
 git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch log/development.log' HEAD
 
-hello
-=======
->>>>>>> 0b5ef0f1bd73282edb88e714d88dac7275197f2b
+
+How to change your password on the commandline.

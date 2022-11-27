@@ -18,7 +18,7 @@ require 'carrierwave/orm/activerecord'
     if params[:horse][:video].present?
         Aws.use_bundled_cert!
         s3 = Aws::S3::Resource.new(
-        credentials: Aws::Credentials.new('AKIAI6FXAV2E76ELVK5Q', 'SgoR4/o9vRPip69daNu9CXRYrHHMFBcrjb5j/kev'),
+        credentials: Aws::Credentials.new('XXXXXX', 'SgoR4/XXXXX/kev'),
         region: 'us-east-1'
         )
           obj = s3.bucket('depo-input').object(params[:horse][:video].original_filename)

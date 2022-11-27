@@ -12,7 +12,7 @@ class DwnldsController < InheritedResources::Base
   #initiate the client
   s3 = Aws::S3::Client.new({
       region:            'us-east-2',
-      access_key_id:     'AKIAI6FXAV2E76ELVK5Q',
+      access_key_id:     '',
       secret_access_key: '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'
   })
   #Get the object

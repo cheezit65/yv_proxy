@@ -47,75 +47,13 @@
 </div>
 </div>
 <div align="center" class="hideTable">
-<% if @horses.count > 0 %>
-		<h1 style="font-family:Merriweather Sans !important ;color:black !important;text-align:center; font-size:24pt">Recently Added</h1>
-		<br>
-		<% @sale = Sale.all %>
-		<% @farm = Farm.all %>
-		<% @flag = 0 %>
-		<table class="tableStyle" id="mainPageTable" class="tablesorter">
-			<thead class="tableHeadHover">
-				<th width="8%">Hip Number</th>
-				<th width="12%" >Name</th>
-				<th width="10%" class="hideColumn" >Gender</th>
-				<th width="10%" class="hideColumn" >Gait</th>
-				<th width="15%" class="hideColumn" >Sire</th>
-				<th width="20%" class="hideColumn" >Sale</th>
-				<th width="20%" class="hideColumn" >Farm</th>
-			</thead>
-			<tbody>
-				<% @horses.sort_by { |obj| obj.created_at } %>
-				<% @horses.each do |horse| %>
-				<tr id="clickableHand" class='clickable-row' data-href='<%= horse_path(horse) %>'>
-					<td class="mobileStyle"><%= horse.HipNumber %></td>
-					<td class="mobileStyle"><%= horse.Name %></td>
-					<td id="mobileStyle" class="hideColumn"><%= horse.Gender %></td>
-
-					<% @sires = Sire.all %>
-					<% if horse.sire == "00000" %>
-					<td class="hideColumn" id="mobileStyle" >no sire listed</td>
-					<% else %>
-					<% @sires.each do |sire| %>
-					<% if sire.id.to_i == horse.sire.to_i %>
-					<td id="mobileStyle" class="hideColumn"><%= sire.gait %></td>
-					<td id="mobileStyle" class="hideColumn"><%= sire.Name %></td>
-					<% end %>
-					<% end %>
-					<% end %>
-					
-					<% @sales = Sale.all %>
-					<% @sales.each do |sale| %>
-					<% if sale.id.to_i == horse.Sale.to_i || sale.SaleCode == horse.Sale %>
-					<% @flag = 1 %>
-					<td  id="mobileStyle" class="hideColumn"><%= sale.Name %></td>
-					<% end %>
-					<% end %>
-
-					<% @farms = Farm.all %>
-					<% @farms.each do |farm| %>
-					<% if farm.id.to_i == horse.farm.to_i || farm.FarmCode == horse.farm %>
-					<% @flag = 1 %>
-					<td id="mobileStyle" class="hideColumn"><%= farm.name %></td>
-					<% end %>
-					<% end %>
-
-
-					<% if @flag == 0 %>
-					<td style="text-align:center">&nbsp;</td>
-					<% end %>
-				</tr>
-				<% @flag = 0 %>
-				<% end %>
-			</tbody>
-		</table>
-		<br />
-		<br>
-		<br>
+	<h1 style="font-family:Merriweather Sans !important ;color:black !important;text-align:center; font-size:24pt">Recently Added</h1>
+		</tbody>
+	</table>
+	<br />
+	<br>
+	<br>
 </div>
-<% else %>
-	<div class="hideDiv" style="margin-bottom: 0px; border-bottom: none">
-	</div>
-<% end %>
 	
 <!-- Footer -->
 <script>
