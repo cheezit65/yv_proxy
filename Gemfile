@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-
+ruby "3.1.0"
 gem 'rails', '~> 6.0', '>= 6.0.2.2'
 gem 'tzinfo-data'
 gem 'devise', '>= 1.3.4'
