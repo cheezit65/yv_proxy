@@ -1,4 +1,4 @@
-class AddFieldsToSales < ActiveRecord::Migration[6.0]
+class AddFieldsToHorses < ActiveRecord::Migration[6.0]
   def change
     add_column :horses, :sire, :string
     add_column :horses, :farm, :string
@@ -6,6 +6,7 @@ class AddFieldsToSales < ActiveRecord::Migration[6.0]
     add_column :horses, :fb_count, :string
     add_column :horses, :tw_count, :string
     add_column :horses, :g_count, :string
-    add_column :horses, :e_count, :string    
+    add_column :horses, :e_count, :string
+    add_column :horses, :Description, :string
   end
 end
