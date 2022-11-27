@@ -22,7 +22,7 @@ I added the if params[:user] part and the else to redirect to dwnlds_url.
         redirect_back(fallback_location: root_path)
       else
         redirect_to dwnlds_url
-      end
+      enda
     
     else
       flash[:notice] = "Captcha checkbox not checked. Try again."
