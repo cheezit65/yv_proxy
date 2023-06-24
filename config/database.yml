@@ -30,6 +30,11 @@ test:
   
 
 production:
-  <<: *default
-  adapter: sqlite3
-  database: db/development.sqlite3
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: mysql.las247.com
+  pool: 5
+  username: las247db
+  password: 
+  socket: /tmp/mysql.sock
