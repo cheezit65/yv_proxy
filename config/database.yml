@@ -16,7 +16,7 @@ default: &default
   # socket: /tmp/mysql.sock
 
 
-# development:
+development:
   # <<: *default
   # database: db/development.sqlite3
 
