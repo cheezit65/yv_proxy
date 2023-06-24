@@ -4,11 +4,15 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 #
-default: &default
   adapter: mysql
-  encoding: unicode
+  encoding: utf8
+  reconnect: false
+  database: mysql.las247.com
   pool: 5
-  timeout: 5000
+  username: las247db
+  password: 
+  socket: /tmp/mysql.sock
+
 
 development:
   <<: *default
