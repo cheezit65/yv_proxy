@@ -1,0 +1,4 @@
+6.24.203
+
+Trying to get thepackage loaded locally through localhost:3000. I had to comment out sassc-rails in the gem file. 
+I'm not sure why it was there, maybe needed it for render?
