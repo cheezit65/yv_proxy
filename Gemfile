@@ -5,7 +5,7 @@ gem 'rails', '~> 6.0', '>= 6.0.2.2'
 gem 'tzinfo-data'
 gem 'devise', '>= 1.3.4'
 gem 'activeadmin', '~> 2.7'
-gem 'pg'
+# gem 'pg'
 gem 'aws-sdk-s3'
 gem 'prawn'
 gem 'rqrcode'
@@ -14,7 +14,7 @@ gem 'fog-aws'
 gem "recaptcha"
 gem "puma"
 gem 'sqlite3'
-gem 'rack-attack'
+# gem 'rack-attack'
 gem "ransack", github: "activerecord-hackery/ransack", ref: "aada8"
 #gem 'sqlite3', git: "https://github.com/larskanis/sqlite3-ruby", branch: "add-gemspec"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
