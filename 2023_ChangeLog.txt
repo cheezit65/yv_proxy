@@ -13,3 +13,7 @@ I then had to use git to clone the new repo into the las247.com/public directory
 I installed RVM:
 
 https://help.dreamhost.com/hc/en-us/articles/217185247-Ruby-Version-Manager-RVM-
+
+
+
+ gem install mysql2 -v '0.5.5' --source 'http://rubygems.org/'
