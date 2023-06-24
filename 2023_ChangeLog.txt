@@ -2,3 +2,14 @@
 
 Trying to get thepackage loaded locally through localhost:3000. I had to comment out sassc-rails in the gem file. 
 I'm not sure why it was there, maybe needed it for render?
+
+I never got it to load locally, so I created a new repository. I've since uploaded the new project to yv_passenger repository. 
+for that repository, i had to change the perms in the developer-settings on github.
+
+I used putty to connect to dreamhost using the params in the last247 domain (from the dreamhost panel) to get the path & credentials.
+
+I then had to use git to clone the new repo into the las247.com/public directory. You have to use the public directory if you're using passenger.
+
+I installed RVM:
+
+https://help.dreamhost.com/hc/en-us/articles/217185247-Ruby-Version-Manager-RVM-
