@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
 # ruby "2.7.8"
-# gem 'sassc-rails' 
+gem 'sass-rails', '>= 5'
 gem 'rails', '~> 6.0', '>= 6.0.2.2'
 gem 'tzinfo-data'
 gem 'devise', '>= 1.3.4'
 gem 'activeadmin', '~> 2.7'
-gem 'mysql2'
+# gem 'mysql2'
 # gem 'pg'
 gem 'aws-sdk-s3'
 gem 'prawn'
