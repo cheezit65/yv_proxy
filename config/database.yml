@@ -8,7 +8,7 @@ default: &default
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: mysql.las247.com
+  database: las247
   pool: 5
   username: las247db
   password: fpNyETXX
@@ -39,7 +39,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: mysql.las247.com
+  database: las247
   pool: 5
   username: las247db
   password: fpNyETXX
