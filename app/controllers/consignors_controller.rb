@@ -5,6 +5,8 @@ class ConsignorsController < ApplicationController
   # GET /consignors.json
   def index
     @consignors = Consignor.all
+    Rails.logger.info 'Index view accessed'
+
   end
 
   # GET /consignors/1
