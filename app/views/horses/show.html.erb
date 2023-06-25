@@ -299,7 +299,7 @@ form input[type=submit],form input[type=button],form button
  		</div>
 	<div class="flex-items-default-saleButtons2">
 <!-- 			<%= button_to 'Email A Friend', :back,  :method => :get,  :class => "buttonStyle3"%> -->
- 		<button  class="my_popup_open" id="button1" style="background: linear-gradient(#00bfff, #4267b2);"> Email horse to a friend</button><br> </br> 
+ 		<!-- <button  class="my_popup_open" id="button1" style="background: linear-gradient(#00bfff, #4267b2);"> Email horse to a friend</button><br> </br> 
 		 		<% @email = "" %> 
 	<div id="my_popup">
  			<button onclick="window.close()"; style="margin-bottom:30px; border: thick 2px black;" class="my_popup_close">Close</button>
@@ -319,9 +319,9 @@ form input[type=submit],form input[type=button],form button
 
 
 
-		<span>				
+		<span>				 -->
 		<% if flash[:notice] %>
-		<div>
+			<div>
 			<%= flash[:notice] %>
 		</div>
 		<% end %>
