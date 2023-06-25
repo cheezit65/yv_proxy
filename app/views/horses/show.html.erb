@@ -303,6 +303,18 @@ form input[type=submit],form input[type=button],form button
 		 		<% @email = "" %> 
 	<div id="my_popup">
  			<button onclick="window.close()"; style="margin-bottom:30px; border: thick 2px black;" class="my_popup_close">Close</button>
+ 			<%= form_for @email, url: {controller: "messages", action: "create"} do |f| %>
+			<br><span style="font-size:16px;color: white;">
+			EMAIL THIS HORSE TO A FRIEND!<br></span>
+			<span style="font-size:18px;text-align:center !important;color:black">
+			<br>Enter YOUR email address:
+			<span style="font-size: 25pt;"><%= email_field(:user1, :email1) %><br></span>
+			<br>Enter YOUR FRIEND's email address:
+			<span style="font-size: 25pt;"><%= email_field(:user2, :email2) %><br>
+			<%= f.hidden_field :id, :value => @horse.id %>
+			<%= f.hidden_field :yearling, :value => @horse.Name %>
+			<%= f.hidden_field :hip, :value => @horse.HipNumber %>
+			<%= submit_tag "Send", :email1 => :email1,:email2 => :email2, :user1 => :user1,:user2 => :user2, :id => :id, :yearling => :yearling	, :hip => :hip %> </span>			 
 
 
 
