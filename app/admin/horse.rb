@@ -5,12 +5,12 @@ action_item :super_action do
    link_to 'View Website', root_path, :target => "_blank"
  end
 
- action_item :super_action  do
-   link_to 'New Horse', new_prawgavp_horse_path
- end
- action_item :only => :index  do
-   link_to 'New Sire', new_prawgavp_sire_path
- end
+ # action_item :super_action  do
+   # link_to 'New Horse', new_prawgavp_horse_path
+ # end
+ # action_item :only => :index  do
+   # link_to 'New Sire', new_prawgavp_sire_path
+ # end
        
 config.per_page = 5000
  action_item :only => :index do
