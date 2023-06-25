@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   resources :uploads
   get 'search/simple'
   get 'search/advanced'
+    get 'consignor/yvsi' => "devise/sessions#new" 
+    get 'consignor/yvso' => "devise/sessions#destroy"     
+    get "consignor/yvsu" => "devise/registrations#new", as: "new_user_registration"     
   resources :messages
   resources :horses do
     collection { post :import }
