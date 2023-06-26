@@ -2,43 +2,7 @@
 <% require "uri" %>
 
 <style>
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
 
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 140px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  bottom: 150%;
-  left: 50%;
-  margin-left: -75px;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-}
  #my_popup{
 	text-align: center !important;
 	padding-top:1%;
@@ -342,15 +306,8 @@ form input[type=submit],form input[type=button],form button
  			<!-- <%= form_for @email, url: {controller: "messages", action: "create"} do |f| %> -->
 			<br><span style="font-size:16px;color: white;">
 			Copy the the link below and paste it into your email to send to a friend.<br>
-			<span id="linker">http://www.yearlingvideos.com/horses/<%= @horse.id %></span><br>
-			<div class="tooltip">
-			<button onclick="copyTheText()" onmouseout="outFunc()">
-			  <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-			  Copy text
-			  </button>
-			</div>
+			http://www.yearlingvideos.com/horses/<%= @horse.id %>
 			</span>
-
 			<!-- <span style="font-size: 25pt;"><%= email_field(:user1, :email1) %><br></span>
 			<br>Enter YOUR FRIEND's email address:
 			<span style="font-size: 25pt;"><%= email_field(:user2, :email2) %><br>
@@ -425,20 +382,4 @@ form input[type=submit],form input[type=button],form button
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
   ga('create', 'UA-104901712-1', 'auto');
   ga('send', 'pageview');
-</script>
-<script>
-function copyTheText() {
-  var copyText = document.getElementById("linkers");
-  copyText.select();
-  copyText.setSelectionRange(0, 99999);
-  navigator.clipboard.writeText(copyText.value);
-  
-  var tooltip = document.getElementById("myTooltip");
-  tooltip.innerHTML = "Copied: " + copyText.value;
-}
-
-function outFunc() {
-  var tooltip = document.getElementById("myTooltip");
-  tooltip.innerHTML = "Copy to clipboard";
-}
 </script>
