@@ -306,7 +306,7 @@ form input[type=submit],form input[type=button],form button
  			<!-- <%= form_for @email, url: {controller: "messages", action: "create"} do |f| %> -->
 			<br><span style="font-size:16px;color: white;">
 			Copy the the link below and paste it into your email to send to a friend.<br>
-			'http://www.yearlingvideos.com/horses' + '/' + <%= @horse.id %>
+			'http://www.yearlingvideos.com/horses/'<%= @horse.id %>
 			</span>
 			<!-- <span style="font-size: 25pt;"><%= email_field(:user1, :email1) %><br></span>
 			<br>Enter YOUR FRIEND's email address:
