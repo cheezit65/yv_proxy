@@ -8,7 +8,7 @@ class EmailPage  < ActionMailer::Base
     @id = id
     @horsename = horsename
     @url = 'http://www.yearlingvideos.com/horses' + '/' + @id
-    mail(to: @email2, subject: 'Yearling Video Horse', cc: @email1, bcc: 'cheezit65@gmail.com', from: "do-not-reply@yearlingvideos.com")
+    mail(to: @email2, subject: 'Yearling Video Horse', cc: @email1, bcc: 'rubykim1965@gmail.com', from: "do-not-reply@yearlingvideos.com")
   end
   
 end

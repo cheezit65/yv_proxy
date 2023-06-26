@@ -9,7 +9,7 @@ class ClientReportMailer < ApplicationMailer
     @saleID = Sale.find(sale)
     pdf.render_file "app/report/#{@saleID.Name}.pdf"
     attachments["#{@saleID.Name}.pdf"] = File.read("app/report/#{@saleID.Name}.pdf")
-    mail(to: @email1, subject: 'Yearling Videos: Horse Views Report', cc: @email1, bcc: 'cheezit65@gmail.com', from: "do-not-reply@yearlingvideos.com")
+    mail(to: @email1, subject: 'Yearling Videos: Horse Views Report', cc: @email1, bcc: 'rubykim1965@gmail.com', from: "do-not-reply@yearlingvideos.com")
   end
 
 end
