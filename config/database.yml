@@ -8,11 +8,11 @@ default: &default
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: las247
+  database: yearling
   pool: 5
-  username: las247db
-  password: fpNyETXX
-  host: mysql.las247.com
+  username: yearlingdb
+  password: gieawa$4
+  host: mysql.yearlingvideos.com
   # socket: /tmp/mysql.sock
 
 
@@ -39,9 +39,9 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: las247
+  database: yearling 
   pool: 5
-  username: las247db
-  password: fpNyETXX
-  host: mysql.las247.com
+  username: yearlingdb
+  password: gieawa$4
+  host: mysql.yearlingvideos.com
   # socket: /tmp/mysql.sock
