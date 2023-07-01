@@ -83,11 +83,11 @@ config.action_mailer.default_url_options = { :host => 'yearlingvideos.com' }
 config.action_mailer.delivery_method = :smtp
 config.action_mailer.perform_deliveries = true
 config.action_mailer.smtp_settings = {
-    :address              => 'smtp.mailgun.org',
-    :port                 => 2525,
-    :domain               => 'yearlingvideos.mailgun.org',
+    :address              => 'smtp.dreamhost.com',
+    :port                 => 465,
+    :domain               => 'yearlingvideos.com',
     :user_name            => 'postmaster@yearlingvideos.com',
-    :password             => 'a851518f9b27b2c5a40a20d1212a1e3a',
+    :password             => 'zeM7PE44',
     :authentication => :plain,
     :enable_starttls_auto => true,
     :ssl =>false

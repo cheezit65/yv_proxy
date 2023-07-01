@@ -13,3 +13,15 @@ I then had to use git to clone the new repo into the las247.com/public directory
 I installed RVM:
 
 https://help.dreamhost.com/hc/en-us/articles/217185247-Ruby-Version-Manager-RVM-
+############
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: yearling 
+  pool: 5
+  username: yearlingdb
+  password: gieawa$4
+  host: mysql.yearlingvideos.com
+  # socket: /tmp/mysql.sock
+
+#####On dreamhost, I changed postmaster info (see email on 7.1.2023 to kim)
