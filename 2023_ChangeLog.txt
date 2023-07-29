@@ -25,3 +25,5 @@ https://help.dreamhost.com/hc/en-us/articles/217185247-Ruby-Version-Manager-RVM-
   # socket: /tmp/mysql.sock
 
 #####On dreamhost, I changed postmaster info (see email on 7.1.2023 to kim)
+
+trying to get recaptcha to work again on downloads page.
