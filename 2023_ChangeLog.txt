@@ -26,4 +26,10 @@ https://help.dreamhost.com/hc/en-us/articles/217185247-Ruby-Version-Manager-RVM-
 
 #####On dreamhost, I changed postmaster info (see email on 7.1.2023 to kim)
 
-trying to get recaptcha to work again on downloads page.
+trying to get recaptcha to work again on downloads page. NOTE: I had to go to the recaptcha page & get a new set of keys.
+the recaptcha keys are stored in the recapthca.rb file.
+
+See printed notes on KF's wall at home for instructions on how to push a package.
+
+
+
