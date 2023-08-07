@@ -102,7 +102,6 @@ end
     end
 
     column :e_count
-    column :g_count
     column :BulkUploadVideoName
       actions
   end
