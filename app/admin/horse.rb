@@ -65,14 +65,6 @@ end
      selectable_column
     id_column
     column :PageViews
-    column :Sale do |sale|
-      if sale.Sale.to_i > 0
-      saleName = Sale.find(sale.Sale)
-      saleName.Name
-      else
-      sale.Sale
-      end
-    end
     column :HipNumber
     column :Name
     column :Gender
@@ -100,6 +92,15 @@ end
        farm2.farm2
     end
     end
+        column :Sale do |sale|
+      if sale.Sale.to_i > 0
+      saleName = Sale.find(sale.Sale)
+      saleName.Name
+      else
+      sale.Sale
+      end
+    end
+
     column :e_count
     column :g_count
     column :BulkUploadVideoName
