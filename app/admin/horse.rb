@@ -64,17 +64,9 @@ end
   index do
      selectable_column
     id_column
-    column :Sale do |sale|
-      if sale.Sale.to_i > 0
-      saleName = Sale.find(sale.Sale)
-      saleName.Name
-      else
-      sale.Sale
-      end
-    end
+    column :PageViews
     column :HipNumber
     column :Name
-    column :PageViews
     column :Gender
     column :sire do |s|
       if s.sire.to_i > 0
@@ -83,6 +75,14 @@ end
       else
         s.sire
       end
+    column :Sale do |sale|
+      if sale.Sale.to_i > 0
+      saleName = Sale.find(sale.Sale)
+      saleName.Name
+      else
+      sale.Sale
+      end
+    end
     end
     column :farm do |farm|
       if farm.farm.to_i > 0
@@ -101,7 +101,7 @@ end
     end
     end
     column :e_count
-    column :g_count
+    # column :g_count
     column :BulkUploadVideoName
       actions
   end
