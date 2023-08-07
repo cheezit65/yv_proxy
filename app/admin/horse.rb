@@ -64,9 +64,9 @@ end
   index do
      selectable_column
     id_column
-    column :PageViews
     column :HipNumber
     column :Name
+    column :PageViews
     column :Gender
     column :sire do |s|
       if s.sire.to_i > 0
