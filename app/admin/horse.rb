@@ -114,7 +114,7 @@ end
       f.input :Name
       f.input :Gender, :as => :select, :collection => ["filly","colt", "gelding"]
       f.input :farm, :as => :select, :collection => Farms.map{|u| ["#{u.name}", u.id]}
-      # f.input :farm2, :as => :select, :collection => Farms.map{|u| ["#{u.name}", u.id]}
+      f.input :farm2, :as => :select, :collection => Farms.map{|u| ["#{u.name}", u.id]}
       f.input :Description
       f.input :Sale, :as => :select, :collection => Sales.map{|u| ["#{u.Name}", u.id]}
       f.input :sire, :as => :select, :collection => Sires.map{|u| ["#{u.Name}", u.id]}
