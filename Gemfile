@@ -13,8 +13,8 @@ gem 'rqrcode'
 gem 'carrierwave'
 gem 'fog-aws'
 gem "recaptcha"
-gem "passenger"
-# gem "puma"
+#gem "passenger"
+gem "puma"
 # gem 'sqlite3'
 # gem 'rack-attack'
 gem "ransack", github: "activerecord-hackery/ransack", ref: "aada8"
