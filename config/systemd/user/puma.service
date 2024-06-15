@@ -3,8 +3,8 @@ Description=Puma instance to serve application
 After=network.target
 
 [Service]
-WorkingDirectory=/home/las247a/las247.com
-ExecStart=/home/las247a/.rvm/gems/ruby-2.6.6/bin/puma -C config/puma.rb -e production
+WorkingDirectory=/home/dh_fmj9h7/yearlingvideos.com
+ExecStart=/home/dh_fmj9h7/.rvm/gems/ruby-2.6.6/bin/puma -C config/puma.rb -e production
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 TimeoutStopSec=5
