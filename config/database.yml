@@ -15,9 +15,8 @@ default: &default
   host: mysql.yearlingvideos.com
   # socket: /tmp/mysql.sock
 
-
 development:
-default: &default
+  default: &default
   adapter: mysql2
   encoding: utf8
   reconnect: false
