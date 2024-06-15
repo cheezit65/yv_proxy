@@ -2,7 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'csv'
 require 'rails/all'
-
+config.serve_static_files
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
