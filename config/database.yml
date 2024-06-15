@@ -17,8 +17,16 @@ default: &default
 
 
 development:
-  <<: *default
-  database: db/development.sqlite3
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: yearling
+  pool: 5
+  username: yearlingdb
+  password: gieawa$4
+  host: mysql.yearlingvideos.com
+  # socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
