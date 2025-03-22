@@ -23,6 +23,7 @@ class DwnldsController < InheritedResources::Base
     resp = s3.get_object({ bucket:'yv-output2', key: foldery + params[:filename] }, target: params[:filename])
 
  send_file params[:filename]
+ File.delete(:filename)
 
 end
   
