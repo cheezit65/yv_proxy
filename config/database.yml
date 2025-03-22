@@ -1,57 +1,19 @@
-# SQLite version 3.x
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
-#
-default: &default
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
-
-development:
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
-  database: db/development.sqlite3
-
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
-test:
-  <<: *default
-  database: db/test.sqlite3
-
-production:
-  <<: *default
-  database: db/production.sqlite3
-  # # socket: /tmp/mysql.sock
-
-## EVERYTHING BELOW NEEDS TO BE UNCOMMENTED OUT AND EVERYTHING ABOVE
-## NEEDS TO BE COMMENTED OUT BEFORE PUSHING A PACKAGE LIVE.
-
+# # SQLite version 3.x
+# #   gem install sqlite3
+# #
+# #   Ensure the SQLite 3 gem is defined in your Gemfile
+# #   gem 'sqlite3'
+# #
 # default: &default
-  # adapter: mysql2
-  # encoding: utf8
-  # reconnect: false
-  # database: yearling
+  # adapter: sqlite3
   # pool: 5
-  # username: yearlingdb
-  # password: gieawa$4
-  # host: mysql.yearlingvideos.com
-  # # socket: /tmp/mysql.sock
+  # timeout: 5000
 # 
 # development:
-  # default: &default
-  # adapter: mysql2
-  # encoding: utf8
-  # reconnect: false
-  # database: yearling
+  # adapter: sqlite3
   # pool: 5
-  # username: yearlingdb
-  # password: gieawa$4
-  # host: mysql.yearlingvideos.com
-  # # socket: /tmp/mysql.sock
+  # timeout: 5000
+  # database: db/development.sqlite3
 # 
 # # Warning: The database defined as "test" will be erased and
 # # re-generated from your development database when you run "rake".
@@ -60,21 +22,59 @@ production:
   # <<: *default
   # database: db/test.sqlite3
 # 
-# # production:
-  # # <<: *default
-  # # url: <%= ENV["DATABASE_URL"] %>
-  # # database: yvdb_k6fd
-  # # username: yvdb_k6fd_user
-  # # password: QZYuwqZvD19j2LbcBRm6f03JKvqaKWUq
-#   
-# 
 # production:
-  # adapter: mysql2
-  # encoding: utf8
-  # reconnect: false
-  # database: yearling 
-  # pool: 5
-  # username: yearlingdb
-  # password: gieawa$4
-  # host: mysql.yearlingvideos.com
-  # # socket: /tmp/mysql.sock
+  # <<: *default
+  # database: db/production.sqlite3
+  # # # socket: /tmp/mysql.sock
+
+## EVERYTHING BELOW NEEDS TO BE UNCOMMENTED OUT AND EVERYTHING ABOVE
+## NEEDS TO BE COMMENTED OUT BEFORE PUSHING A PACKAGE LIVE.
+
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: yearling
+  pool: 5
+  username: yearlingdb
+  password: gieawa$4
+  host: mysql.yearlingvideos.com
+  # socket: /tmp/mysql.sock
+
+development:
+  default: &default
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: yearling
+  pool: 5
+  username: yearlingdb
+  password: gieawa$4
+  host: mysql.yearlingvideos.com
+  # socket: /tmp/mysql.sock
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: db/test.sqlite3
+
+# production:
+  # <<: *default
+  # url: <%= ENV["DATABASE_URL"] %>
+  # database: yvdb_k6fd
+  # username: yvdb_k6fd_user
+  # password: QZYuwqZvD19j2LbcBRm6f03JKvqaKWUq
+  
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: yearling 
+  pool: 5
+  username: yearlingdb
+  password: gieawa$4
+  host: mysql.yearlingvideos.com
+  # socket: /tmp/mysql.sock
